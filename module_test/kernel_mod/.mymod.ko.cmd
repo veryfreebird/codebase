@@ -1,0 +1,1 @@
+cmd_/home/jamema/src/github/module_test/kernel_mod/mymod.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/jamema/src/github/module_test/kernel_mod/mymod.ko /home/jamema/src/github/module_test/kernel_mod/mymod.o /home/jamema/src/github/module_test/kernel_mod/mymod.mod.o

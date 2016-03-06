@@ -1,0 +1,1 @@
+cmd_/home/jamema/src/module_test/netlink/testnetlink.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/jamema/src/module_test/netlink/testnetlink.ko /home/jamema/src/module_test/netlink/testnetlink.o /home/jamema/src/module_test/netlink/testnetlink.mod.o

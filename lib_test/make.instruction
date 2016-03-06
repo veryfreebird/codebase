@@ -1,0 +1,11 @@
+gcc -fPIC -shared -o lib.so lib.c
+gcc -o program1 program1.c ./lib.so
+gcc -o program2 program2.c ./lib.so
+gcc -o runsosimple runsosimple.c -ldl
+./runsosimple /usr/lib64/libm-2.20.so
+LD_DEBUG=files ./program1 => enable debugging log when running programs
+gcc -fPIC -shared -Wl,-soname,lib1.so.1 -o lib1.so.1.5.0 lib1.c => build shared library with so name
+ld -n director => to create soname
+LD_LIBRARY_PATH=. ./program1 => set temporary directory to load the shared libraries
+ldd xxx => check the shared libararies
+readelf -d xxx.so => check shared libraries in the elf files

@@ -1,0 +1,25 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+KERNELDIR	Makefile	/^KERNELDIR := \/lib\/modules\/`uname -r`\/build $/;"	m
+MAX_PAYLOAD	testnetlink.c	14;"	d	file:
+MAX_PAYLOAD	user.c	10;"	d	file:
+PWD	Makefile	/^PWD := $(shell pwd) $/;"	m
+RTNL_RCV_BUF	user.c	9;"	d	file:
+buf	user.c	/^  char buf[MAX_PAYLOAD];$/;"	m	struct:req	file:
+k_thread	testnetlink.c	/^static struct task_struct * k_thread = NULL;$/;"	v	typeref:struct:task_struct	file:
+main	user.c	/^int main()$/;"	f
+mode	testnetlink.c	/^static int  mode = 0;$/;"	v	file:
+modules-objs	Makefile	/^modules-objs := testnetlink.o$/;"	m
+nlh	user.c	/^  struct nlmsghdr nlh;$/;"	m	struct:req	typeref:struct:req::nlmsghdr	file:
+obj-m	Makefile	/^obj-m := testnetlink.o$/;"	m
+req	user.c	/^struct req{$/;"	s	file:
+testnetlink	testnetlink.c	/^static struct sock *testnetlink = NULL;$/;"	v	typeref:struct:sock	file:
+testnetlink_exit	testnetlink.c	/^module_exit(testnetlink_exit);$/;"	v
+testnetlink_exit	testnetlink.c	/^static void testnetlink_exit(void) $/;"	f	file:
+testnetlink_init	testnetlink.c	/^module_init(testnetlink_init); $/;"	v
+testnetlink_init	testnetlink.c	/^static int testnetlink_init(void) $/;"	f	file:
+testnetlink_rcv_skb	testnetlink.c	/^static void testnetlink_rcv_skb(struct sk_buff *skb)$/;"	f	file:
