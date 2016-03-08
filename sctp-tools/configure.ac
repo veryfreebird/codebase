@@ -1,0 +1,76 @@
+dnl -*-autoconf-*-
+
+dnl lksctp-tools: Autoconf script
+dnl
+dnl $Id: configure.in,v 1.1.1.2 2002/08/06 23:55:45 inaky Exp $
+
+dnl (C) 2002 Intel Corporation
+dnl     Iñaky Pérez-González <inaky.perez-gonzalez@intel.com>
+dnl      - Initial packaging
+
+dnl Package info
+dnl (CONFIG_AUX_DIR is for putting stuff in $TOPSRCDIR/bin, so we
+dnl reduce clutter in the root; if we put it below AM_INIT_AUTOMAKE,
+dnl configure will fail ...)
+
+AC_INIT([lksctp-tools], [1.0.16], [], [], [http://www.lksctp.org/])
+AC_CONFIG_AUX_DIR(bin)
+AC_CONFIG_SRCDIR([src/apps/sctp_darn.c])
+AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_MACRO_DIR([m4])
+AC_REVISION($Revision: 1.1.1.2 $)
+AM_INIT_AUTOMAKE
+m4_ifndef([AM_SILENT_RULES], [m4_define([AM_SILENT_RULES],[])])
+AM_SILENT_RULES([yes])
+
+dnl Set defaults
+dnl CFLAGS="$CFLAGS -g -Wall"
+
+dnl Checks for programs.
+AC_PROG_AWK
+AC_PROG_CC
+AC_PROG_INSTALL
+AC_PROG_LN_S
+AC_ISC_POSIX
+
+dnl Checks for libraries.
+AC_LIBTOOL_DLOPEN
+AC_PROG_LIBTOOL
+AC_SUBST(LIBTOOL_DEPS)
+
+dnl Checks for header files.
+AC_HEADER_STDC
+AC_HEADER_SYS_WAIT
+AC_CHECK_HEADERS([arpa/inet.h fcntl.h malloc.h netdb.h netinet/in.h stdint.h stdlib.h string.h sys/ioctl.h sys/param.h sys/socket.h sys/time.h unistd.h])
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_C_CONST
+AC_C_INLINE
+AC_TYPE_SIZE_T
+AC_HEADER_TIME
+AC_STRUCT_TM
+AC_C_VOLATILE
+
+# Checks for library functions.
+AC_FUNC_MALLOC
+AC_FUNC_MEMCMP
+AC_FUNC_REALLOC
+AC_FUNC_SELECT_ARGTYPES
+AC_FUNC_SETVBUF_REVERSED
+AC_FUNC_VPRINTF
+AC_CHECK_FUNCS([bzero gethostbyname gettimeofday memmove memset select socket strchr strerror strtol strtoul])
+
+AC_CONFIG_FILES([lksctp-tools.spec
+		Makefile
+		bin/Makefile
+		man/Makefile
+		src/Makefile
+		src/apps/Makefile
+		src/func_tests/Makefile
+		src/include/Makefile
+		src/include/netinet/Makefile
+		src/lib/Makefile
+		src/testlib/Makefile
+		src/withsctp/Makefile
+		doc/Makefile])
+AC_OUTPUT

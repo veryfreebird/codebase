@@ -1,0 +1,18 @@
+# -*-makefile-*-
+#
+# Generate pre-parsed C code.
+%.i: %.c
+	$(COMPILE) -E -c $^ -o $@
+
+.PRECIOUS: %.i
+%.ci: %.i
+	-grep -v -e "^#" -e "^ *$$" $^ | indent > $@
+	mv -f $@ $^
+
+
+## FIXME: Your stuff here
+
+edit = @sed \
+	-e "s|\@bindir\@|$(bindir)|" \
+	-e "s|\@libdir\@|$(libdir)|" \
+	-e "s|\@PACKAGE\@|$(PACKAGE)|"
