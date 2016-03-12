@@ -287,3 +287,21 @@ nmap <C-x>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <C-x>f :cs find f <C-R>=expand("<cword>")<CR><CR>
 nmap <C-x>i :cs find i <C-R>=expand("<cword>")<CR>$<CR>
 nmap <C-x>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+let g:edittype="new"
+command! -complete=shellcmd -nargs=* Hman call Hman(<f-args>)
+function! Hman(...)
+    let query=join(a:000)
+    execute g:edittype 
+    execute '0read ++edit !MANPAGER=more man' . ' ' . query . ' ' . '| col -b'
+    setlocal buftype=nofile
+    1,1/^[a-z0-9]/-1d
+    1 
+    setfiletype man
+endfunction
+noremap <silent> ,o 
+            \ :Hmancword<CR>
+command! -complete=shellcmd -nargs=0 Hmancword call Hmancword(<f-args>)
+function! Hmancword()
+    execute "Hman" . ' ' . expand("<cword>")
+endfunction
+
