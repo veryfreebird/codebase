@@ -1,0 +1,1 @@
+cmd_/home/jamema/src/codebase_github/module_test/proc_fs/myproc.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/jamema/src/codebase_github/module_test/proc_fs/myproc.ko /home/jamema/src/codebase_github/module_test/proc_fs/myproc.o /home/jamema/src/codebase_github/module_test/proc_fs/myproc.mod.o

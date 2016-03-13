@@ -1,0 +1,4 @@
+sudo modprobe ./myproc.ko
+cat /proc/abc_proc
+sudo echo "new string" > /proc/abc_proc
+sudo echo "new new string" > /proc/abc_proc
