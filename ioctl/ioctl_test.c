@@ -25,6 +25,7 @@ int main()
     //char *ip = (char *)malloc(16);
     char *mac = new  char(32);
     //char *mac = (char *)malloc(32);
+    int mtu;
     int socket_fd;
     if((socket_fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0){
         perror("socket");
@@ -63,6 +64,11 @@ int main()
                 (unsigned char)ifr.ifr_netmask.sa_data[5]);
         printf("Mac address is %s\n", mac);
     }
-    return 0;
+     //获取硬件MTU地址
+    if(ioctl(socket_fd, SIOCGIFMTU, &ifr) != -1){
+        mtu = ifr.ifr_mtu;
+        printf("MTU is %d\n", mtu);
+    }
+   return 0;
 }
 
