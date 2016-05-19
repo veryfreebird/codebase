@@ -3672,7 +3672,6 @@ main	euler/test8.c	/^int main()$/;"	f
 main	euler/test9.c	/^int main()$/;"	f
 main	euler/test97.c	/^int main()$/;"	f
 main	hash/ip_hash/iptest.c	/^int main()$/;"	f
-main	ioctl/ioctl_test.c	/^int main()$/;"	f
 main	lib_test/program1.c	/^int main()$/;"	f
 main	lib_test/program2.c	/^int main()$/;"	f
 main	lib_test/runsosimple.c	/^int main(int argc, char * argv[])$/;"	f
@@ -3726,6 +3725,7 @@ main	sctp-tools/src/func_tests/test_timetolive.c	/^int main(int argc, char *argv
 main	sctp-tools/src/withsctp/checksctp.c	/^int main(void)$/;"	f
 main	shm_test/shm_client.c	/^int main () $/;"	f
 main	shm_test/shm_main.c	/^int main () $/;"	f
+main	socket/ioctl/ioctl_test.c	/^int main()$/;"	f
 main	socket/multicast/client-old.c	/^int main(int argc, char *argv[])$/;"	f
 main	socket/multicast/client.c	/^int main(void) {$/;"	f
 main	socket/multicast/server.c	/^int main (int argc, char *argv[ ])$/;"	f

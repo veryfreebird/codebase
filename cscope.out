@@ -1,4 +1,4 @@
-cscope 15 $HOME/src/codebase_github -q 0000010406 0001239641
+cscope 15 $HOME/src/codebase_github -q 0000010406 0001239663
 	@cksum/testcksum.c
 
 1 
@@ -19104,384 +19104,6 @@ key
 , u32 
 öôvÆ
 );
-
-	@ioctl/ioctl_test.c
-
-1 
-	~<°dio.h
->
-
-2 
-	~<°dlib.h
->
-
-3 
-	~<√t/if.h
->
-
-4 
-	~<uni°d.h
->
-
-5 
-	~<sys/io˘l.h
->
-
-6 
-	~<¨∑/öë.h
->
-
-7 
-	~<sys/°©.h
->
-
-8 
-	~<sys/ty≥s.h
->
-
-9 
-	~<î∫o.h
->
-
-10 
-	~<f˙é.h
->
-
-11 
-	~<√töë/ö.h
->
-
-12 
-	~<√t/rouã.h
->
-
-13 
-	~<°rög.h
->
-
-14 
-	~<√t/if_¨p.h
->
-
-16 
-	$maö
-()
-
-18 
-sockaddr_ö
- *
-sö
-;
-
-19 
-i‰eq
- 
-i‰
-;
-
-20 
-FILE
- *
-dns
-;
-
-21 
-FILE
- *
-gw
-;
-
-22 *
-ù
- = 
-√w
- (16);
-
-23 *
-√tmask
- = 
-√w
- (16);
-
-24 *
-brﬂdˇ°
- = 
-√w
- (16);
-
-26 *
-mac
- = 
-√w
- (32);
-
-28 
-mtu
-;
-
-29 
-sockë_fd
-;
-
-30 if((
-sockë_fd
- = 
-	`sockë
-(
-AF_INET
-, 
-SOCK_DGRAM
-, 0)) < 0){
-
-31 
-	`≥º‹
-("socket");
-
-32 
-	`exô
-(1);
-
-34 
-	`mem£t
-(&
-i‰
-, 0, (ifr));
-
-35 
-	`°r˝y
-(
-i‰
-.
-i‰_«me
-, "wlp2s0");
-
-36 
-	`mem£t
-(&
-sö
-, 0, (sin));
-
-38 if(
-	`io˘l
-(
-sockë_fd
-, 
-SIOCGIFADDR
-, &
-i‰
-) != -1){
-
-39 
-sö
- = (
-sockaddr_ö
- *)&
-i‰
-.
-i‰_addr
-;
-
-40 
-	`°r˝y
-(
-ù
-, 
-	`öë_¡ﬂ
-(
-sö
-->
-sö_addr
-));
-
-41 
-	`¥ötf
-("IPáddªs†i†%s\n", 
-ù
-);
-
-44 if(
-	`io˘l
-(
-sockë_fd
-, 
-SIOCGIFBRDADDR
-, &
-i‰
-) != -1){
-
-45 
-sö
- = (
-sockaddr_ö
- *)&
-i‰
-.
-i‰_brﬂdaddr
-;
-
-46 
-	`°r˝y
-(
-brﬂdˇ°
-, 
-	`öë_¡ﬂ
-(
-sö
-->
-sö_addr
-));
-
-47 
-	`¥ötf
-("Brﬂdˇ° i†%s\n", 
-brﬂdˇ°
-);
-
-50 if(
-	`io˘l
-(
-sockë_fd
-, 
-SIOCGIFNETMASK
-, &
-i‰
-) != -1){
-
-51 
-sö
- = (
-sockaddr_ö
- *)&
-i‰
-.
-i‰_brﬂdaddr
-;
-
-52 
-	`°r˝y
-(
-√tmask
-, 
-	`öë_¡ﬂ
-(
-sö
-->
-sö_addr
-));
-
-53 
-	`¥ötf
-("Në-mask i†%s\n", 
-√tmask
-);
-
-56 if(
-	`io˘l
-(
-sockë_fd
-, 
-SIOCGIFHWADDR
-, &
-i‰
-) != -1){
-
-57 
-sö
- = (
-sockaddr_ö
- *)&
-i‰
-.
-i‰_√tmask
-;
-
-58 
-	`•rötf
-(
-mac
-, "%02x:%02x:%02x:%02x:%02x:%02x",
-
-59 ()
-i‰
-.
-i‰_√tmask
-.
-ß_d©a
-[0],
-
-60 ()
-i‰
-.
-i‰_√tmask
-.
-ß_d©a
-[1],
-
-61 ()
-i‰
-.
-i‰_√tmask
-.
-ß_d©a
-[2],
-
-62 ()
-i‰
-.
-i‰_√tmask
-.
-ß_d©a
-[3],
-
-63 ()
-i‰
-.
-i‰_√tmask
-.
-ß_d©a
-[4],
-
-64 ()
-i‰
-.
-i‰_√tmask
-.
-ß_d©a
-[5]);
-
-65 
-	`¥ötf
-("Ma¯addªs†i†%s\n", 
-mac
-);
-
-68 if(
-	`io˘l
-(
-sockë_fd
-, 
-SIOCGIFMTU
-, &
-i‰
-) != -1){
-
-69 
-mtu
- = 
-i‰
-.
-i‰_mtu
-;
-
-70 
-	`¥ötf
-("MTU i†%d\n", 
-mtu
-);
-
-73 
-	}
-}
 
 	@lib_test/lib.h
 
@@ -99118,6 +98740,390 @@ sh¨ed_mem‹y
 , "Hello, world.");
 
 40 
+	}
+}
+
+	@socket/ioctl/ioctl_test.c
+
+1 
+	~<°dio.h
+>
+
+2 
+	~<°dlib.h
+>
+
+3 
+	~<√t/if.h
+>
+
+4 
+	~<uni°d.h
+>
+
+5 
+	~<sys/io˘l.h
+>
+
+6 
+	~<¨∑/öë.h
+>
+
+7 
+	~<sys/°©.h
+>
+
+8 
+	~<sys/ty≥s.h
+>
+
+9 
+	~<î∫o.h
+>
+
+10 
+	~<f˙é.h
+>
+
+11 
+	~<√töë/ö.h
+>
+
+12 
+	~<√t/rouã.h
+>
+
+13 
+	~<°rög.h
+>
+
+14 
+	~<√t/if_¨p.h
+>
+
+16 
+	$maö
+()
+
+18 
+sockaddr_ö
+ *
+sö
+;
+
+19 
+i‰eq
+ 
+i‰
+;
+
+20 
+FILE
+ *
+dns
+;
+
+21 
+FILE
+ *
+gw
+;
+
+22 *
+ù
+ = 
+√w
+ (16);
+
+23 *
+√tmask
+ = 
+√w
+ (16);
+
+24 *
+brﬂdˇ°
+ = 
+√w
+ (16);
+
+26 *
+mac
+ = 
+√w
+ (32);
+
+28 
+mtu
+;
+
+29 
+sockë_fd
+;
+
+30 if((
+sockë_fd
+ = 
+	`sockë
+(
+AF_INET
+, 
+SOCK_DGRAM
+, 0)) < 0){
+
+31 
+	`≥º‹
+("socket");
+
+32 
+	`exô
+(1);
+
+34 
+	`mem£t
+(&
+i‰
+, 0, (ifr));
+
+35 
+	`°r˝y
+(
+i‰
+.
+i‰_«me
+, "wlp2s0");
+
+36 
+	`mem£t
+(&
+sö
+, 0, (sin));
+
+38 if(
+	`io˘l
+(
+sockë_fd
+, 
+SIOCGIFADDR
+, &
+i‰
+) != -1){
+
+39 
+sö
+ = (
+sockaddr_ö
+ *)&
+i‰
+.
+i‰_addr
+;
+
+40 
+	`°r˝y
+(
+ù
+, 
+	`öë_¡ﬂ
+(
+sö
+->
+sö_addr
+));
+
+41 
+	`¥ötf
+("IPáddªs†i†%s\n", 
+ù
+);
+
+44 if(
+	`io˘l
+(
+sockë_fd
+, 
+SIOCGIFBRDADDR
+, &
+i‰
+) != -1){
+
+45 
+sö
+ = (
+sockaddr_ö
+ *)&
+i‰
+.
+i‰_brﬂdaddr
+;
+
+46 
+	`°r˝y
+(
+brﬂdˇ°
+, 
+	`öë_¡ﬂ
+(
+sö
+->
+sö_addr
+));
+
+47 
+	`¥ötf
+("Brﬂdˇ° i†%s\n", 
+brﬂdˇ°
+);
+
+50 if(
+	`io˘l
+(
+sockë_fd
+, 
+SIOCGIFNETMASK
+, &
+i‰
+) != -1){
+
+51 
+sö
+ = (
+sockaddr_ö
+ *)&
+i‰
+.
+i‰_brﬂdaddr
+;
+
+52 
+	`°r˝y
+(
+√tmask
+, 
+	`öë_¡ﬂ
+(
+sö
+->
+sö_addr
+));
+
+53 
+	`¥ötf
+("Në-mask i†%s\n", 
+√tmask
+);
+
+56 if(
+	`io˘l
+(
+sockë_fd
+, 
+SIOCGIFHWADDR
+, &
+i‰
+) != -1){
+
+57 
+sö
+ = (
+sockaddr_ö
+ *)&
+i‰
+.
+i‰_√tmask
+;
+
+58 
+	`•rötf
+(
+mac
+, "%02x:%02x:%02x:%02x:%02x:%02x",
+
+59 ()
+i‰
+.
+i‰_√tmask
+.
+ß_d©a
+[0],
+
+60 ()
+i‰
+.
+i‰_√tmask
+.
+ß_d©a
+[1],
+
+61 ()
+i‰
+.
+i‰_√tmask
+.
+ß_d©a
+[2],
+
+62 ()
+i‰
+.
+i‰_√tmask
+.
+ß_d©a
+[3],
+
+63 ()
+i‰
+.
+i‰_√tmask
+.
+ß_d©a
+[4],
+
+64 ()
+i‰
+.
+i‰_√tmask
+.
+ß_d©a
+[5]);
+
+65 
+	`¥ötf
+("Ma¯addªs†i†%s\n", 
+mac
+);
+
+68 if(
+	`io˘l
+(
+sockë_fd
+, 
+SIOCGIFMTU
+, &
+i‰
+) != -1){
+
+69 
+mtu
+ = 
+i‰
+.
+i‰_mtu
+;
+
+70 
+	`¥ötf
+("MTU i†%d\n", 
+mtu
+);
+
+72 
+	`˛o£
+(
+sockë_fd
+);
+
+74 
 	}
 }
 
@@ -199491,7 +199497,7 @@ __nŸhrow__
 __LEAF
 )Ë
 	)
-fct
+f˘
 
 59 #i‡
 deföed
@@ -199547,7 +199553,7 @@ __LEAF_ATTR
 f˘
 Ë
 	)
-fct
+f˘
 
 72 
 	#__ölöe
@@ -199573,7 +199579,7 @@ fct
 f˘
 Ë
 	)
-fct
+f˘
 
 82 
 	#__P
@@ -199581,7 +199587,7 @@ fct
 ¨gs
 Ë
 	)
-args
+¨gs
 
 83 
 	#__PMT
@@ -199589,7 +199595,7 @@ args
 ¨gs
 Ë
 	)
-args
+¨gs
 
 88 
 	#__CONCAT
@@ -200045,7 +200051,7 @@ __USER_LABEL_PREFIX__
 	`__STRING
  (¥efixË
 	)
-cname
+˙ame
 
 203 #i‡!
 deföed
@@ -200823,7 +200829,7 @@ __REDIRECT
 Æüs
 Ë«mê
 	)
-proto
+¥Ÿo
 
 425 
 	#__LDBL_REDIR
@@ -200833,7 +200839,7 @@ proto
 ¥Ÿo
 Ë«mê
 	)
-proto
+¥Ÿo
 
 426 
 	#__LDBL_REDIR1_NTH
@@ -222433,7 +222439,7 @@ _ASM_GENERIC_ERRNO_BASE_H
 1
 /usr/include
 345
-9299
+9306
 cksum/testcksum.c
 endian/endian.c
 euler/misc.c
@@ -222506,7 +222512,6 @@ hash/ip_hash/ghash_bucket.h
 hash/ip_hash/iptest.c
 hash/ip_hash/jhash.c
 hash/ip_hash/jhash.h
-ioctl/ioctl_test.c
 lib_test/lib.h
 lib_test/lib1.c
 lib_test/lib2.c
@@ -222585,6 +222590,7 @@ sctp-tools/src/withsctp/sctp_socket.h
 sctp-tools/src/withsctp/sctp_sockopt.c
 shm_test/shm_client.c
 shm_test/shm_main.c
+socket/ioctl/ioctl_test.c
 socket/multicast/client-old.c
 socket/multicast/client.c
 socket/multicast/server.c
