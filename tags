@@ -241,17 +241,17 @@ CLEANFILES	sctp-tools/src/withsctp/Makefile	/^CLEANFILES = withsctp$/;"	m
 CLIENT	sctp-tools/src/apps/sctp_status.c	55;"	d	file:
 CLIENT	sctp-tools/src/apps/sctp_test.c	67;"	d	file:
 CLIENT	sctp-tools/src/apps/sctp_xconnect.c	61;"	d	file:
-CMD_NAME	socket/udp/client.c	/^enum{CMD_NAME,DST_IP,DST_PORT};$/;"	e	enum:__anon19	file:
-CMD_NAME	socket/udp/server.c	/^enum{CMD_NAME,DST_PORT};$/;"	e	enum:__anon20	file:
+CMD_NAME	socket/udp/client.c	/^enum{CMD_NAME,DST_IP,DST_PORT};$/;"	e	enum:__anon20	file:
+CMD_NAME	socket/udp/server.c	/^enum{CMD_NAME,DST_PORT};$/;"	e	enum:__anon19	file:
 CMSG_SPACE_INITMSG	sctp-tools/src/apps/sctp_test.c	121;"	d	file:
 CMSG_SPACE_SNDRCV	sctp-tools/src/apps/sctp_test.c	122;"	d	file:
-COMMAND_LISTEN	sctp-tools/src/apps/sctp_darn.h	/^	COMMAND_LISTEN,$/;"	e	enum:__anon2
-COMMAND_NONE	sctp-tools/src/apps/myftp.c	/^typedef enum { COMMAND_NONE, COMMAND_RECV, COMMAND_SEND } command_t;$/;"	e	enum:__anon5	file:
-COMMAND_NONE	sctp-tools/src/apps/sctp_darn.h	/^	COMMAND_NONE = 0,$/;"	e	enum:__anon2
-COMMAND_POLL	sctp-tools/src/apps/sctp_darn.h	/^	COMMAND_POLL,$/;"	e	enum:__anon2
-COMMAND_RECV	sctp-tools/src/apps/myftp.c	/^typedef enum { COMMAND_NONE, COMMAND_RECV, COMMAND_SEND } command_t;$/;"	e	enum:__anon5	file:
-COMMAND_SEND	sctp-tools/src/apps/myftp.c	/^typedef enum { COMMAND_NONE, COMMAND_RECV, COMMAND_SEND } command_t;$/;"	e	enum:__anon5	file:
-COMMAND_SEND	sctp-tools/src/apps/sctp_darn.h	/^	COMMAND_SEND,$/;"	e	enum:__anon2
+COMMAND_LISTEN	sctp-tools/src/apps/sctp_darn.h	/^	COMMAND_LISTEN,$/;"	e	enum:__anon1
+COMMAND_NONE	sctp-tools/src/apps/myftp.c	/^typedef enum { COMMAND_NONE, COMMAND_RECV, COMMAND_SEND } command_t;$/;"	e	enum:__anon9	file:
+COMMAND_NONE	sctp-tools/src/apps/sctp_darn.h	/^	COMMAND_NONE = 0,$/;"	e	enum:__anon1
+COMMAND_POLL	sctp-tools/src/apps/sctp_darn.h	/^	COMMAND_POLL,$/;"	e	enum:__anon1
+COMMAND_RECV	sctp-tools/src/apps/myftp.c	/^typedef enum { COMMAND_NONE, COMMAND_RECV, COMMAND_SEND } command_t;$/;"	e	enum:__anon9	file:
+COMMAND_SEND	sctp-tools/src/apps/myftp.c	/^typedef enum { COMMAND_NONE, COMMAND_RECV, COMMAND_SEND } command_t;$/;"	e	enum:__anon9	file:
+COMMAND_SEND	sctp-tools/src/apps/sctp_darn.h	/^	COMMAND_SEND,$/;"	e	enum:__anon1
 COMPILE	sctp-tools/src/apps/Makefile	/^COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \\$/;"	m
 COMPILE	sctp-tools/src/func_tests/Makefile	/^COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \\$/;"	m
 COMPILE	sctp-tools/src/lib/Makefile	/^COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \\$/;"	m
@@ -455,9 +455,9 @@ DLLTOOL	sctp-tools/src/include/netinet/Makefile	/^DLLTOOL = false$/;"	m
 DLLTOOL	sctp-tools/src/lib/Makefile	/^DLLTOOL = false$/;"	m
 DLLTOOL	sctp-tools/src/testlib/Makefile	/^DLLTOOL = false$/;"	m
 DLLTOOL	sctp-tools/src/withsctp/Makefile	/^DLLTOOL = false$/;"	m
-DST_IP	socket/udp/client.c	/^enum{CMD_NAME,DST_IP,DST_PORT};$/;"	e	enum:__anon19	file:
-DST_PORT	socket/udp/client.c	/^enum{CMD_NAME,DST_IP,DST_PORT};$/;"	e	enum:__anon19	file:
-DST_PORT	socket/udp/server.c	/^enum{CMD_NAME,DST_PORT};$/;"	e	enum:__anon20	file:
+DST_IP	socket/udp/client.c	/^enum{CMD_NAME,DST_IP,DST_PORT};$/;"	e	enum:__anon20	file:
+DST_PORT	socket/udp/client.c	/^enum{CMD_NAME,DST_IP,DST_PORT};$/;"	e	enum:__anon20	file:
+DST_PORT	socket/udp/server.c	/^enum{CMD_NAME,DST_PORT};$/;"	e	enum:__anon19	file:
 DSYMUTIL	sctp-tools/Makefile	/^DSYMUTIL = $/;"	m
 DSYMUTIL	sctp-tools/bin/Makefile	/^DSYMUTIL = $/;"	m
 DSYMUTIL	sctp-tools/doc/Makefile	/^DSYMUTIL = $/;"	m
@@ -783,6 +783,8 @@ JHASH_GOLDEN_RATIO	hash/ip_hash/jhash.c	41;"	d	file:
 KDIR	module_test/kernel_mod/Makefile	/^KDIR := \/lib\/modules\/`uname -r`\/build $/;"	m
 KDIR	module_test/proc_fs/Makefile	/^KDIR := \/lib\/modules\/`uname -r`\/build $/;"	m
 KERNELDIR	module_test/netlink/Makefile	/^KERNELDIR := \/lib\/modules\/`uname -r`\/build $/;"	m
+KEY_ID	shm_test/shm_client.c	4;"	d	file:
+KEY_ID	shm_test/shm_main.c	4;"	d	file:
 LATEX	sctp-tools/Makefile	/^LATEX = @LATEX@$/;"	m
 LATEX	sctp-tools/bin/Makefile	/^LATEX = @LATEX@$/;"	m
 LATEX	sctp-tools/doc/Makefile	/^LATEX = @LATEX@$/;"	m
@@ -1778,12 +1780,12 @@ __this_module	module_test/proc_fs/myproc.mod.c	/^__visible struct module __this_
 __used	module_test/kernel_mod/mymod.mod.c	/^__used$/;"	v	file:
 __used	module_test/netlink/testnetlink.mod.c	/^__used$/;"	v	file:
 __used	module_test/proc_fs/myproc.mod.c	/^__used$/;"	v	file:
-_assoc_state	sctp-tools/src/apps/sctp_test.c	/^} _assoc_state;$/;"	t	typeref:struct:__anon9	file:
-_poll_sks	sctp-tools/src/apps/sctp_test.c	/^} _poll_sks;$/;"	t	typeref:struct:__anon10	file:
-_sctp_cmsg_data_t	sctp-tools/src/apps/myftp.c	/^} _sctp_cmsg_data_t;$/;"	t	typeref:union:__anon6	file:
-_sctp_cmsg_data_t	sctp-tools/src/apps/sctp_darn.c	/^} _sctp_cmsg_data_t;$/;"	t	typeref:union:__anon1	file:
-_sctp_cmsg_data_t	sctp-tools/src/apps/sctp_status.c	/^} _sctp_cmsg_data_t;$/;"	t	typeref:union:__anon4	file:
-_sctp_cmsg_data_t	sctp-tools/src/apps/sctp_test.c	/^} _sctp_cmsg_data_t;$/;"	t	typeref:union:__anon7	file:
+_assoc_state	sctp-tools/src/apps/sctp_test.c	/^} _assoc_state;$/;"	t	typeref:struct:__anon6	file:
+_poll_sks	sctp-tools/src/apps/sctp_test.c	/^} _poll_sks;$/;"	t	typeref:struct:__anon7	file:
+_sctp_cmsg_data_t	sctp-tools/src/apps/myftp.c	/^} _sctp_cmsg_data_t;$/;"	t	typeref:union:__anon10	file:
+_sctp_cmsg_data_t	sctp-tools/src/apps/sctp_darn.c	/^} _sctp_cmsg_data_t;$/;"	t	typeref:union:__anon8	file:
+_sctp_cmsg_data_t	sctp-tools/src/apps/sctp_status.c	/^} _sctp_cmsg_data_t;$/;"	t	typeref:union:__anon3	file:
+_sctp_cmsg_data_t	sctp-tools/src/apps/sctp_test.c	/^} _sctp_cmsg_data_t;$/;"	t	typeref:union:__anon4	file:
 _sctp_load_libs	sctp-tools/src/withsctp/sctp_load_libs.c	/^_sctp_load_libs(void)$/;"	f
 a	euler/test64.c	/^int a[N]={0};$/;"	v
 aa	euler/test20.c	/^int aa[N],bb[N];$/;"	v
@@ -1889,7 +1891,7 @@ accept_r	sctp-tools/src/apps/sctp_test.c	/^int accept_r(int sk){$/;"	f
 acpt_sk	sctp-tools/src/func_tests/test_1_to_1_threads.c	/^int acpt_sk;$/;"	v
 active	sctp-tools/src/apps/sctp_xconnect.c	/^int active = 0;$/;"	v
 add_ip_addr_r	hash/ip_hash/iptest.c	/^int add_ip_addr_r( ip_addr__t*  p_ip_addr_in_ptr,$/;"	f
-addr	hash/ip_hash/iptest.c	/^      char    addr[IP_ADDR_T_SIZE_C]; $/;"	m	union:__anon22::__anon23	file:
+addr	hash/ip_hash/iptest.c	/^      char    addr[IP_ADDR_T_SIZE_C]; $/;"	m	union:__anon21::__anon22	file:
 addr_num	sctp-tools/src/include/netinet/sctp.h	/^	__u32			addr_num; \/*output*\/$/;"	m	struct:sctp_getaddrs
 addr_num	sctp-tools/src/include/netinet/sctp.h	/^	int			addr_num;$/;"	m	struct:sctp_getaddrs_old
 addrs	sctp-tools/src/include/netinet/sctp.h	/^	__u8			addrs[0]; \/*output, variable size*\/$/;"	m	struct:sctp_getaddrs
@@ -2360,7 +2362,7 @@ am_test_tcp_style_OBJECTS	sctp-tools/src/func_tests/Makefile	/^am_test_tcp_style
 am_test_tcp_style_v6_OBJECTS	sctp-tools/src/func_tests/Makefile	/^am_test_tcp_style_v6_OBJECTS =  \\$/;"	m
 am_test_timetolive_OBJECTS	sctp-tools/src/func_tests/Makefile	/^am_test_timetolive_OBJECTS = test_timetolive.$(OBJEXT)$/;"	m
 am_test_timetolive_v6_OBJECTS	sctp-tools/src/func_tests/Makefile	/^am_test_timetolive_v6_OBJECTS =  \\$/;"	m
-app_ip_addr__t	hash/ip_hash/iptest.c	/^}app_ip_addr__t;$/;"	t	typeref:struct:__anon24	file:
+app_ip_addr__t	hash/ip_hash/iptest.c	/^}app_ip_addr__t;$/;"	t	typeref:struct:__anon23	file:
 append_addr	sctp-tools/src/apps/sctp_darn.c	/^append_addr(const char *parm, struct sockaddr *addrs, int *ret_count)$/;"	f
 append_addr	sctp-tools/src/apps/sctp_test.c	/^append_addr(const char *parm, struct sockaddr *addrs, int *ret_count)$/;"	f
 as_fn_append	sctp-tools/config.status	/^  as_fn_append ()$/;"	f
@@ -2383,13 +2385,13 @@ as_fn_set_status	sctp-tools/configure	/^as_fn_set_status ()$/;"	f
 as_fn_success	sctp-tools/configure	/^as_fn_success () { as_fn_return 0; }$/;"	f
 as_fn_unset	sctp-tools/config.status	/^as_fn_unset ()$/;"	f
 as_fn_unset	sctp-tools/configure	/^as_fn_unset ()$/;"	f
-assoc_i	sctp-tools/src/apps/sctp_test.c	/^        int assoc_i;$/;"	m	struct:__anon10	file:
+assoc_i	sctp-tools/src/apps/sctp_test.c	/^        int assoc_i;$/;"	m	struct:__anon7	file:
 assoc_id	sctp-tools/src/include/netinet/sctp.h	/^	sctp_assoc_t		assoc_id; \/*input*\/$/;"	m	struct:sctp_getaddrs
 assoc_id	sctp-tools/src/include/netinet/sctp.h	/^	sctp_assoc_t            assoc_id;$/;"	m	struct:sctp_getaddrs_old
 assoc_id	sctp-tools/src/include/netinet/sctp.h	/^    sctp_assoc_t            assoc_id;$/;"	m	struct:sctp_assoc_value
 assoc_num	sctp-tools/src/apps/sctp_xconnect.c	/^int	assoc_num,$/;"	v
 assoc_pattern	sctp-tools/src/apps/sctp_test.c	/^int assoc_pattern = ASSOC_PATTERN_SEQUENTIAL;$/;"	v
-assoc_state	sctp-tools/src/apps/sctp_test.c	/^	_assoc_state *assoc_state;$/;"	m	struct:__anon10	file:
+assoc_state	sctp-tools/src/apps/sctp_test.c	/^	_assoc_state *assoc_state;$/;"	m	struct:__anon7	file:
 assoc_value	sctp-tools/src/include/netinet/sctp.h	/^    uint32_t                assoc_value;$/;"	m	struct:sctp_assoc_value
 associd	sctp-tools/src/apps/sctp_darn.c	/^sctp_assoc_t associd = 0;$/;"	v
 associd	sctp-tools/src/include/netinet/sctp.h	/^	sctp_assoc_t associd;$/;"	m	struct:__anon18
@@ -2611,8 +2613,8 @@ command_poll	sctp-tools/src/apps/sctp_darn.c	/^command_poll(char *argv0)$/;"	f
 command_recv	sctp-tools/src/apps/myftp.c	/^command_recv(char *argv0, int sk)$/;"	f	file:
 command_send	sctp-tools/src/apps/myftp.c	/^command_send(char *argv0, int sk)$/;"	f	file:
 command_send	sctp-tools/src/apps/sctp_darn.c	/^command_send(char *argv0, int *skp)$/;"	f
-command_t	sctp-tools/src/apps/myftp.c	/^typedef enum { COMMAND_NONE, COMMAND_RECV, COMMAND_SEND } command_t;$/;"	t	typeref:enum:__anon5	file:
-command_t	sctp-tools/src/apps/sctp_darn.h	/^} command_t;$/;"	t	typeref:enum:__anon2
+command_t	sctp-tools/src/apps/myftp.c	/^typedef enum { COMMAND_NONE, COMMAND_RECV, COMMAND_SEND } command_t;$/;"	t	typeref:enum:__anon9	file:
+command_t	sctp-tools/src/apps/sctp_darn.h	/^} command_t;$/;"	t	typeref:enum:__anon1
 compare_long_nums	euler/misc.c	/^int compare_long_nums(int *in_a, int *in_b)$/;"	f
 conn_addr	sctp-tools/src/func_tests/test_1_to_1_threads.c	/^struct sockaddr_in  conn_addr;$/;"	v	typeref:struct:sockaddr_in
 connect_r	sctp-tools/src/apps/sctp_status.c	/^int connect_r(int sk, const struct sockaddr *serv_addr, socklen_t addrlen) {$/;"	f
@@ -2627,11 +2629,11 @@ constrcut_prime_check	euler/misc.c	/^bool constrcut_prime_check(int max_num)$/;"
 constrcut_prime_check_long	euler/misc.c	/^bool constrcut_prime_check_long(long long max_num)$/;"	f
 controlVector	sctp-tools/src/apps/peel_server.c	/^static char controlVector[65535];$/;"	v	file:
 convert_integer	euler/test17.c	/^int convert_integer(int num, char *str)$/;"	f
-count	hash/ip_hash/ghash_bucket.c	/^   u32         count;$/;"	m	struct:__anon21	file:
+count	hash/ip_hash/ghash_bucket.c	/^   u32         count;$/;"	m	struct:__anon25	file:
 current_max	euler/test18.c	/^int current_max = 0;$/;"	v
 cut_long_num	euler/misc.c	/^void cut_long_num(int n, int *num)$/;"	f
 cvs_id	sctp-tools/doc/template.c	/^static char *cvs_id __attribute__ ((unused)) = "$Id: template.c,v 1.1.1.1 2002\/08\/06 22:31:05 inaky Exp $";$/;"	v	file:
-cycle	sctp-tools/src/apps/sctp_test.c	/^	int cycle;$/;"	m	struct:__anon9	file:
+cycle	sctp-tools/src/apps/sctp_test.c	/^	int cycle;$/;"	m	struct:__anon6	file:
 d	euler/Makefile	/^d = f$/;"	m
 data0	cksum/testcksum.c	/^short data0[]={0,0x1234,0xFFFF,0,0,0x0000};$/;"	v
 data1	cksum/testcksum.c	/^short data1[]={0,0x1234,0xFFFF,0,0,0xFFFF};$/;"	v
@@ -2774,7 +2776,7 @@ foobar	lib_test/lib2.c	/^int foobar(int i)$/;"	f
 format_long_long_num	euler/misc.c	/^void format_long_long_num(long long n, int *num)$/;"	f
 format_long_num	euler/misc.c	/^void format_long_num(int n, int *num)$/;"	f
 found_num	euler/test51.c	/^int found_num[10];$/;"	v
-free_head	hash/ip_hash/iptest.c	/^    dlist_t                       free_head;$/;"	m	struct:__anon25	file:
+free_head	hash/ip_hash/iptest.c	/^    dlist_t                       free_head;$/;"	m	struct:__anon24	file:
 func_append	sctp-tools/bin/ltmain.sh	/^func_append ()$/;"	f
 func_append	sctp-tools/config.status	/^func_append ()\\$/;"	f
 func_append	sctp-tools/configure	/^func_append ()\\$/;"	f
@@ -3273,7 +3275,7 @@ ghash_bucket__t	hash/ip_hash/ghash_bucket.h	/^typedef struct ghash_bucket__t  gh
 ghash_bucket_create__r	hash/ip_hash/ghash_bucket.c	/^ghash_bucket__t *ghash_bucket_create__r(int buck_size,GHASH_EQUAL_F cmp_f,GHASH_KEY_F key_f,u32 rand_value)$/;"	f
 ghash_bucket_delete__r	hash/ip_hash/ghash_bucket.c	/^void   ghash_bucket_delete__r(ghash_bucket__t *hash_bucket,dlist_t *node, GHASH_KEY key)$/;"	f
 ghash_bucket_destroy__r	hash/ip_hash/ghash_bucket.c	/^void  ghash_bucket_destroy__r(ghash_bucket__t *hash_bucket)$/;"	f
-ghash_bucket_head__t	hash/ip_hash/ghash_bucket.c	/^}ghash_bucket_head__t;$/;"	t	typeref:struct:__anon21	file:
+ghash_bucket_head__t	hash/ip_hash/ghash_bucket.c	/^}ghash_bucket_head__t;$/;"	t	typeref:struct:__anon25	file:
 ghash_bucket_insert__r	hash/ip_hash/ghash_bucket.c	/^void  ghash_bucket_insert__r(ghash_bucket__t *hash_bucket,dlist_t *node, GHASH_KEY key)$/;"	f
 ghash_bucket_search__r	hash/ip_hash/ghash_bucket.c	/^dlist_t    *ghash_bucket_search__r(ghash_bucket__t *hash_bucket,GHASH_KEY key)$/;"	f
 ghash_bucket_stat__r	hash/ip_hash/ghash_bucket.c	/^void  ghash_bucket_stat__r(ghash_bucket__t *hash_bucket,ghash_bucket_stat__t *ghash_bucket_stat)$/;"	f
@@ -3288,7 +3290,7 @@ gsk	sctp-tools/src/apps/sctp_status.c	/^int gsk = -1;$/;"	v
 guth_number_of_chunks	sctp-tools/src/include/netinet/sctp.h	721;"	d
 h	euler/test66.c	/^  long long g,h;$/;"	m	struct:_Node	file:
 hands	euler/test54.c	/^char hands[1000*20] = {0};$/;"	v
-head	hash/ip_hash/ghash_bucket.c	/^   dlist_t     head;$/;"	m	struct:__anon21	file:
+head	hash/ip_hash/ghash_bucket.c	/^   dlist_t     head;$/;"	m	struct:__anon25	file:
 host	sctp-tools/Makefile	/^host = x86_64-unknown-linux-gnu$/;"	m
 host	sctp-tools/bin/Makefile	/^host = x86_64-unknown-linux-gnu$/;"	m
 host	sctp-tools/doc/Makefile	/^host = x86_64-unknown-linux-gnu$/;"	m
@@ -3403,11 +3405,11 @@ infodir	sctp-tools/src/include/netinet/Makefile	/^infodir = ${datarootdir}\/info
 infodir	sctp-tools/src/lib/Makefile	/^infodir = ${datarootdir}\/info$/;"	m
 infodir	sctp-tools/src/testlib/Makefile	/^infodir = ${datarootdir}\/info$/;"	m
 infodir	sctp-tools/src/withsctp/Makefile	/^infodir = ${datarootdir}\/info$/;"	m
-init	sctp-tools/src/apps/myftp.c	/^	struct sctp_initmsg init;$/;"	m	union:__anon6	typeref:struct:__anon6::sctp_initmsg	file:
-init	sctp-tools/src/apps/sctp_darn.c	/^	struct sctp_initmsg init;$/;"	m	union:__anon1	typeref:struct:__anon1::sctp_initmsg	file:
-init	sctp-tools/src/apps/sctp_status.c	/^	struct sctp_initmsg init;$/;"	m	union:__anon4	typeref:struct:__anon4::sctp_initmsg	file:
-init	sctp-tools/src/apps/sctp_test.c	/^        struct sctp_initmsg     init;$/;"	m	union:__anon8	typeref:struct:__anon8::sctp_initmsg	file:
-init	sctp-tools/src/apps/sctp_test.c	/^        struct sctp_initmsg init;$/;"	m	union:__anon7	typeref:struct:__anon7::sctp_initmsg	file:
+init	sctp-tools/src/apps/myftp.c	/^	struct sctp_initmsg init;$/;"	m	union:__anon10	typeref:struct:__anon10::sctp_initmsg	file:
+init	sctp-tools/src/apps/sctp_darn.c	/^	struct sctp_initmsg init;$/;"	m	union:__anon8	typeref:struct:__anon8::sctp_initmsg	file:
+init	sctp-tools/src/apps/sctp_status.c	/^	struct sctp_initmsg init;$/;"	m	union:__anon3	typeref:struct:__anon3::sctp_initmsg	file:
+init	sctp-tools/src/apps/sctp_test.c	/^        struct sctp_initmsg     init;$/;"	m	union:__anon5	typeref:struct:__anon5::sctp_initmsg	file:
+init	sctp-tools/src/apps/sctp_test.c	/^        struct sctp_initmsg init;$/;"	m	union:__anon4	typeref:struct:__anon4::sctp_initmsg	file:
 init	sctp-tools/src/include/netinet/sctp.h	/^	struct sctp_initmsg	init;$/;"	m	union:__anon13	typeref:struct:__anon13::sctp_initmsg
 init_function	lib_test/lib1.c	/^void __attribute__((constructor)) init_function(void)$/;"	f
 init_hash	hash/ip_hash/iptest.c	/^int  init_hash()$/;"	f
@@ -3473,12 +3475,12 @@ interactive	sctp-tools/src/apps/myftp.c	/^static int interactive = 0;$/;"	v	file
 interactive_mode	sctp-tools/src/apps/sctp_darn.c	/^int interactive_mode = 0;$/;"	v
 interface	sctp-tools/src/apps/sctp_darn.c	/^char *interface = "eth0";$/;"	v
 internet_drafts	sctp-tools/doc/Makefile	/^internet_drafts = \\$/;"	m
-ip_addr	hash/ip_hash/iptest.c	/^    ip_addr__t                     ip_addr;$/;"	m	struct:__anon24	file:
-ip_addr__t	hash/ip_hash/iptest.c	/^}ip_addr__t;$/;"	t	typeref:struct:__anon22	file:
+ip_addr	hash/ip_hash/iptest.c	/^    ip_addr__t                     ip_addr;$/;"	m	struct:__anon23	file:
+ip_addr__t	hash/ip_hash/iptest.c	/^}ip_addr__t;$/;"	t	typeref:struct:__anon21	file:
 ip_addr_factory	hash/ip_hash/iptest.c	/^ip_addr_factory__t ip_addr_factory;$/;"	v
-ip_addr_factory__t	hash/ip_hash/iptest.c	/^}ip_addr_factory__t;$/;"	t	typeref:struct:__anon25	file:
-ip_addr_hash	hash/ip_hash/iptest.c	/^    ghash_bucket__t              *ip_addr_hash;$/;"	m	struct:__anon25	file:
-ip_addr_storage	hash/ip_hash/iptest.c	/^    app_ip_addr__t                ip_addr_storage[MAX_IP_ADDR_NBR];$/;"	m	struct:__anon25	file:
+ip_addr_factory__t	hash/ip_hash/iptest.c	/^}ip_addr_factory__t;$/;"	t	typeref:struct:__anon24	file:
+ip_addr_hash	hash/ip_hash/iptest.c	/^    ghash_bucket__t              *ip_addr_hash;$/;"	m	struct:__anon24	file:
+ip_addr_storage	hash/ip_hash/iptest.c	/^    app_ip_addr__t                ip_addr_storage[MAX_IP_ADDR_NBR];$/;"	m	struct:__anon24	file:
 ip_hash_equal__r	hash/ip_hash/iptest.c	/^static int  ip_hash_equal__r(dlist_t *node,GHASH_KEY key)$/;"	f	file:
 ip_hash_slot__r	hash/ip_hash/iptest.c	/^static u32  ip_hash_slot__r(GHASH_KEY key,u32 rand_value)$/;"	f	file:
 is_flush	euler/test54.c	/^bool is_flush(char *hand, char *values)$/;"	f
@@ -3562,7 +3564,7 @@ libwithsctp_la_LIBADD	sctp-tools/src/withsctp/Makefile	/^libwithsctp_la_LIBADD =
 libwithsctp_la_LINK	sctp-tools/src/withsctp/Makefile	/^libwithsctp_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \\$/;"	m
 libwithsctp_la_OBJECTS	sctp-tools/src/withsctp/Makefile	/^libwithsctp_la_OBJECTS = $(am_libwithsctp_la_OBJECTS)$/;"	m
 libwithsctp_la_SOURCES	sctp-tools/src/withsctp/Makefile	/^libwithsctp_la_SOURCES = sctp_load_libs.c sctp_socket.c sctp_bind.c \\$/;"	m
-list	hash/ip_hash/iptest.c	/^    dlist_t                        list;$/;"	m	struct:__anon24	file:
+list	hash/ip_hash/iptest.c	/^    dlist_t                        list;$/;"	m	struct:__anon23	file:
 listen_r	sctp-tools/src/apps/sctp_status.c	/^int listen_r(int sk, int listen_count) {$/;"	f
 listen_r	sctp-tools/src/apps/sctp_test.c	/^int listen_r(int sk, int listen_count)$/;"	f
 listeners	sctp-tools/src/apps/sctp_test.c	/^int listeners = 0;$/;"	v
@@ -3670,6 +3672,7 @@ main	euler/test8.c	/^int main()$/;"	f
 main	euler/test9.c	/^int main()$/;"	f
 main	euler/test97.c	/^int main()$/;"	f
 main	hash/ip_hash/iptest.c	/^int main()$/;"	f
+main	ioctl/ioctl_test.c	/^int main()$/;"	f
 main	lib_test/program1.c	/^int main()$/;"	f
 main	lib_test/program2.c	/^int main()$/;"	f
 main	lib_test/runsosimple.c	/^int main(int argc, char * argv[])$/;"	f
@@ -3721,6 +3724,8 @@ main	sctp-tools/src/func_tests/test_sockopt.c	/^main(void)$/;"	f
 main	sctp-tools/src/func_tests/test_tcp_style.c	/^main(int argc, char *argv[])$/;"	f
 main	sctp-tools/src/func_tests/test_timetolive.c	/^int main(int argc, char *argv[])$/;"	f
 main	sctp-tools/src/withsctp/checksctp.c	/^int main(void)$/;"	f
+main	shm_test/shm_client.c	/^int main () $/;"	f
+main	shm_test/shm_main.c	/^int main () $/;"	f
 main	socket/multicast/client-old.c	/^int main(int argc, char *argv[])$/;"	f
 main	socket/multicast/client.c	/^int main(void) {$/;"	f
 main	socket/multicast/server.c	/^int main (int argc, char *argv[ ])$/;"	f
@@ -3798,9 +3803,9 @@ msg	sctp-tools/src/apps/peel_server.c	/^static struct msghdr msg;$/;"	v	typeref:
 msg	sctp-tools/src/apps/sctp_status.c	/^unsigned char msg[] = "012345678901234567890123456789012345678901234567890";$/;"	v
 msg	sctp-tools/src/apps/sctp_test.c	/^unsigned char msg[] = "012345678901234567890123456789012345678901234567890";$/;"	v
 msg_cnt	sctp-tools/src/apps/sctp_status.c	/^int msg_cnt = MSG_CNT;$/;"	v
-msg_cnt	sctp-tools/src/apps/sctp_test.c	/^	int msg_cnt;$/;"	m	struct:__anon9	file:
+msg_cnt	sctp-tools/src/apps/sctp_test.c	/^	int msg_cnt;$/;"	m	struct:__anon6	file:
 msg_cnt	sctp-tools/src/apps/sctp_test.c	/^int msg_cnt = MSG_CNT;$/;"	v
-msg_sent	sctp-tools/src/apps/sctp_test.c	/^	int msg_sent;$/;"	m	struct:__anon9	file:
+msg_sent	sctp-tools/src/apps/sctp_test.c	/^	int msg_sent;$/;"	m	struct:__anon6	file:
 msg_sizes	sctp-tools/src/apps/sctp_test.c	/^static int msg_sizes[NCASES][MSG_CNT] =$/;"	v	file:
 msg_sizes	sctp-tools/src/func_tests/test_fragments.c	/^int msg_sizes[] = {1353, 2000, 5000, 10000, 20000, 32768};$/;"	v
 mul_long_nums	euler/misc.c	/^void mul_long_nums(int *in_a, int *in_b, int *out_c)$/;"	f
@@ -3887,7 +3892,7 @@ opt_space	sctp-tools/src/apps/sctp_darn.c	/^int opt_space = 0;$/;"	v
 order_pattern	sctp-tools/src/apps/sctp_status.c	/^int order_pattern = ORDER_PATTERN_UNORDERED;$/;"	v
 order_pattern	sctp-tools/src/apps/sctp_test.c	/^int order_pattern = ORDER_PATTERN_UNORDERED;$/;"	v
 order_state	sctp-tools/src/apps/sctp_status.c	/^int order_state = 0;$/;"	v
-order_state	sctp-tools/src/apps/sctp_test.c	/^        int order_state;$/;"	m	struct:__anon9	file:
+order_state	sctp-tools/src/apps/sctp_test.c	/^        int order_state;$/;"	m	struct:__anon6	file:
 order_state	sctp-tools/src/apps/sctp_test.c	/^int order_state = 0;$/;"	v
 output_long_num	euler/misc.c	/^void output_long_num(int *a)$/;"	f
 p	euler/test66.c	/^  int p[N],q[N];$/;"	m	struct:_PellAns	file:
@@ -4064,8 +4069,8 @@ ra_family	sctp-tools/src/apps/sctp_darn.c	/^sa_family_t ra_family;	\/* What fami
 ra_len	sctp-tools/src/apps/sctp_darn.c	/^int ra_len = 0;		\/* How long is remote_addr? *\/$/;"	v
 ra_raw	sctp-tools/src/apps/sctp_darn.c	/^void *ra_raw;		\/* This is the addr part of remote_addr. *\/$/;"	v
 rand_value	hash/ip_hash/ghash_bucket.c	/^  u32                         rand_value;$/;"	m	struct:ghash_bucket__t	file:
-rand_value	hash/ip_hash/iptest.c	/^    int                           rand_value;$/;"	m	struct:__anon25	file:
-raw	sctp-tools/src/apps/sctp_test.c	/^        int                    raw;$/;"	m	union:__anon8	file:
+rand_value	hash/ip_hash/iptest.c	/^    int                           rand_value;$/;"	m	struct:__anon24	file:
+raw	sctp-tools/src/apps/sctp_test.c	/^        int                    raw;$/;"	m	union:__anon5	file:
 raw	sctp-tools/src/include/netinet/sctp.h	/^	__u8   			raw;$/;"	m	union:__anon13
 rcvbuf_func	sctp-tools/src/apps/sctp_darn.c	/^rcvbuf_func(char *argv0, int sk, int len, int set)$/;"	f	file:
 readBuffer	sctp-tools/src/apps/peel_server.c	/^static char readBuffer[65535];	$/;"	v	file:
@@ -4074,9 +4079,9 @@ real_setsockopt	sctp-tools/src/withsctp/sctp_load_libs.c	/^int (*real_setsockopt
 real_socket	sctp-tools/src/withsctp/sctp_load_libs.c	/^int (*real_socket)(int domain, int type, int protocol);$/;"	v
 receive_r	sctp-tools/src/apps/sctp_status.c	/^int receive_r(int sk)$/;"	f
 receive_r	sctp-tools/src/apps/sctp_test.c	/^int receive_r(int sk, int once)$/;"	f
-reference	hash/ip_hash/iptest.c	/^    int                            reference;$/;"	m	struct:__anon24	file:
+reference	hash/ip_hash/iptest.c	/^    int                            reference;$/;"	m	struct:__anon23	file:
 relay	sctp-tools/src/func_tests/test_1_to_1_threads.c	/^void *relay(void *arg)$/;"	f
-rem_port	sctp-tools/src/apps/sctp_test.c	/^	int rem_port;$/;"	m	struct:__anon9	file:
+rem_port	sctp-tools/src/apps/sctp_test.c	/^	int rem_port;$/;"	m	struct:__anon6	file:
 remote_addr	sctp-tools/src/apps/sctp_darn.c	/^sockaddr_storage_t remote_addr;$/;"	v
 remote_host	sctp-tools/src/apps/myftp.c	/^static char *remote_host = NULL;$/;"	v	file:
 remote_host	sctp-tools/src/apps/sctp_darn.c	/^char *remote_host = NULL;$/;"	v
@@ -4121,7 +4126,7 @@ s_loc	sctp-tools/src/apps/sctp_status.c	/^struct sockaddr_storage s_rem, s_loc;$
 s_loc	sctp-tools/src/apps/sctp_test.c	/^struct sockaddr_storage s_rem, s_loc;$/;"	v	typeref:struct:
 s_rem	sctp-tools/src/apps/sctp_status.c	/^struct sockaddr_storage s_rem, s_loc;$/;"	v	typeref:struct:sockaddr_storage
 s_rem	sctp-tools/src/apps/sctp_test.c	/^struct sockaddr_storage s_rem, s_loc;$/;"	v	typeref:struct:sockaddr_storage
-sa	sctp-tools/src/apps/sctp_darn.h	/^        struct sockaddr sa;$/;"	m	union:__anon3	typeref:struct:__anon3::sockaddr
+sa	sctp-tools/src/apps/sctp_darn.h	/^        struct sockaddr sa;$/;"	m	union:__anon2	typeref:struct:__anon2::sockaddr
 sa	sctp-tools/src/testlib/sctputil.h	/^	struct sockaddr sa;	$/;"	m	union:__anon11	typeref:struct:__anon11::sockaddr
 sac_assoc_id	sctp-tools/src/include/netinet/sctp.h	/^	sctp_assoc_t sac_assoc_id;$/;"	m	struct:sctp_assoc_change
 sac_error	sctp-tools/src/include/netinet/sctp.h	/^	__u16 sac_error;$/;"	m	struct:sctp_assoc_change
@@ -4204,7 +4209,7 @@ sctp_authkey	sctp-tools/src/include/netinet/sctp.h	/^struct sctp_authkey {$/;"	s
 sctp_authkey_event	sctp-tools/src/include/netinet/sctp.h	/^struct sctp_authkey_event {$/;"	s
 sctp_authkeyid	sctp-tools/src/include/netinet/sctp.h	/^struct sctp_authkeyid {$/;"	s
 sctp_bindx	sctp-tools/src/lib/bindx.c	/^sctp_bindx(int fd, struct sockaddr *addrs, int addrcnt, int flags)$/;"	f
-sctp_cmsg_data_t	sctp-tools/src/apps/sctp_test.c	/^} sctp_cmsg_data_t;$/;"	t	typeref:union:__anon8	file:
+sctp_cmsg_data_t	sctp-tools/src/apps/sctp_test.c	/^} sctp_cmsg_data_t;$/;"	t	typeref:union:__anon5	file:
 sctp_cmsg_data_t	sctp-tools/src/include/netinet/sctp.h	/^} sctp_cmsg_data_t;$/;"	t	typeref:union:__anon13
 sctp_cmsg_t	sctp-tools/src/include/netinet/sctp.h	/^} sctp_cmsg_t;$/;"	t	typeref:enum:sctp_cmsg_type
 sctp_cmsg_type	sctp-tools/src/include/netinet/sctp.h	/^typedef enum sctp_cmsg_type {$/;"	g
@@ -4336,7 +4341,7 @@ sinit_max_instreams	sctp-tools/src/include/netinet/sctp.h	/^	__u16 sinit_max_ins
 sinit_num_ostreams	sctp-tools/src/include/netinet/sctp.h	/^	__u16 sinit_num_ostreams;$/;"	m	struct:sctp_initmsg
 size_arg	sctp-tools/src/apps/sctp_status.c	/^int size_arg = 0;$/;"	v
 size_arg	sctp-tools/src/apps/sctp_test.c	/^int size_arg = 0;$/;"	v
-sk	sctp-tools/src/apps/sctp_test.c	/^        int sk;$/;"	m	struct:__anon10	file:
+sk	sctp-tools/src/apps/sctp_test.c	/^        int sk;$/;"	m	struct:__anon7	file:
 sn_adaptation_event	sctp-tools/src/include/netinet/sctp.h	/^	struct sctp_adaptation_event sn_adaptation_event;$/;"	m	union:sctp_notification	typeref:struct:sctp_notification::sctp_adaptation_event
 sn_assoc_change	sctp-tools/src/include/netinet/sctp.h	/^	struct sctp_assoc_change sn_assoc_change;$/;"	m	union:sctp_notification	typeref:struct:sctp_notification::sctp_assoc_change
 sn_authkey_event	sctp-tools/src/include/netinet/sctp.h	/^	struct sctp_authkey_event sn_authkey_event;$/;"	m	union:sctp_notification	typeref:struct:sctp_notification::sctp_authkey_event
@@ -4352,13 +4357,13 @@ sn_shutdown_event	sctp-tools/src/include/netinet/sctp.h	/^	struct sctp_shutdown_
 sn_type	sctp-tools/src/include/netinet/sctp.h	/^		__u16 sn_type;             \/* Notification type. *\/$/;"	m	struct:sctp_notification::__anon16
 snd_func	sctp-tools/src/apps/sctp_darn.c	/^snd_func(char *input)$/;"	f	file:
 sndbuf_func	sctp-tools/src/apps/sctp_darn.c	/^sndbuf_func(char *argv0, int sk, int len, int set)$/;"	f	file:
-sndrcv	sctp-tools/src/apps/sctp_test.c	/^        struct sctp_sndrcvinfo  sndrcv;$/;"	m	union:__anon8	typeref:struct:__anon8::sctp_sndrcvinfo	file:
+sndrcv	sctp-tools/src/apps/sctp_test.c	/^        struct sctp_sndrcvinfo  sndrcv;$/;"	m	union:__anon5	typeref:struct:__anon5::sctp_sndrcvinfo	file:
 sndrcv	sctp-tools/src/include/netinet/sctp.h	/^	struct sctp_sndrcvinfo	sndrcv;$/;"	m	union:__anon13	typeref:struct:__anon13::sctp_sndrcvinfo
-sndrcvinfo	sctp-tools/src/apps/myftp.c	/^	struct sctp_sndrcvinfo sndrcvinfo;$/;"	m	union:__anon6	typeref:struct:__anon6::sctp_sndrcvinfo	file:
-sndrcvinfo	sctp-tools/src/apps/sctp_darn.c	/^	struct sctp_sndrcvinfo sndrcvinfo;$/;"	m	union:__anon1	typeref:struct:__anon1::sctp_sndrcvinfo	file:
-sndrcvinfo	sctp-tools/src/apps/sctp_status.c	/^	struct sctp_sndrcvinfo sndrcvinfo;$/;"	m	union:__anon4	typeref:struct:__anon4::sctp_sndrcvinfo	file:
-sndrcvinfo	sctp-tools/src/apps/sctp_test.c	/^        struct sctp_sndrcvinfo sndrcvinfo;$/;"	m	union:__anon7	typeref:struct:__anon7::sctp_sndrcvinfo	file:
-sockaddr_storage_t	sctp-tools/src/apps/sctp_darn.h	/^} sockaddr_storage_t;$/;"	t	typeref:union:__anon3
+sndrcvinfo	sctp-tools/src/apps/myftp.c	/^	struct sctp_sndrcvinfo sndrcvinfo;$/;"	m	union:__anon10	typeref:struct:__anon10::sctp_sndrcvinfo	file:
+sndrcvinfo	sctp-tools/src/apps/sctp_darn.c	/^	struct sctp_sndrcvinfo sndrcvinfo;$/;"	m	union:__anon8	typeref:struct:__anon8::sctp_sndrcvinfo	file:
+sndrcvinfo	sctp-tools/src/apps/sctp_status.c	/^	struct sctp_sndrcvinfo sndrcvinfo;$/;"	m	union:__anon3	typeref:struct:__anon3::sctp_sndrcvinfo	file:
+sndrcvinfo	sctp-tools/src/apps/sctp_test.c	/^        struct sctp_sndrcvinfo sndrcvinfo;$/;"	m	union:__anon4	typeref:struct:__anon4::sctp_sndrcvinfo	file:
+sockaddr_storage_t	sctp-tools/src/apps/sctp_darn.h	/^} sockaddr_storage_t;$/;"	t	typeref:union:__anon2
 sockaddr_storage_t	sctp-tools/src/testlib/sctputil.h	/^} sockaddr_storage_t;$/;"	t	typeref:union:__anon11
 socket	sctp-tools/src/withsctp/sctp_socket.c	/^socket(int domain, int type, int protocol)$/;"	f
 socket_r	sctp-tools/src/apps/sctp_test.c	/^int socket_r(void)$/;"	f
@@ -4414,7 +4419,7 @@ srto_assoc_id	sctp-tools/src/include/netinet/sctp.h	/^	sctp_assoc_t	srto_assoc_i
 srto_initial	sctp-tools/src/include/netinet/sctp.h	/^	__u32		srto_initial;$/;"	m	struct:sctp_rtoinfo
 srto_max	sctp-tools/src/include/netinet/sctp.h	/^	__u32		srto_max;$/;"	m	struct:sctp_rtoinfo
 srto_min	sctp-tools/src/include/netinet/sctp.h	/^	__u32		srto_min;$/;"	m	struct:sctp_rtoinfo
-ss	sctp-tools/src/apps/sctp_darn.h	/^	struct sockaddr_storage ss;$/;"	m	union:__anon3	typeref:struct:__anon3::sockaddr_storage
+ss	sctp-tools/src/apps/sctp_darn.h	/^	struct sockaddr_storage ss;$/;"	m	union:__anon2	typeref:struct:__anon2::sockaddr_storage
 ssb_adaptation_ind	sctp-tools/src/include/netinet/sctp.h	/^	__u32	ssb_adaptation_ind;$/;"	m	struct:sctp_setadaptation
 sse_assoc_id	sctp-tools/src/include/netinet/sctp.h	/^	sctp_assoc_t sse_assoc_id;$/;"	m	struct:sctp_shutdown_event
 sse_flags	sctp-tools/src/include/netinet/sctp.h	/^	__u16 sse_flags;$/;"	m	struct:sctp_shutdown_event
@@ -4447,7 +4452,7 @@ str	module_test/proc_fs/myproc.c	/^static char *str = NULL;$/;"	v	file:
 stream_pattern	sctp-tools/src/apps/sctp_status.c	/^int stream_pattern = STREAM_PATTERN_SEQUENTIAL;$/;"	v
 stream_pattern	sctp-tools/src/apps/sctp_test.c	/^int stream_pattern = STREAM_PATTERN_SEQUENTIAL;$/;"	v
 stream_state	sctp-tools/src/apps/sctp_status.c	/^int stream_state = 0;$/;"	v
-stream_state	sctp-tools/src/apps/sctp_test.c	/^        int stream_state;$/;"	m	struct:__anon9	file:
+stream_state	sctp-tools/src/apps/sctp_test.c	/^        int stream_state;$/;"	m	struct:__anon6	file:
 stream_state	sctp-tools/src/apps/sctp_test.c	/^int stream_state = 0;$/;"	v
 subdir	sctp-tools/Makefile	/^subdir = .$/;"	m
 subdir	sctp-tools/bin/Makefile	/^subdir = bin$/;"	m
@@ -4812,13 +4817,13 @@ usage	sctp-tools/src/apps/sctp_test.c	/^void usage(char *argv0)$/;"	f
 usage	sctp-tools/src/apps/sctp_xconnect.c	/^void usage(char *argv0)$/;"	f
 use_poll	sctp-tools/src/apps/sctp_darn.c	/^int use_poll = 0;$/;"	v
 user_test_check_message	sctp-tools/src/apps/sctp_darn.c	/^user_test_check_message(struct msghdr *msg,$/;"	f
-v4	sctp-tools/src/apps/sctp_darn.h	/^        struct sockaddr_in v4;$/;"	m	union:__anon3	typeref:struct:__anon3::sockaddr_in
+v4	sctp-tools/src/apps/sctp_darn.h	/^        struct sockaddr_in v4;$/;"	m	union:__anon2	typeref:struct:__anon2::sockaddr_in
 v4	sctp-tools/src/testlib/sctputil.h	/^	struct sockaddr_in v4;	$/;"	m	union:__anon11	typeref:struct:__anon11::sockaddr_in
-v6	sctp-tools/src/apps/sctp_darn.h	/^        struct sockaddr_in6 v6;$/;"	m	union:__anon3	typeref:struct:__anon3::sockaddr_in6
+v6	sctp-tools/src/apps/sctp_darn.h	/^        struct sockaddr_in6 v6;$/;"	m	union:__anon2	typeref:struct:__anon2::sockaddr_in6
 v6	sctp-tools/src/testlib/sctputil.h	/^	struct sockaddr_in6 v6;$/;"	m	union:__anon11	typeref:struct:__anon11::sockaddr_in6
-value	hash/ip_hash/iptest.c	/^      int     value[IP_ADDR_T_SIZE_C\/sizeof(int)];$/;"	m	union:__anon22::__anon23	file:
+value	hash/ip_hash/iptest.c	/^      int     value[IP_ADDR_T_SIZE_C\/sizeof(int)];$/;"	m	union:__anon21::__anon22	file:
 verbose	sctp-tools/src/apps/myftp.c	/^static int verbose = 0;$/;"	v	file:
-version	hash/ip_hash/iptest.c	/^   char  version;$/;"	m	struct:__anon22	file:
+version	hash/ip_hash/iptest.c	/^   char  version;$/;"	m	struct:__anon21	file:
 vpkgdatadir	sctp-tools/src/apps/Makefile	/^vpkgdatadir = $(pkgdatadir)\/v1.0.16$/;"	m
 vpkgdatadir	sctp-tools/src/func_tests/Makefile	/^vpkgdatadir = $(pkgdatadir)\/v1.0.16$/;"	m
 vpkgdatadir	sctp-tools/src/lib/Makefile	/^vpkgdatadir = $(pkgdatadir)\/v1.0.16$/;"	m

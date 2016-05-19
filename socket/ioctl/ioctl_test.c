@@ -69,6 +69,7 @@ int main()
         mtu = ifr.ifr_mtu;
         printf("MTU is %d\n", mtu);
     }
+   close(socket_fd);
    return 0;
 }
 
