@@ -1,0 +1,5 @@
+Right left
+Right   left
+right      left
+right LEFT
+rightleft

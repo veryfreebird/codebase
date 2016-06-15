@@ -1,0 +1,2 @@
+grep -irE "right\s+left" input.txt    //>=1 spaces
+grep -irE "right\s*left" input.txt    //>=0 spaces
