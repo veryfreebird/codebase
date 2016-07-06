@@ -1,0 +1,4 @@
+probe kernel.function("tcp_init_cwnd").return
+{
+        printf("tcp_init_cwnd return: %d\n", $return)
+}
