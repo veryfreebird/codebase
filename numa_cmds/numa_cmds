@@ -1,0 +1,9 @@
+numactl --hardware
+
+/sys/devices/system/node/node0-node1
+
+echo 1024 > /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
+
+echo 1024 > /sys/devices/system/node/node0/hugepages/hugepages-2048kB/nr_hugepages
+
+numastat -c ,,,

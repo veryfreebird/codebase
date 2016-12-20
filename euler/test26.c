@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define MAX_LEN 10000
 
@@ -75,6 +76,7 @@ int main()
 {
     char values[MAX_LEN], result[MAX_LEN], repeat_nums[MAX_LEN],save_repeat[MAX_LEN];
     int i;
+    char *ptr;
     int len, repeat,max_repeat = 0, max_num;
     for(i=2;i<1000;i++)
     {
@@ -97,5 +99,8 @@ int main()
     
     printf("\nMAX REPEAT:%d\n", max_repeat);
     printall(save_repeat, max_repeat);    
+    ptr = malloc(11);
+    ptr[10]=0xa;
+    free(ptr);
     return 0;
 }
