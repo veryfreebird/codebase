@@ -252,7 +252,7 @@ set completeopt=longest,menu
 " CTags的设定 
 """"""""""""""""""""""""""""""""
 let Tlist_Sort_Type = "name" " 按照名称排序 
-"let Tlist_Use_Right_Window = 1 " 在右侧显示窗口 
+let Tlist_Use_Right_Window = 1 " 在右侧显示窗口 
 let Tlist_Compart_Format = 1 " 压缩方式 
 let Tlist_Exist_OnlyWindow = 1 " 如果只有一个buffer，kill窗口也kill掉buffer 
 let Tlist_File_Fold_Auto_Close = 0 " 不要关闭其他文件的tags 
@@ -267,18 +267,20 @@ set tags=tags
 "其他东东
 """""""""""""""""""""""""
 "默认打开Taglist 
-let Tlist_Auto_Open=1 
+let Tlist_Auto_Open=0 
 """""""""""""""""""""""""""""" 
 " Tag list (ctags) 
 """""""""""""""""""""""""""""""" 
 let Tlist_Ctags_Cmd = '/usr/bin/ctags' 
 let Tlist_Show_One_File = 1 "不同时显示多个文件的tag，只显示当前文件的 
 let Tlist_Exit_OnlyWindow = 1 "如果taglist窗口是最后一个窗口，则退出vim 
+let Tlist_Use_Right_Window = 0 "在右侧窗口中显示taglist窗口
 " minibufexpl插件的一般设置
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
+set updatetime=2000
 nmap <C-x>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-x>g :cs find g <C-R>=expand("<cword>")<CR><CR>
 nmap <C-x>c :cs find c <C-R>=expand("<cword>")<CR><CR>
@@ -287,21 +289,6 @@ nmap <C-x>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <C-x>f :cs find f <C-R>=expand("<cword>")<CR><CR>
 nmap <C-x>i :cs find i <C-R>=expand("<cword>")<CR>$<CR>
 nmap <C-x>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-let g:edittype="new"
-command! -complete=shellcmd -nargs=* Hman call Hman(<f-args>)
-function! Hman(...)
-    let query=join(a:000)
-    execute g:edittype 
-    execute '0read ++edit !MANPAGER=more man' . ' ' . query . ' ' . '| col -b'
-    setlocal buftype=nofile
-    1,1/^[a-z0-9]/-1d
-    1 
-    setfiletype man
-endfunction
-noremap <silent> ,o 
-            \ :Hmancword<CR>
-command! -complete=shellcmd -nargs=0 Hmancword call Hmancword(<f-args>)
-function! Hmancword()
-    execute "Hman" . ' ' . expand("<cword>")
-endfunction
 
+let g:winManagerWindowLayout='FileExplorer|TagList'
+nmap wm :WMToggle<cr>

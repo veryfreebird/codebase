@@ -1,4 +1,11 @@
 # config
+quick install:
+    cp .vimrc to home
+    cp vim.tar.gz to home and untar it
+
+
+
+
 install ctags
 ctags -R
 vim -t main => open and locate to main function
