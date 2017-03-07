@@ -1,5 +1,5 @@
 #SILENCE = @
-C_FLAGS += -g -ggdb
+C_FLAGS += -g -ggdb -fno-omit-frame-pointer
 
 test: test.o foo.o
 	$(SILENCE)gcc $(C_FLAGS) -o test test.o foo.o
