@@ -1,0 +1,30 @@
+syntax = "proto2";
+
+package cn.vicky.model.seri;  
+
+message User {
+    required int32 id = 1; // 主键,唯一
+    required string username = 2; // 帐号
+    required string password = 3; // 密码
+    optional string email = 4; // 邮箱(可选)
+    repeated Person person = 5; // 账户拥有的角色(可以重复)
+    }
+
+message Person { 
+    required int32 id = 1; // 主键,唯一
+    required string name = 2; // 角色名字
+
+    repeated PhoneNumber phone = 3; // 电话号码(可以重复)
+    } 
+
+    // 枚举类型
+enum PhoneType { 
+    MOBILE = 0; 
+    HOME = 1; 
+    WORK = 2; 
+    } 
+
+message PhoneNumber { 
+    required string number = 1; 
+    optional PhoneType type = 2 [default = HOME]; 
+    } 

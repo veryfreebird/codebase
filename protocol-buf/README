@@ -1,1 +1,4 @@
-protoc -I=./ --cpp_out=./ test.proto
+Need libprotobuf: https://github.com/google/protobuf/blob/master/src/README.md
+Need hiredis: https://github.com/redis/hiredis
+
+
