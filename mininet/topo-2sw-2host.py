@@ -23,7 +23,7 @@ class MyTopo( Topo ):
                    leftSwitch = self.addSwitch( 't0' )
                    rightSwitch = self.addSwitch( 't1' )
 
-                   for i in range(1,21):
+                   for i in range(1,3):
                        host = self.addHost('h'+str(i))
                        self.addLink(host,leftSwitch)
                        self.addLink(host,rightSwitch)
