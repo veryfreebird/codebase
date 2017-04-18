@@ -44,32 +44,11 @@ int main(void) {
     gtp_session.set_que_id          (1234);
     gtp_session.set_fwd_state       (1234);
 
+    printf("size of gtp session:%d\n", sizeof(gtp_session));
+
     nokia::asrnc::eipu::udp udp_session;
-    udp_session.set_index         (9999);
-    udp_session.set_flag          (9999);
-    udp_session.set_free          (9999);
-    udp_session.set_addr          (9999);
-    udp_session.set_id            (9999);
-    udp_session.set_id_hdr        (9999);
-    udp_session.set_addr_hdr      (9999);
-    udp_session.set_conn_id       (9999);
-    udp_session.set_trace_id      (9999);
-    udp_session.set_local_addr    (9999);
-    udp_session.set_remote_addr   (9999);
-    udp_session.set_flow_id       (9999);
-    udp_session.set_unit_addr     (9999);
-    udp_session.set_own_unit      (9999);
-    udp_session.set_bind          (9999);
-    udp_session.set_owner_id      (9999);
-    udp_session.set_ifc           (9999);
-    udp_session.set_muxi          (9999);
-    udp_session.set_mux_src       (9999);
-    udp_session.set_mux_dst       (9999);
-    udp_session.set_l3_pid        (9999);
-    udp_session.set_mon_type      (9999);
-    udp_session.set_imsi          (9999);
-    udp_session.set_mon_status    (9999);
-    udp_session.set_max_mux_count (9999);
+    printf("size of udp session:%d\n", sizeof(udp_session));
+//    std::cout << udp_session <<std::endl;
 
     // 创建User对象
     cn::vicky::model::seri::User u;
@@ -114,7 +93,7 @@ int main(void) {
 
     // 持久化到文件:
     std::fstream out("User.pb", std::ios::out | std::ios::binary | std::ios::trunc);
-    u.SerializeToOstream(&out);
+    gtp_session.SerializeToOstream(&out);
     out.close();
 
     // 从文件对象化:
@@ -173,17 +152,14 @@ int main(void) {
     reply = (redisReply*) redisCommand(c, "Get Jack");  
     std::cout << "reply->len = " << reply->len << "\nreply->str : \n" << reply->str << std::endl; // 这里打印不完  
 
-    cn::vicky::model::seri::User u3;
-    u3.ParseFromArray(reply->str, reply->len); //反序列化
-
-    std::cout << u3.id() << std::endl;
-    std::cout << u3.username() << std::endl;
-    std::cout << u3.password() << std::endl;
-    std::cout << u3.email() << std::endl;
+    std::cout << u2.id() << std::endl;
+    std::cout << u2.username() << std::endl;
+    std::cout << u2.password() << std::endl;
+    std::cout << u2.email() << std::endl;
 
     std::cout << "---------------------------" << std::endl;
-    for(int i = 0;i < u3.person_size();i++) {
-        cn::vicky::model::seri::Person* p = u3.mutable_person(i);
+    for(int i = 0;i < u2.person_size();i++) {
+        cn::vicky::model::seri::Person* p = u2.mutable_person(i);
         std::cout << p->id() << std::endl;
         std::cout << p->name() << std::endl;
         for (int j = 0;j < p->phone_size();j++) {
@@ -192,31 +168,6 @@ int main(void) {
         }
         std::cout << "---------------------------" << std::endl;
     }
-
-    std::cout << "----------Following uses Redis for persistenti of gtp udp session state-----------------" << std::endl;
-    
-    //将对象以二进制保存  
-    const int byteSize1 = gtp_session.ByteSize();  
-    std::cout << "GTP session byteSize = " << byteSize1 << std::endl;  
-    char buf1[byteSize];  
-    bzero(buf1, byteSize1);  
-    gtp_session.SerializeToArray(buf1, byteSize1);  
-
-    //第一次执行:将对象写入redis数据库  
-    reply = (redisReply*) redisCommand(c, "SET %d %b", gtp_session.conn_id(), buf1, byteSize1); // 重点!!!  
-    printf("SET (binary API): %s\n", reply->str);  
-    freeReplyObject(reply);  
-
-    //第二次执行:从redis数据库读取对象数据  
-    reply = (redisReply*) redisCommand(c, "Get 1234");  
-    std::cout << "reply->len = " << reply->len << "\nreply->str : \n" << reply->str << std::endl; // 这里打印不完  
-    
-    nokia::asrnc::eipu::gtp gtp_session_restored;
-    gtp_session_restored.ParseFromArray(reply->str, reply->len);
-    std::cout << gtp_session_restored.ul_ip_idx() << std::endl;
-    std::cout << gtp_session_restored.fwd_ip_idx() << std::endl;
-    std::cout << gtp_session_restored.dl_ip_idx() << std::endl;
-    std::cout << gtp_session_restored.conn_id() << std::endl;
 
     return 0;
 }
