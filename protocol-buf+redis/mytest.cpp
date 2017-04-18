@@ -12,7 +12,7 @@
 /*
  * 
  */
-int main(void) {
+int main(int argc, char **argv) {
     nokia::asrnc::eipu::gtp gtp_session;
     gtp_session.set_ul_ip_idx       (1234);
     gtp_session.set_fwd_ip_idx      (1234);
@@ -143,7 +143,8 @@ int main(void) {
     }
 
     std::cout << "----------Following uses Redis for persistent-----------------" << std::endl;
-    
+    const char *hostname = (argc > 1) ? argv[1] : "10.133.141.167";
+ 
     
     //将对象以二进制保存  
     const int byteSize = u.ByteSize();  
@@ -158,7 +159,7 @@ int main(void) {
     redisReply *reply;  
 
     struct timeval timeout = {1, 500000}; // 1.5 seconds  
-    c = redisConnectWithTimeout((char*) "10.133.141.167", 6379, timeout);  
+    c = redisConnectWithTimeout(hostname, 6379, timeout);  
     if (c->err) {  
     printf("Connection error: %s\n", c->errstr);  
     exit(1);  
@@ -198,7 +199,7 @@ int main(void) {
     //将对象以二进制保存  
     const int byteSize1 = gtp_session.ByteSize();  
     std::cout << "GTP session byteSize = " << byteSize1 << std::endl;  
-    char buf1[byteSize];  
+    char buf1[byteSize1];  
     bzero(buf1, byteSize1);  
     gtp_session.SerializeToArray(buf1, byteSize1);  
 
@@ -213,11 +214,35 @@ int main(void) {
     
     nokia::asrnc::eipu::gtp gtp_session_restored;
     gtp_session_restored.ParseFromArray(reply->str, reply->len);
+
     std::cout << gtp_session_restored.ul_ip_idx() << std::endl;
     std::cout << gtp_session_restored.fwd_ip_idx() << std::endl;
     std::cout << gtp_session_restored.dl_ip_idx() << std::endl;
     std::cout << gtp_session_restored.conn_id() << std::endl;
 
+
+    //将对象以二进制保存  
+    const int byteSize2 = udp_session.ByteSize();  
+    std::cout << "UDP session byteSize = " << byteSize2 << std::endl;  
+    char buf2[byteSize2];  
+    bzero(buf2, byteSize2);  
+    udp_session.SerializeToArray(buf2, byteSize2);  
+
+    //第一次执行:将对象写入redis数据库  
+    reply = (redisReply*) redisCommand(c, "SET %d %b", udp_session.conn_id(), buf2, byteSize2); // 重点!!!  
+    printf("SET (binary API): %s\n", reply->str);  
+    freeReplyObject(reply);  
+
+    //第二次执行:从redis数据库读取对象数据  
+    reply = (redisReply*) redisCommand(c, "Get 9999");  
+    std::cout << "reply->len = " << reply->len << "\nreply->str : \n" << reply->str << std::endl; // 这里打印不完  
+    
+    nokia::asrnc::eipu::udp udp_session_restored;
+    udp_session_restored.ParseFromArray(reply->str, reply->len);
+
+    std::cout << udp_session_restored.conn_id() << std::endl;
+    std::cout << udp_session_restored.ifc() << std::endl;
+    std::cout << udp_session_restored.id() << std::endl;
     return 0;
 }
 
