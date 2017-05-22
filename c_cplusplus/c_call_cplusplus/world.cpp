@@ -7,6 +7,7 @@ class test
     int showhello()
     {
         std::cout << "I am in class test" << std::endl;
+        return 1;
     }
 };
 void world()
