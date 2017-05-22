@@ -1,5 +1,5 @@
 #SILENCE = @ 
-
+SERVER = 127.0.0.1
 CXX = g++
 CXX_FLAGS := -g $(shell pkg-config --cflags protobuf) $(shell pkg-config --cflags hiredis) 
 LD_FLAGS  := $(shell pkg-config --libs protobuf)  $(shell pkg-config --libs hiredis)  
@@ -46,3 +46,6 @@ $(BINS): %: %.o
 #ifneq ($(MAKECMDGOALS),clean)
 #	-include $(DEPS)
 #endif
+
+run:
+	taskset 0x01 ./mytest $(SERVER)

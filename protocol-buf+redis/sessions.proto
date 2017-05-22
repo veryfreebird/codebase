@@ -1,0 +1,64 @@
+syntax = "proto2";
+
+package nokia.asrnc.eipu;  
+
+message gtp {
+    required int32 ul_ip_idx       = 1; 
+    required int32 fwd_ip_idx      = 2;
+    required int32 dl_ip_idx       = 3;
+    required int32 dl_tei          = 4;
+    required int32 ul_tei          = 5;
+    required int32 fwd_tei         = 6;
+    required int32 conn_id         = 7;
+    required int32 aap_pid         = 8;
+    required int32 l3_pid          = 9;
+    required int32 l3_computer     = 10;
+    required int32 ipbr_id         = 11;
+    required int32 vrf_id          = 12;
+    required int32 error_ind_cnt   = 13; 
+    required int32 pdcp_lid        = 14;
+    required int64 imsi_id         = 15;
+    required bool  mon_status      = 16; 
+    required int32 process_owner   = 17;
+    required int32 phb             = 18;
+    required int32 dl_dscp         = 19;
+    required int32 qos_class       = 20;
+    required int32 rab_state       = 21;
+    required int32 saved_rab_state = 22;
+    required int32 tunnel_reserved = 23;
+    required int32 sv_inactive     = 24;
+    required int32 fwd_ip_exist    = 25;
+    required int32 dmpg_switch     = 26;
+    required int32 pdcp_forward    = 27;
+    required int32 que_id          = 28;
+    required int32 fwd_state       = 29;
+    }
+
+message udp {
+    required int32 index         = 1;
+    required int32 flag          = 2;
+    required int64 free          = 3;
+    required int64 addr          = 4;
+    required int64 id            = 5;
+    required int64 id_hdr        = 6;
+    required int64 addr_hdr      = 7;
+    required int32 conn_id       = 8;
+    required int32 trace_id      = 9;
+    required int32 local_addr    = 10;
+    required int32 remote_addr   = 11;
+    required int32 flow_id       = 12;
+    required int32 unit_addr     = 13;
+    required int32 own_unit      = 14;
+    required int32 bind          = 15;
+    required int32 owner_id      = 16;
+    required int32 ifc           = 17;
+    required int32 muxi          = 18;
+    required int32 mux_src       = 19;
+    required int32 mux_dst       = 20;
+    required int32 l3_pid        = 21;
+    required int32 mon_type      = 22;
+    required int32 imsi          = 23;
+    required int32 mon_status    = 24;
+    required int32 max_mux_count = 25;
+}
+
