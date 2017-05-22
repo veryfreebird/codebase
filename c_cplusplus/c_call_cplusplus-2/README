@@ -1,0 +1,3 @@
+g++ -c apple.cpp  
+g++ -c apple.cpp  applewrapper.cpp  
+gcc test.c -o test applewrapper.o apple.o -lstdc++ 

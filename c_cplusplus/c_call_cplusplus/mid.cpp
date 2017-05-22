@@ -10,18 +10,22 @@ class test{
 #ifdef __cplusplus
 extern "C" {  // 即使这是一个C++程序，下列这个函数的实现也要以C约定的风格来搞！
 #endif
-int call_showhello(test *p)
+struct hellotest
 {
-    return p->showhello();
+   test tobject;
+};
+int call_showhello(struct hellotest *p)
+{
+    return p->tobject.showhello();
     //return 0; 
 }
 void m_world()
 {
     world();
-    test tobject;
-    //call_showhello(&tobject);
+    struct hellotest *ttobject = new struct hellotest;
+    call_showhello(ttobject);
 }
 
 #ifdef __cplusplus
-}
+};
 #endif
