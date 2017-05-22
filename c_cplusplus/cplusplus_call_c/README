@@ -1,0 +1,6 @@
+gcc --shared -o libhello.so hello.c -fPIC
+cp libhello.so /lib/
+export LD_LIBRARY_PATH=/lib
+
+
+g++ test.cpp -o test -lhello
