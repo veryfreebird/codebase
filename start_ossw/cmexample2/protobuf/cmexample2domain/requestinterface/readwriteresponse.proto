@@ -1,0 +1,11 @@
+package cmexample2domain.requestinterface;
+
+message ReadWriteResponse {
+    enum Status {
+        UNKNOWN = 0;
+        SUCCESS = 1;
+        BUILDING_ALREADY_EXISTS = 2;
+        CITIZEN_ALREADY_EXISTS = 3;
+    }
+    optional Status status = 1;
+}

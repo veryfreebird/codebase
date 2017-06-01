@@ -1,0 +1,11 @@
+package cmexample2domain.requestinterface;
+
+message ReadRequest {
+    enum Type {
+        UNKNOWN = 0;
+        READ_TOWN_SUMMARY = 1;
+        READ_INFRASTRUCTURE = 2;
+        READ_CITIZENS = 3;
+    }
+    optional Type type = 1;
+}

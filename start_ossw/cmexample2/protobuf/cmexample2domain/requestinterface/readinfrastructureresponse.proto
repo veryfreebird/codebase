@@ -1,0 +1,12 @@
+package cmexample2domain.requestinterface;
+
+message ReadInfrastructureResponse {
+    repeated BuildingInfo buildingInfo = 1;
+}
+
+message BuildingInfo {
+    optional string name = 1;
+    optional int32 opex = 2;
+    optional int32 freeSpaces = 3;
+    repeated string citizen = 4;
+}

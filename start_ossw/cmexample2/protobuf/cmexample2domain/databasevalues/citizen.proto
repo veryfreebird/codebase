@@ -1,0 +1,6 @@
+package cmexample2domain.databasevalues;
+
+message Citizen {
+    optional uint32 tax = 1;
+    optional string building = 2;
+}

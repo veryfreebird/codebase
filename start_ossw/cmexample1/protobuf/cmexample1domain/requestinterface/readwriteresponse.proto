@@ -1,0 +1,11 @@
+package cmexample1domain.requestinterface;
+
+message ReadWriteResponse {
+    enum Status {
+        UNKNOWN = 0;
+        SUCCESS = 1;
+        INVALID_TYPE = 2;
+        FOO_ID_MISSING = 3;
+    }
+    optional Status status = 1;
+}

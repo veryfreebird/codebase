@@ -1,0 +1,15 @@
+{
+    "domain":
+    {
+        "name": "cmexample1domain",
+        "dataVersion": "0.0.1",
+        "requestHandlerPluginPath": "@plugindir@/libcmexample1plugins.so",
+        "dataParserPluginPath": "@plugindir@/libcmexample1plugins.so",
+        "validatorPluginPath": "@plugindir@/libcmexample1plugins.so"
+    },
+    "transactionGroup":
+    {
+        "name": "cmexample1trgroup",
+        "domains": [ "cmexample1domain" ]
+    }
+}

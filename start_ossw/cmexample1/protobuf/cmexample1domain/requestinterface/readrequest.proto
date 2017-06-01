@@ -1,0 +1,13 @@
+package cmexample1domain.requestinterface;
+
+import "protobuf/cmexample1domain/requestinterface/readfoorequest.proto";
+
+message ReadRequest {
+    enum Type {
+        UNKNOWN = 0;
+        READ_FOO = 1;
+        READ_ALL_DESCRIPTIONS = 2;
+    }
+    optional Type type = 1;
+    optional ReadFooRequest readFooRequest = 2;
+}

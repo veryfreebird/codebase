@@ -1,0 +1,6 @@
+package cmexample2domain.requestinterface;
+
+message ReadTownSummaryResponse {
+    optional uint32 population = 1;
+    optional uint32 finance = 2;
+}

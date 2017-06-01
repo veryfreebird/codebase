@@ -1,0 +1,15 @@
+package cmexample1domain.requestinterface;
+
+import "protobuf/cmexample1domain/requestinterface/writefoorequest.proto";
+import "protobuf/cmexample1domain/requestinterface/deletefoorequest.proto";
+
+message ReadWriteRequest {
+    enum Type {
+        UNKNOWN = 0;
+        WRITE_FOO = 1;
+        DELETE_FOO = 2;
+    }
+    optional Type type = 1;
+    optional WriteFooRequest writeFooRequest = 2;
+    optional DeleteFooRequest deleteFooRequest = 3;
+}

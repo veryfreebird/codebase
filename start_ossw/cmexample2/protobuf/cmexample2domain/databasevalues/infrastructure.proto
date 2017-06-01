@@ -1,0 +1,7 @@
+package cmexample2domain.databasevalues;
+
+import "protobuf/cmexample2domain/databasevalues/building.proto";
+
+message Infrastructure {
+    repeated Building building = 1;
+}

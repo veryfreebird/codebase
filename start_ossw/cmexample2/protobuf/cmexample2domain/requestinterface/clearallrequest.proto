@@ -1,0 +1,4 @@
+package cmexample2domain.requestinterface;
+
+message ClearAllRequest {
+}

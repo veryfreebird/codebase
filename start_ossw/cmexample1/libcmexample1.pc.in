@@ -1,0 +1,12 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+includedir=@includedir@
+libdir=@libdir@
+
+Name: cmexample1
+Description: Configuration management example library.
+URL: @PACKAGE_URL@
+Version: @PACKAGE_VERSION@
+Cflags: -I${includedir} -std=c++11
+Libs: -L${libdir} -lcmexample1
+Libs.private:

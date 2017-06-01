@@ -1,0 +1,5 @@
+package cmexample2domain.requestinterface;
+
+message DeleteBuildingRequest {
+    optional string name = 1;
+}

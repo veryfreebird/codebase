@@ -1,0 +1,7 @@
+package cmexample1domain.requestinterface;
+
+message Foo {
+    optional int32 id = 1;
+    optional string description = 2;
+    repeated string value = 3;
+}

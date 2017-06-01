@@ -1,0 +1,7 @@
+package cmexample2domain.requestinterface;
+
+message AddCitizenRequest {
+    optional string name = 1;
+    optional uint32 tax = 2;
+    optional string building = 3;
+}

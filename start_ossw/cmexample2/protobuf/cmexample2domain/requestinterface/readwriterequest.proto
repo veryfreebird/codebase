@@ -1,0 +1,19 @@
+package cmexample2domain.requestinterface;
+
+import "protobuf/cmexample2domain/requestinterface/addbuildingrequest.proto";
+import "protobuf/cmexample2domain/requestinterface/deletebuildingrequest.proto";
+import "protobuf/cmexample2domain/requestinterface/addcitizenrequest.proto";
+import "protobuf/cmexample2domain/requestinterface/deletecitizenrequest.proto";
+import "protobuf/cmexample2domain/requestinterface/clearallrequest.proto";
+
+message ReadWriteRequest
+{
+    oneof readWriteRequest
+    {
+        AddBuildingRequest      addBuildingRequest = 1;
+        DeleteBuildingRequest   deleteBuildingRequest = 2;
+        AddCitizenRequest       addCitizenRequest = 3;
+        DeleteCitizenRequest    deleteCitizenRequest = 4;
+        ClearAllRequest         clearAllRequest = 5;
+    }
+}
