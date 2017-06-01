@@ -25,4 +25,6 @@ cmexample1/libcmexample1.pc
 .dirstamp
 *.log
 *.trs
+cmexample2/cmexample2.json
+cmexample2/libcmexample2.pc
 *~
