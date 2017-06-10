@@ -13,7 +13,7 @@ wc -l filename //lines
 wc -w filename //words
 wc -c filename //characters
 diff -y file1 file2 //
-diff -w file1 file2 //ignore blank line
+diff -w file1 file2 //ignore whitespaces 
 mkdir -p bbb/aaa/ccc //auto create non-exist parent dir
 mkdir -m 777 foldname //set access
 chmod u+s filename //setuid, user can execute the filename with user right
