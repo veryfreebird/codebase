@@ -36,4 +36,4 @@ grep -w 123 -c test //show the match number
 grep -n 123 test //show the matched line number
 grep -v 123 test //show the unmatched line
 grep --color 123 test //with color
-
+id username //show user info, uid, gid, groups
