@@ -4,11 +4,27 @@ grep "^jamema" /etc/passwd && echo "jamema found in password" || echo "jamema no
 
 var=testfile
 
-if [ -n $var ] && [ -e $var ]    ####  if [[ -n $var && -e $var ]]   ==same as this
+if [ -n "$var" ] && [ -e $var ]    ####  if [[ -n $var && -e $var ]]   ==same as this
 then
     echo "\$var is not null and a file named $var exists."
+else
+    echo "\$var is null or file named $var does not exist"
 fi
 
+num=123
+if [[ "$num" -gt 100 && "$num" -lt 150 ]]
+then
+    echo "\$num is $num greater than 100 and less than 150"
+fi
+
+test ! -f /etc/passwd && echo "File /etc/passwd does not exist" || echo "File /etc/passwd does exist"
+[ ! -f /etc/passwd ] || echo "File /etc/passwd exists"
+
+datevar=`date`
+pwdvar=`pwd`
+
+echo "$datevar"
+echo "$pwdvar"
 
 read -sp "Enter a password:" pass
 
