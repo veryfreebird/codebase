@@ -18,7 +18,7 @@ int main (void)
         char buffer [10];
         zmq_recv (responder, buffer, 10, 0);
         printf ("Received %s\n",buffer);
-        sleep (1);          //  Do some 'work'
+        //sleep (1);          //  Do some 'work'
         zmq_send (responder, buffer, 10, 0);
     }
     return 0;
