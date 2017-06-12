@@ -1,0 +1,5 @@
+package cmexample1domain.databasevalues;
+
+message FooValues {
+    repeated string value = 1;
+}

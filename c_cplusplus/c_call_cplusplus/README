@@ -1,0 +1,8 @@
+g++ --shared -o libworld.so world.cpp -fPIC
+cp libworld.so /lib/
+
+g++ --shared -o libmid.so mid.cpp -lworld -fPIC
+cp libmid.so /lib/
+
+gcc test.c -l mid -o test
+./test

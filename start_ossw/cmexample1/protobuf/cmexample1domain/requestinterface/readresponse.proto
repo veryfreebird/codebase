@@ -1,0 +1,16 @@
+package cmexample1domain.requestinterface;
+
+import "protobuf/cmexample1domain/requestinterface/readfooresponse.proto";
+import "protobuf/cmexample1domain/requestinterface/readalldescriptionsresponse.proto";
+
+message ReadResponse {
+    enum Status {
+        UNKNOWN = 0;
+        SUCCESS = 1;
+        INVALID_TYPE = 2;
+        FOO_NOT_FOUND = 3;
+    }
+    optional Status status = 1;
+    optional ReadFooResponse readFooResponse = 2;
+    optional ReadAllDescriptionsResponse readAllDescriptionsResponse = 3;
+}

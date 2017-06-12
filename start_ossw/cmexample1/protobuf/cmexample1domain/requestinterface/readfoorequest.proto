@@ -1,0 +1,5 @@
+package cmexample1domain.requestinterface;
+
+message ReadFooRequest {
+    optional int32 fooId = 1;
+}

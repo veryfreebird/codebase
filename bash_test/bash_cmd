@@ -1,0 +1,42 @@
+mkdir abc{1..6}
+echo {a..z}
+echo {0..10}
+echo {0..1000..5}
+mkdir abc{1..10}
+ls abc[12345]
+rm -rf abc{1..10}
+cat > test  and CTRL+d to save to the input to file
+head -n 5 filename
+head -n -5 filename
+tail -n 5 filename
+wc -l filename //lines
+wc -w filename //words
+wc -c filename //characters
+diff -y file1 file2 //
+diff -w file1 file2 //ignore whitespaces 
+mkdir -p bbb/aaa/ccc //auto create non-exist parent dir
+mkdir -m 777 foldname //set access
+chmod u+s filename //setuid, user can execute the filename with user right
+chmod g+s filename //setgid, user can execute the filename with group right
+sort test
+sort -u testnum //remove duplicate lines
+sort -n testnum //sort as numbers
+sort -r testnum //reverse order
+sort -t ',' -k2n,2 testn2 //multiple column sort
+sort -t ',' -k2nr,2 testn2 //multiple column sort, reverse order
+uniq test //remove duplicate lines
+uniq -c test //show duplicate num of different line
+uniq -d test //only show all duplicate lines for once
+uniq -D test //show all duplicate lines
+echo test | tr a-z A-Z //replace characters with upper case
+echo "{test}" | tr '{}' '()' //change {} to ()
+echo "This is a TEST" | tr -d a-z //remove all lower case characters
+grep -w 123 test //only match 123
+grep -w 123 -c test //show the match number
+grep -n 123 test //show the matched line number
+grep -v 123 test //show the unmatched line
+grep --color 123 test //with color
+id username //show user info, uid, gid, groups
+dd if=/dev/zero of=./testfile bs=1024 count=1024 //create a file
+dd if=/dev/sda of=./MBR.image bs=512 count=1
+tar -tzvf filename.tar.gz //list files without unzip it

@@ -1,0 +1,15 @@
+package cmexample2domain.requestinterface;
+
+import "protobuf/cmexample2domain/requestinterface/readtownsummaryresponse.proto";
+import "protobuf/cmexample2domain/requestinterface/readinfrastructureresponse.proto";
+import "protobuf/cmexample2domain/requestinterface/readcitizensresponse.proto";
+
+message ReadResponse
+{
+    oneof readResponse
+    {
+        ReadTownSummaryResponse     townSummary = 1;
+        ReadInfrastructureResponse  infrastructure = 2;
+        ReadCitizensResponse        citizens = 3;
+    }
+}

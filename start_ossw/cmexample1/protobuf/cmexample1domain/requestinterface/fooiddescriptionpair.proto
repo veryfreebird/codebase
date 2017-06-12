@@ -1,0 +1,6 @@
+package cmexample1domain.requestinterface;
+
+message FooIdDescriptionPair {
+    optional int32 fooId = 1;
+    optional string description = 2;
+}

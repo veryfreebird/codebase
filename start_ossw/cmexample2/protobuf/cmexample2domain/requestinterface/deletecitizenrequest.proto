@@ -1,0 +1,5 @@
+package cmexample2domain.requestinterface;
+
+message DeleteCitizenRequest {
+    optional string name = 1;
+}

@@ -1,0 +1,13 @@
+package cmexample2domain.databasevalues;
+
+import "protobuf/cmexample2domain/databasevalues/infrastructure.proto";
+import "protobuf/cmexample2domain/databasevalues/citizen.proto";
+
+message Value
+{
+    oneof value
+    {
+        Infrastructure  infrastructure = 1;
+        Citizen         citizen = 2;
+    }
+}

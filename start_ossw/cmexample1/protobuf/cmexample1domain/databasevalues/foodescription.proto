@@ -1,0 +1,5 @@
+package cmexample1domain.databasevalues;
+
+message FooDescription {
+    optional string description = 1;
+}

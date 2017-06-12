@@ -1,0 +1,7 @@
+package cmexample2domain.databasevalues;
+
+message Building {
+    optional string name = 1;
+    optional uint32 opex = 2;
+    optional uint32 citizen_limit = 3;
+}

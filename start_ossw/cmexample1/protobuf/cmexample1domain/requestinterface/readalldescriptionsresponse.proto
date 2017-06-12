@@ -1,0 +1,7 @@
+package cmexample1domain.requestinterface;
+
+import "protobuf/cmexample1domain/requestinterface/fooiddescriptionpair.proto";
+
+message ReadAllDescriptionsResponse {
+    repeated FooIdDescriptionPair FooIdDescriptionPair = 1;
+}

@@ -1,0 +1,22 @@
+{
+    "domain":
+    {
+        "name": "cmexample2domain",
+        "dataVersion": "0.0.1",
+        "requestHandlerPluginPath": "@plugindir@/libcmexample2plugins.so",
+        "dataParserPluginPath": "@plugindir@/libcmexample2plugins.so",
+        "validatorPluginPath": "@plugindir@/libcmexample2plugins.so",
+        "notifications":
+        [
+            {
+                "key": "cmexample2notificationkey",
+                "prefixes": [""]
+            }
+        ]
+    },
+    "transactionGroup":
+    {
+        "name": "cmexample2trgroup",
+        "domains": ["cmexample2domain"]
+    }
+}

@@ -1,0 +1,11 @@
+package cmexample2domain.requestinterface;
+
+message ReadCitizensResponse {
+    repeated CitizenInfo citizenInfo = 1;
+}
+
+message CitizenInfo {
+    optional string name = 1;
+    optional int32 tax = 2;
+    optional string building = 3;
+}
