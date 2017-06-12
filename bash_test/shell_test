@@ -44,6 +44,24 @@ else
     esac
 fi
 
+echo "list files\n"
+for file in `ls`
+do
+    echo "$file "
+done
+
+vars=1
+while [ $vars -le 3 ]  //while true OR  while : OR while false - infinite while loop
+do
+    echo "while $vars"
+    vars=$((vars+1))
+done
+
+a=28
+b=25
+c=$(($((a>b))?a:b))
+echo $c
+
 read -sp "Enter a password:" pass
 
 if test "$pass" == "jamema"
