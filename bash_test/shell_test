@@ -51,7 +51,7 @@ do
 done
 
 vars=1
-while [ $vars -le 3 ]  //while true OR  while : OR while false - infinite while loop
+while [ $vars -le 3 ]  ##while true OR  while : OR while false - infinite while loop
 do
     echo "while $vars"
     vars=$((vars+1))
@@ -67,12 +67,22 @@ read -sp "Enter a password:" pass
 if test "$pass" == "jamema"
 then
     echo -e "\nPassword jamema verified."
-    exit 0
 elif test "$pass" == "rose"
 then
     echo -e "\nPassword rose verified."
-    exit 0
 else
     echo -e "\nAccess denied."
-    exit 1
 fi
+
+select choice in a b c d Exit
+do
+    case $choice in
+        a) echo "a";;
+        b) echo "b";;
+        c) echo "c";;
+        d) echo "d";;
+        Exit) 
+            echo "Exit"
+            exit;
+    esac
+done
