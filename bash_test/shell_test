@@ -26,6 +26,24 @@ pwdvar=`pwd`
 echo "$datevar"
 echo "$pwdvar"
 
+if [ $# -eq 0 ]
+then
+    echo "no input parameter \$1"
+else
+    echo "\$1 is"
+    case "$1" in
+        1)
+            echo -e "1\n"
+            ;;
+        2)
+            echo -e "2\n"
+            ;;
+        *)
+            echo -e "$1\n"
+            ;;
+    esac
+fi
+
 read -sp "Enter a password:" pass
 
 if test "$pass" == "jamema"
