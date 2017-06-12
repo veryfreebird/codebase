@@ -40,3 +40,54 @@ id username //show user info, uid, gid, groups
 dd if=/dev/zero of=./testfile bs=1024 count=1024 //create a file
 dd if=/dev/sda of=./MBR.image bs=512 count=1
 tar -tzvf filename.tar.gz //list files without unzip it
+$BASH
+$HOME
+$IFS
+$OSTYPE
+$SECONDS
+$TMOUT
+$UID
+$* => 所有位置参数，用IFS隔开
+$@ => 所有位置参数，空格隔开， "$@"，可用于for循环
+$# => 位置参数个数
+$? => 最近一次前台执行shell命令执行结果， 0为正确，非0为错误。
+$！ => 最近一次执行的后台命令的进程号
+$_ => 前次执行的最后一个参数
+$$ => 当前shell进程号
+set one two three => $1 $2 $3赋值
+declare => 声明变量和修改变量属性 -r 只读, -a 数组, unset可以消除数组或者某个数组变量
+nohup command .... & => 后台执行命令， 并不随着ssh session退出而终止
+exit code => 以code(0-255)码退出， 正常为0
+
+===========脚本调试==================
+bash -x shell_script //调试模式运行脚本
+bash -v shell_script //激活详细输出模式
+bash -xv shell_script
+
+$PS4可以增加调试信息   //PS1 - shell prompt, PS2 - prompt for too long line, PS3 - for bash select, PS4 - for bash trace
+export PS4='+{$LINENO:${FUNCNAME[0]}}'
+
+set -x => 打开调试代码段
+uname -a
+set +x => 关闭调试代码段
+
+test -d "$HOME"; echo $? //test if there is $HOME folder, -f => file, -S => socket, -p => pipe
+-eq相等, -ne不等, -le小于等于, -ge大于等于, -lt小于, -gt大于 => 比较大小
+if condition; then commands; fi
+
+if condition; then
+   commands
+fi
+
+if condition
+then
+   commands
+fi
+
+grep "^jamema" /etc/passwd && "jamema found" || "jamema not found" ///第一个命令成功执行&&后的第二个命令，否则执行||后的第三个命令
+
+if [ -n $var && -e $var]   //存在var变量且var变量的文件名存在
+then
+...
+fi
+

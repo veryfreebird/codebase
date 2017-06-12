@@ -1,0 +1,26 @@
+#!/usr/bin/bash -
+
+grep "^jamema" /etc/passwd && echo "jamema found in password" || echo "jamema not found in password"
+
+var=testfile
+
+if [ -n $var ] && [ -e $var ]    ####  if [[ -n $var && -e $var ]]   ==same as this
+then
+    echo "\$var is not null and a file named $var exists."
+fi
+
+
+read -sp "Enter a password:" pass
+
+if test "$pass" == "jamema"
+then
+    echo -e "\nPassword jamema verified."
+    exit 0
+elif test "$pass" == "rose"
+then
+    echo -e "\nPassword rose verified."
+    exit 0
+else
+    echo -e "\nAccess denied."
+    exit 1
+fi
