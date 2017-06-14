@@ -74,6 +74,30 @@ else
     echo -e "\nAccess denied."
 fi
 
+while getopts ":abc:d:" opt
+do
+    case $opt in
+        a)
+            echo "-a was triggered"
+            ;;
+        b)
+            echo "-b was triggered"
+            ;;
+        c)
+            echo "-c with var $OPTARG"
+            ;;
+        d)
+            echo "-d with var $OPTARG"
+            ;;
+        :)
+            echo "option -$OPTARG requires an argument" ##$OPTARG is set to option
+            ;;
+        ?)
+            echo "Invalid option -$OPTARG"              ##$OPTARG is set to invalid option
+            ;;
+    esac
+done
+
 select choice in a b c d Exit
 do
     case $choice in

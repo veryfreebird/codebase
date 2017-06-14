@@ -90,4 +90,5 @@ if [ -n $var && -e $var]   //存在var变量且var变量的文件名存在
 then
 ...
 fi
-
+getopt f:vl -vl -f bbvar dddd
+getopt f:vl -vlf bbvar dddd
