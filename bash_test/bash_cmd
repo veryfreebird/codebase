@@ -92,3 +92,23 @@ then
 fi
 getopt f:vl -vl -f bbvar dddd
 getopt f:vl -vlf bbvar dddd
+command > /dev/null   #redirect all standard output to null
+command &> /dev/null  command >& /dev/null  command > /dev/null 2>&1  #redirect all standard output/error log to null
+command 2> /tmp/error.log
+command 2> /dev/null 
+du -s /home/* | sort -rn > usage.txt
+command &> filename  ##redirect all standard output and error to file
+command >& filename ##redirect all standard output and error to file
+command > filename 2>&1 ##redirect all standard output and error to file
+command 2>&1 > filename ##redirect all standard output and error to file
+exec 3< filename #use fd 3 to open filename to read
+cat <& 3  #copy fd 3 as standard input
+exec 3<&-   #close fd 3
+
+exec 4> /tmp/output.txt #use fd 4 to open filename to write
+date >&4
+uname -a >&4
+exec 4>&-
+
+exec 4<> /tmp/inputoutput.txt #use fd 4 to open filename to read and write
+
