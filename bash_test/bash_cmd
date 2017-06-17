@@ -112,3 +112,33 @@ exec 4>&-
 
 exec 4<> /tmp/inputoutput.txt #use fd 4 to open filename to read and write
 
+command > filename #connect command and file to output
+command1 | command2 #use pipe to connect: output of command1 is input of command2
+tar czvf - /home/jamema | ssh root@remotehost "cat > /home/remoteuser/backup.tgz"
+tar czf - /home/jamema | ssh remote_host "( cd /backup; tar xzf - )"
+tr -dc A-Za-z0-9_ </dev/urandom | head -c7 | xargs
+cat test | tr '\n' ' ' | xargs #列变行
+awk, cut, grep, tar, head, paste, sed, sort, split, strings, tac, tail, tee, tr, uniq, wc ##用于管道过滤器
+awk -F: '{print $1}' /etc/passwd | sort #以:分割，取第一列排序显示
+history | awk '{print $2}' | sort | uniq -c | sort -rn | head 
+grep "/bin/bash" /etc/passwd | cut -d: -f1,6
+cat /proc/cpuinfo | grep name | cut -d: -f2 | uniq
+ls -l | cut -c 1 | grep d | wc -l #当前目录下子目录个数
+ls -l | grep "^d" | wc -l #当前目录下子目录个数
+rpm -qa | grep kernel
+ls /usr/bin | head # list the first 10 line
+cat file1 | paste -d, - file2  #合并file1,file2，列间以,隔开
+echo front | sed 's/front/back/'
+cat -n test | sed '3,10d' #显示除3-10行外的部分
+cat -n test | sed -n '3,10p' #只显示3-10行
+sudo dd if=/dev/mem bs=1k skip=768 count=256 2>/dev/null | strings -n 32 | less #打印BIOS中信息，需root权限
+tar czv - backup | split -b 5m - backup.tar.gz #压缩并按照5M大小拆分文件
+ls /etc | tee /tmp/ls.outputi ls1.output #显示到屏幕，同时输出到另外一个或者两个文件, tee -a 追加
+echo abc | tee - - - #三次重复复制到标准输出
+tr [:space:] '\t'
+tr -d [:digit:]      tr -d '0-9'    tr [:lower:] [:upper:]    tr 'a-z' 'A-Z'
+
+
+
+
+
