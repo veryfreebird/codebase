@@ -107,6 +107,9 @@ do
         d) echo "d";;
         Exit) 
             echo "Exit"
-            exit;
+            break;
     esac
 done
+
+SRC_PORT=${1:-""}
+echo ${SRC_PORT}
