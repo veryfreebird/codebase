@@ -1,6 +1,6 @@
 #!/usr/bin/bash -
 
-trap "echo 'CTRL + C is hit'; exit;" SIGINT
+trap "echo 'CTRL + C is hit, linenum: $LINENO, command: $BASH_COMMAND'; exit;" SIGINT
 trap "echo 'Normal exit'" 0
 
 

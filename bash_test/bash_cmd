@@ -181,5 +181,9 @@ echo $FILE
 trap "echo this is a test" ERR  #set trap command
 rm $FILE    #trigger teh error signal
 
+logger -p notice "this is a test"
 
+trap '' SIGINT SIGQUIT  #ignore SIGINT and SIGQUIT
+
+trap - SIGNAL  # restore signal handler
 
