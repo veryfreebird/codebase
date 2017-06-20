@@ -138,7 +138,48 @@ echo abc | tee - - - #三次重复复制到标准输出
 tr [:space:] '\t'
 tr -d [:digit:]      tr -d '0-9'    tr [:lower:] [:upper:]    tr 'a-z' 'A-Z'
 
+sleep 30 &
+jobs -l  #列出当前shell下所有作业
+disown %1 #从当前shell作业表中删除
+jobs -l  #确认删除
+ps -ef | grep sleep #作业后台运行中
+echo $$ #当前shell进程号
 
+
+ps -o pid,ppid,cmd,stat
+
+ps -ef #Standard format
+
+ps aux #BSD format
+
+pstree pid #show pstree of one pid
+pstree pid -p #show individual pid
+pstree jamema #show pstree of user jamema
+pgrep -u jamema,redis #list pid of user jamema,redis
+
+kill -l #list all signals
+
+kill #by default, SIGTERM is sent
+
+kill -9 pid # send SIGKILL to pid
+
+killall firefox #kill all firefox processes
+
+###pkill
+
+move pid to nohup state
+CTRL+Z   #move to background
+disown %num  #remove from own job list
+kill -SIGCONT pid  #let process continue
+
+(command1;command2;command3;...)  #will start a new shell
+
+$BASH_SUBSHELL #shell的嵌套层数
+
+FILE=`mktemp -u /tmp/testtrap.$$.XXXX`  #create temp file, but not actually create the file
+echo $FILE
+trap "echo this is a test" ERR  #set trap command
+rm $FILE    #trigger teh error signal
 
 
 

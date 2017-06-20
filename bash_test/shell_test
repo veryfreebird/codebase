@@ -1,5 +1,9 @@
 #!/usr/bin/bash -
 
+trap "echo 'CTRL + C is hit'; exit;" SIGINT
+trap "echo 'Normal exit'" 0
+
+
 grep "^jamema" /etc/passwd && echo "jamema found in password" || echo "jamema not found in password"
 
 var=testfile
@@ -112,4 +116,7 @@ do
 done
 
 SRC_PORT=${1:-""}
-echo ${SRC_PORT}
+echo ${SRC_PORT}  ##if no $1 defined, $1 is set to ""
+
+
+exit 0
