@@ -1,0 +1,32 @@
+a #append after the matched line
+c #change the matched line
+i #insert before the matched line
+
+sedAppend script:
+
+/<Tom's info>/a\
+Full name: tom\
+Email: tom@qq.com
+
+sed -f sedAppend file-to-be-updated
+
+d #delete the matched line
+sed '/^$/d' file-to-delete-blank-line
+
+sed '50,$d' file-to-be-update #delete lines from line num 50 to the end
+
+s #replace
+[address]s/pattern/replacement/flags
+
+flags: 
+n - only replace the n matched pattern
+g - replace all the matched pattern, without g, only the first matched pattern will be replaced
+p - print what in pattern space
+w file - write the pattern space to file
+
+s/ALU/Alcatel \& Lucent/g
+
+echo "ALU Helloworld" | sed 's/ALU/Alcatel \& Lucent/g'
+
+
+    
