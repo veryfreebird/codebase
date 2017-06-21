@@ -1,0 +1,16 @@
+user.email=79344359@qq.com
+user.name=veryfreebird
+push.default=matching
+credential.helper=store
+gui.recentrepo=/home/jamema/src/codebase_github
+http.proxy=http://127.0.0.1:8087
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=https://github.com/veryfreebird/codebase.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.master.remote=origin
+branch.master.merge=refs/heads/master
+gui.wmstate=normal
+gui.geometry=1600x806+0+31 382 227

@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+while true
+do
+    redis-cli < redis-cmd
+    sleep 5
+done
