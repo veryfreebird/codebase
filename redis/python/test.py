@@ -1,6 +1,6 @@
 import redis
 
-total_num = 1400000
+total_num = 140000
 
 r =  redis.StrictRedis (host='localhost', port=6379, db=0)
 
