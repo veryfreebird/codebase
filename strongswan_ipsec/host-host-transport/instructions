@@ -18,9 +18,15 @@ cp ipsec.d/server.cert.pem /etc/strongswan/ipsec.d/certs/
 cp ipsec.d/client.pem /etc/strongswan/ipsec.d/private
 cp ipsec.d/server.pem /etc/strongswan/ipsec.d/private
 
-cp ipsec.conf /etc/strongswan
-cp ipsec.secrets /etc/strongswan
-cp strongswan.conf /etc/strongswan
+On Server side:
+cp server_conf/ipsec.conf /etc/strongswan
+cp server_conf/ipsec.secrets /etc/strongswan
+cp server_conf/strongswan.conf /etc/strongswan
+
+On Client side:
+cp client_conf/ipsec.conf /etc/strongswan
+cp client_conf/ipsec.secrets /etc/strongswan
+cp client_conf/strongswan.conf /etc/strongswan
 
 systemctl start strongswan
 
