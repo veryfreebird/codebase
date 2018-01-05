@@ -36,3 +36,4 @@ client: ip a a 10.1.0.111/16 dev lo
 ipsec up net-net 
 ipsec statusall
 
+Server: ping -I 10.2.0.222 10.1.0.111
