@@ -1,4 +1,2 @@
 git config --global credential.helper store ////auto save user,passwd
 git config --list
-test
-test 1
