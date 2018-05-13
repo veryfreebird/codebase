@@ -1,0 +1,223 @@
+    1  poweroff
+    2  ifconfig
+    3  ping news.sina.com.cn
+    4  poweroff
+    5  ifconfig
+    6  poweroff
+    7  cd 
+    8  cd .ssh
+    9  ssh-key
+   10  ssh-keygen 
+   11  vim ~/.ssh/authorized_keys
+   12  vi ~/.ssh/authorized_keys
+   13  exit
+   14  ifconfig
+   15  exit
+   16  wget
+   17  cd /etc/
+   18  df
+   19  pwd
+   20  ls
+   21  cd dnf
+   22  ls
+   23  cat dnf.conf
+   24  vi dnf.conf
+   25  dnf install vim
+   26  dnf install -y git
+   27  cat ~/.ssh/authorized_keys 
+   28  ifconfig
+   29  cat ~/.ssh/authorized_keys 
+   30  ssh-copy-id root@192.168.56.102
+   31  ssh 192.168.56.102
+   32  ls
+   33  pwd
+   34  cd
+   35  cd .vim
+   36  ls
+   37  pwd
+   38  ls
+   39  tar xzvf vim.tar.gz 
+   40  ls
+   41  pwd
+   42  ls
+   43  cd root/
+   44  ls
+   45  ls -l
+   46  cd ..
+   47  ls
+   48  ls -l
+   49  cd root/
+   50  ls -a
+   51  mv .vim/ ..
+   52  ls
+   53  ls -a
+   54  cd ..
+   55  ls
+   56  rm -rf root
+   57  ls
+   58  df
+   59  ls
+   60  rm vim.tar.gz 
+   61  ls
+   62  mkdir git
+   63  ls
+   64  cd git
+   65  ls
+   66  cd
+   67  vim .bashrc
+   68  source ~/.bashrc
+   69  ls
+   70  cd git
+   71  ls
+   72  git clone http://dpdk.org/git/dpdk
+   73  git clone https://github.com/veryfreebird/codebase.githttps://github.com/veryfreebird/codebase.git
+   74  git clone https://github.com/veryfreebird/codebase.githttps://github.com/veryfreebird/codebase
+   75  git clone https://github.com/veryfreebird/codebase.git
+   76  ls
+   77  poweroff
+   78  ifconfig
+   79  make
+   80  sed
+   81  gcc
+   82  dnf install -y gcc
+   83  dnf install -y gcc gcc-g++
+   84  dnf install -y gcc
+   85  dnf install glibc-devel
+   86  uname -r
+   87  uname -a
+   88  dnf install kernel-devel
+   89  dnf install kernel-devel.4.13.9-300.fc27
+   90  dnf search kernel-devel
+   91  dnf install kernel-devel.4.13.9-300.fc27.x86_64
+   92  dnf install kernel-devel.4.13.9-300.x86_64
+   93  gcc -dumpspecs
+   94  dnf search kernel-devel
+   95  uname -r
+   96  uname -a
+   97  dnf search kernel-devel4.13.9
+   98  dnf search kernel-devel.4.13.9
+   99  dnf search 4.13.9
+  100  dnf install kernel-devel-4.13.9-300
+  101  dnf install kernel-devel-4.13.9-300.fc27
+  102  dnf install libpcap-devel
+  103  dnf install libnuma-devel
+  104  dnf search numa
+  105  dnf install numactl-devel
+  106  ls
+  107  d git
+  108  ls
+  109  cd git
+  110  ls
+  111  cd dpdk/
+  112  ls
+  113  make install T=x86_64-native-linuxapp-gcc
+  114  ls
+  115  cd x86_64-native-linuxapp-gcc/
+  116  ls
+  117  make
+  118  dnf install -y libelf-devel
+  119  dnf search elf-devel
+  120  dnf install -y elfutils-libelf-devel
+  121  mamake
+  122  make
+  123  ls
+  124  ./build/app/test-pmd/testpmd 
+  125  cd
+  126  pwd
+  127  cd /boot
+  128  ls
+  129  cd grub2/
+  130  ls
+  131  vim grub.cfg 
+  132  cd /etc/grub.d/
+  133  ls
+  134  vim 10_linux 
+  135  vim 01_users 
+  136  poweroff
+  137  cd /etc/default/
+  138  ls
+  139  vim grub 
+  140  pwd
+  141  grub2-mkconfig --output /boot/grub2/grub.cfg 
+  142  cd /boot/grub2/grub.cfg
+  143  vim /boot/grub2/grub.cfg
+  144  hisotry
+  145  reboot
+  146  netstat -tlnp | grep 5001
+  147  ifconfig
+  148  iperf -c 192.168.56.101
+  149  exit
+  150  cat /proc/cmdline 
+  151  cd /sys/devices/system/node/node0/hugepages/hugepages-2048kB/
+  152  ls
+  153  cat nr_hugepages 
+  154  cat free_hugepages 
+  155  cat /proc/meminfo
+  156  cd
+  157  pwd
+  158  dnf install perf
+  159  iperf
+  160  dnf install iperf
+  161  sar
+  162  dnf install sar
+  163  dnf whoprovides sar
+  164  dnf whereprovides sar
+  165  dnf whatprovides sar
+  166  dnf install sysstat
+  167  iperf
+  168  iperf --help
+  169  iperf -s 
+  170  ifconfig
+  171  tcpdump -i enp0s8
+  172  tcpdump -i enp0s8 tcp
+  173  poweroff
+  174  ifconfig
+  175  tcpdump -i enp0s9 tcp
+  176  tcpdump -i enp0s9 tcp -nn
+  177  ip route get 192.168.216.3
+  178  ping 192.168.216.3
+  179  tcpdump -i enp0s9 tcp -nn
+  180  service iptables stop
+  181  systemctl status | grep iptable
+  182  iptables -L
+  183  iptables stop
+  184  service iptables stop
+  185  iptables -P INPUT ACCEPT
+  186  iptables -P OUTPUT ACCEPT
+  187  iptables -P FORWARD ACCEPT
+  188  tcpdump -i enp0s9 tcp -nn
+  189  tcpdump -i enp0s9 udp -nnn
+  190  tcpdump -i enp0s9 icmp -nnn
+  191  tcpdump -i enp0s9 udp
+  192  tcpdump -i enp0s9 udp -nnn
+  193  tcpdump -i enp0s9 tcp -nnn
+  194  ls
+  195  cd
+  196  ls
+  197  dmesg
+  198  journalctl 
+  199  iperf -c 127.0.0.1
+  200  ls
+  201  iperf -c 127.0.0.1 -p 111
+  202  systemctl status
+  203  systemctl status | grep iptable
+  204  cd /
+  205  ls
+  206  cd etc
+  207  ls
+  208  grep -ir systemd .
+  209  systemctl cat smartd
+  210  cd /usr/lib
+  211  cd systemd
+  212  ls
+  213  grep -ir iptables .
+  214  systemctl stop firewalld
+  215  history
+  216  cd git
+  217  ls
+  218  cd
+  219  cd git
+  220  ls
+  221  cd codebase/
+  222  ls
+  223  history > set_new_environ.history 

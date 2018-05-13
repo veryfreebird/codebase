@@ -94,6 +94,7 @@ getopt f:vl -vl -f bbvar dddd
 getopt f:vl -vlf bbvar dddd
 command > /dev/null   #redirect all standard output to null
 command &> /dev/null  command >& /dev/null  command > /dev/null 2>&1  #redirect all standard output/error log to null
+make > make.log 2>&1
 command 2> /tmp/error.log
 command 2> /dev/null 
 du -s /home/* | sort -rn > usage.txt

@@ -24,6 +24,7 @@ int main()
     char *broadcast = new char(16);
     //char *ip = (char *)malloc(16);
     char *mac = new  char(32);
+    char *flags = new char[32];
     //char *mac = (char *)malloc(32);
     int mtu;
     int socket_fd;
@@ -32,7 +33,7 @@ int main()
         exit(1);
     }
     memset(&ifr, 0, sizeof(ifr));
-    strcpy(ifr.ifr_name, "wlp2s0");
+    strcpy(ifr.ifr_name, "enp0s10");
     memset(&sin, 0, sizeof(sin));
     //获取IP地址
     if(ioctl(socket_fd, SIOCGIFADDR, &ifr) != -1){
@@ -68,6 +69,12 @@ int main()
     if(ioctl(socket_fd, SIOCGIFMTU, &ifr) != -1){
         mtu = ifr.ifr_mtu;
         printf("MTU is %d\n", mtu);
+    }
+
+    //获取接口设备状态
+   if(ioctl(socket_fd, SIOCGIFFLAGS, &ifr) != -1){
+       sprintf(flags, "UP: %d Running:%d", (unsigned char)ifr.ifr_flags & IFF_UP !=0, (unsigned char)ifr.ifr_flags & IFF_RUNNING !=0);
+       printf("Network interface flags - %s\n",flags);
     }
    close(socket_fd);
    return 0;

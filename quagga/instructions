@@ -1,0 +1,6 @@
+setenforce 0 => disable SELInux
+copy default ospfd.conf.example to /etc/quagga
+systemctl start ospfd => will start zebra
+vtysh
+
+maybe need to disable firewalld: systemctl stop/disable firewalld

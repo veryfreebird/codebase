@@ -1,0 +1,35 @@
+dnf install strongswan
+
+alias ipsec="strongswan"
+
+ipsec pki --gen --outform pem > ca.pem
+ipsec pki --self --in ca.pem --dn "C=CN, O=strongSwan, CN=strongSwan CA" --ca --outform pem > ca.cert.pem
+
+ipsec pki --gen --outform pem > server.pem
+ipsec pki --pub --in server.pem | ipsec pki --issue --cacert ca.cert.pem --cakey ca.pem --dn "C=CN, O=strongSwan, CN=192.168.82.3" --san="192.168.82.3" --flag serverAuth --flag ikeIntermediate --outform pem > server.cert.pem
+
+ipsec pki --gen --outform pem > client.pem
+ipsec pki --pub --in client.pem | ipsec pki --issue --cacert ca.cert.pem --cakey ca.pem --dn "C=CN, O=strongSwan, CN=192.168.82.4" --san="192.168.82.4" --outform pem > client.cert.pem
+
+
+cp ipsec.d/ca.cert.perm /etc/strongswan/ipsec.d/cacerts
+cp ipsec.d/client.cert.pem /etc/strongswan/ipsec.d/certs/
+cp ipsec.d/server.cert.pem /etc/strongswan/ipsec.d/certs/
+cp ipsec.d/client.pem /etc/strongswan/ipsec.d/private
+cp ipsec.d/server.pem /etc/strongswan/ipsec.d/private
+
+On Server side:
+cp server_conf/ipsec.conf /etc/strongswan
+cp server_conf/ipsec.secrets /etc/strongswan
+cp server_conf/strongswan.conf /etc/strongswan
+
+On Client side:
+cp client_conf/ipsec.conf /etc/strongswan
+cp client_conf/ipsec.secrets /etc/strongswan
+cp client_conf/strongswan.conf /etc/strongswan
+
+systemctl start strongswan
+
+ipsec statusall
+ipsec up host-host
+
