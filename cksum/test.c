@@ -1,5 +1,7 @@
 #include <stdio.h>
 void main()
 {
-    printf("this is a test");
+    int i;
+    for(;;i++)
+       printf("this is a test:%d\n",i);
 }
