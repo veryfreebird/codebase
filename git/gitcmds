@@ -1,3 +1,16 @@
 git config --global credential.helper store ////auto save user,passwd
 git config --list
 git config --global http.proxy http://10.144.1.10:8080
+git clone ssh://jamema@gerrite1.ext.net.nokia.com:8282/scm_rcp/RCPTransportApp
+git status
+$ git branch -a
+* master
+  remotes/origin/master
+  remotes/origin/rcp2.0
+
+$ git branch rcp2.0 remotes/origin/rcp2.0
+Branch rcp2.0 set up to track remote branch rcp2.0 from origin.
+$ git checkout rcp2.0
+Checking out files: 100% (1413/1413), done.
+Switched to branch 'rcp2.0'
+
