@@ -5,6 +5,8 @@
 #include <netinet/sctp.h>
 
 #define SERVER_PORT 6666
+#define SERVER2_PORT 7777
+
 #define BUFFER_SIZE 1024
 #define LISTEN_QUEUE 100
 

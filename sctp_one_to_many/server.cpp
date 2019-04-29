@@ -46,9 +46,21 @@ void SctpServer::loop(void)
         {
             sri_.sinfo_stream++;
         }
+        bzero(&clientAddr_,sizeof(clientAddr_));
         sctp_sendmsg(sockFd_,readBuf_,readSize_,
                      (struct sockaddr *)&clientAddr_,len_,
                       sri_.sinfo_ppid,sri_.sinfo_flags,sri_.sinfo_stream,0,0);
+
+				/*forward to another server*/
+				bzero(&clientAddr_,sizeof(clientAddr_));
+    		clientAddr_.sin_family = AF_INET;
+    		clientAddr_.sin_addr.s_addr = htonl(INADDR_ANY);
+    		clientAddr_.sin_port = htons(SERVER2_PORT);
+    		inet_pton(AF_INET,"127.0.0.1",&clientAddr_.sin_addr); 				
+        sctp_sendmsg(sockFd_,readBuf_,readSize_,
+                     (struct sockaddr *)&clientAddr_,len_,
+                      sri_.sinfo_ppid,sri_.sinfo_flags,sri_.sinfo_stream,0,0);
+                      
     }
 }
 
