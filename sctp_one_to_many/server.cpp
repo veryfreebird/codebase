@@ -39,6 +39,7 @@ void SctpServer::loop(void)
     {
         len_ = sizeof(struct sockaddr_in);
         //从socket读取内容
+        bzero(&clientAddr_,sizeof(clientAddr_));
         readSize_ = sctp_recvmsg(sockFd_,readBuf_,BUFFER_SIZE,
                                  (struct sockaddr *)&clientAddr_,&len_,&sri_,&messageFlags_);
         //增长消息流号
@@ -46,12 +47,11 @@ void SctpServer::loop(void)
         {
             sri_.sinfo_stream++;
         }
-        bzero(&clientAddr_,sizeof(clientAddr_));
         sctp_sendmsg(sockFd_,readBuf_,readSize_,
                      (struct sockaddr *)&clientAddr_,len_,
                       sri_.sinfo_ppid,sri_.sinfo_flags,sri_.sinfo_stream,0,0);
 
-				/*forward to another server
+	/*forward to another server*/
 				bzero(&clientAddr_,sizeof(clientAddr_));
     		clientAddr_.sin_family = AF_INET;
     		clientAddr_.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -60,7 +60,7 @@ void SctpServer::loop(void)
         sctp_sendmsg(sockFd_,readBuf_,readSize_,
                      (struct sockaddr *)&clientAddr_,len_,
                       sri_.sinfo_ppid,sri_.sinfo_flags,sri_.sinfo_stream,0,0);
-                    */  
+                      
     }
 }
 
