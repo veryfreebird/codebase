@@ -12,10 +12,10 @@
 #define SERVER_PORT 6666 
 #define MAXLINE     1024
 
-/×Ways to check ongoing SCTP links
+/*Ways to check ongoing SCTP links
 cat /proc/net/sctp/eps
 cat /proc/net/sctp/assocs
-×/
+*/
 
 
 void sctpstr_cli(FILE *fp,int sock_fd,struct sockaddr *to,socklen_t tolen);
