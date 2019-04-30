@@ -25,7 +25,7 @@ class SctpClient
         {
             close(sockFd_);
         }
-        //Æô¶¯¿Í»§¶Ë
+        //ï¿½ï¿½Í»ï¿½ï¿½ï¿½
         void start(void)
         {
             makeSocket();
@@ -36,6 +36,13 @@ class SctpClient
         void makeSocket(void)
         {
             sockFd_ = socket(AF_INET,SOCK_SEQPACKET,IPPROTO_SCTP);
+            bzero(&clientAddr_,sizeof(clientAddr_));
+            clientAddr_.sin_family = AF_INET;
+            clientAddr_.sin_addr.s_addr = htonl(INADDR_ANY);
+            clientAddr_.sin_port = htons(9999);
+            inet_pton(AF_INET,"127.0.0.1",&clientAddr_.sin_addr);       
+            bind(sockFd_,(struct sockaddr *)&clientAddr_,sizeof(clientAddr_));        
+                
             bzero(&serverAddr_,sizeof(serverAddr_));
             serverAddr_.sin_family = AF_INET;
             serverAddr_.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -52,12 +59,12 @@ class SctpClient
         }
 
         int sockFd_;
-        struct sockaddr_in serverAddr_;
+        struct sockaddr_in serverAddr_, clientAddr_;
         struct sctp_event_subscribe events_;
         int echoToAll_;
 };
 
-//Ñ­»··¢ËÍ²¢½ÓÊÜÏûÏ¢
+//Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½Í²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 void sctpstr_cli(FILE *fp,int sock_fd,struct sockaddr *to,socklen_t tolen)
 {
     struct sockaddr_in peeraddr;
@@ -79,14 +86,23 @@ void sctpstr_cli(FILE *fp,int sock_fd,struct sockaddr *to,socklen_t tolen)
         sri.sinfo_stream = sendline[1] - '0';
         out_sz = strlen(sendline);
 
-        //·¢ËÍÏûÏ¢
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
         int count = sctp_sendmsg(sock_fd,sendline,out_sz,to,tolen,0,0,sri.sinfo_stream,0,0);
         len = sizeof(peeraddr);
-        rd_sz = sctp_recvmsg(sock_fd,recvline,sizeof(recvline),
+        
+        bzero(recvline, MAXLINE);
+        rd_sz = sctp_recvmsg(sock_fd,recvline, MAXLINE,
                              (struct sockaddr *)&peeraddr,&len,&sri,&msg_flags);
-        printf("From str:%d seq:%d (assoc:0x%x):",
+        if(rd_sz != -1)
+        {
+            printf("From str:%d seq:%d (assoc:%d):",
                 sri.sinfo_stream,sri.sinfo_ssn,(u_int)sri.sinfo_assoc_id);
-        printf("%d  %s\n",rd_sz,recvline);
+            printf("%d  %s\n",rd_sz,recvline);
+        }
+        else
+        {
+            perror("RECV ERROR:");
+        }
     }
 }
 
