@@ -4,6 +4,12 @@
 #include <string.h>
 #include <stdio.h>
 #include <arpa/inet.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netinet/sctp.h>
+#include <stdlib.h>
+
 
 static void handle_event(void *buf)
 {
@@ -95,7 +101,7 @@ void SctpServer::listenSocket(void)
 	events_.sctp_peer_error_event = 1;
 	events_.sctp_shutdown_event = 1;
 	events_.sctp_partial_delivery_event = 1;
-    event.sctp_adaption_layer_event = 1;
+    events_.sctp_adaption_layer_event = 1;
 
     setsockopt(sockFd_,IPPROTO_SCTP,SCTP_EVENTS,&events_,sizeof(events_));
 
@@ -105,7 +111,6 @@ void SctpServer::listenSocket(void)
 
 void SctpServer::loop(void)
 {
-    int msg_flag;
     char addrbuf[100];
     while(true)
     {
@@ -115,7 +120,7 @@ void SctpServer::loop(void)
         readSize_ = sctp_recvmsg(sockFd_,readBuf_,BUFFER_SIZE,
                                  (struct sockaddr *)&clientAddr_,&len_,&sri_,&messageFlags_);
 
-        if (msg_flag &  MSG_NOTIFICATION)
+        if (messageFlags_ &  MSG_NOTIFICATION)
         {
         	printf("****************************************************\n");
         	printf("Event: notificaiton length=%d\n", readSize_);
