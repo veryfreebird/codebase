@@ -4,12 +4,6 @@
 #include <string.h>
 #include <stdio.h>
 #include <arpa/inet.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netinet/sctp.h>
-#include <stdlib.h>
-
 
 static void handle_event(void *buf)
 {
@@ -71,6 +65,7 @@ static void handle_event(void *buf)
 			break;
 		}
 	}
+    bzero(buf, 1024);
 }
 
 SctpServer::SctpServer()
@@ -101,7 +96,7 @@ void SctpServer::listenSocket(void)
 	events_.sctp_peer_error_event = 1;
 	events_.sctp_shutdown_event = 1;
 	events_.sctp_partial_delivery_event = 1;
-    events_.sctp_adaption_layer_event = 1;
+    /*events_.sctp_adaption_layer_event = 1;*/
 
     setsockopt(sockFd_,IPPROTO_SCTP,SCTP_EVENTS,&events_,sizeof(events_));
 
@@ -112,6 +107,7 @@ void SctpServer::listenSocket(void)
 void SctpServer::loop(void)
 {
     char addrbuf[100];
+    int port;
     while(true)
     {
         len_ = sizeof(struct sockaddr_in);
@@ -131,7 +127,7 @@ void SctpServer::loop(void)
         	printf("****************************************************\n");
         	printf("Event: data event length=%d\n", readSize_);
         	inet_ntop(AF_INET, &clientAddr_.sin_addr, addrbuf, INET_ADDRSTRLEN);
-        	int port = ntohs(clientAddr_.sin_port);
+        	port = ntohs(clientAddr_.sin_port);
         	printf("data from=%s:%d\n", addrbuf, port);
         	printf("data=%s\n", readBuf_);
         
@@ -144,14 +140,14 @@ void SctpServer::loop(void)
                          (struct sockaddr *)&clientAddr_,len_,
                           sri_.sinfo_ppid,sri_.sinfo_flags,sri_.sinfo_stream,0,0);
 	        /*forward to another server*/
-            bzero(&clientAddr_,sizeof(clientAddr_));
+            /*bzero(&clientAddr_,sizeof(clientAddr_));
             clientAddr_.sin_family = AF_INET;
             clientAddr_.sin_addr.s_addr = htonl(INADDR_ANY);
             clientAddr_.sin_port = htons(SERVER2_PORT);
             inet_pton(AF_INET,"127.0.0.1",&clientAddr_.sin_addr); 				
             sctp_sendmsg(sockFd_,readBuf_,readSize_,
                          (struct sockaddr *)&clientAddr_,len_,
-                          sri_.sinfo_ppid,sri_.sinfo_flags,sri_.sinfo_stream,0,0);
+                          sri_.sinfo_ppid,sri_.sinfo_flags,sri_.sinfo_stream,0,0);*/
         }                 
     }
 }
