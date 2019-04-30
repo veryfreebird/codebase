@@ -65,7 +65,7 @@ static void handle_event(void *buf)
 			break;
 		}
 	}
-    bzero(buf, 1024);
+        bzero(buf, BUFFER_SIZE);
 }
 
 SctpServer::SctpServer()
@@ -76,7 +76,7 @@ SctpServer::SctpServer()
 
 void SctpServer::listenSocket(void)
 {
-    //´´½¨SCTPÌ×½Ó×Ö
+    //åˆ›å»ºSCTPå¥—æ¥å­—
     sockFd_ = socket(AF_INET,SOCK_SEQPACKET,IPPROTO_SCTP);
     bzero(&serverAddr_,sizeof(serverAddr_));
     serverAddr_.sin_family = AF_INET;
@@ -84,10 +84,10 @@ void SctpServer::listenSocket(void)
     serverAddr_.sin_port = htons(SERVER_PORT);
     inet_pton(AF_INET,"127.0.0.1",&serverAddr_.sin_addr);   
 
-    //µØÖ·°ó¶¨
+    //åœ°å€ç»‘å®š
     bind(sockFd_,(struct sockaddr *)&serverAddr_,sizeof(serverAddr_));
 
-    //ÉèÖÃSCTPÍ¨ÖªÊÂ¼ş
+    //è®¾ç½®SCTPé€šçŸ¥äº‹ä»¶
     bzero(&events_,sizeof(events_));
     events_.sctp_data_io_event = 1;
 	events_.sctp_association_event = 1;
@@ -100,7 +100,7 @@ void SctpServer::listenSocket(void)
 
     setsockopt(sockFd_,IPPROTO_SCTP,SCTP_EVENTS,&events_,sizeof(events_));
 
-    //¿ªÊ¼¼àÌı
+    //å¼€å§‹ç›‘å¬
     listen(sockFd_,LISTEN_QUEUE);
 }
 
@@ -111,7 +111,7 @@ void SctpServer::loop(void)
     while(true)
     {
         len_ = sizeof(struct sockaddr_in);
-        //´Ósocket¶ÁÈ¡ÄÚÈİ
+        //ä»socketè¯»å–å†…å®¹
         bzero(&clientAddr_,sizeof(clientAddr_));
         readSize_ = sctp_recvmsg(sockFd_,readBuf_,BUFFER_SIZE,
                                  (struct sockaddr *)&clientAddr_,&len_,&sri_,&messageFlags_);
@@ -131,23 +131,23 @@ void SctpServer::loop(void)
         	printf("data from=%s:%d\n", addrbuf, port);
         	printf("data=%s\n", readBuf_);
         
-            //Ôö³¤ÏûÏ¢Á÷ºÅ
-            if(streamIncrement_)
-            {
-                sri_.sinfo_stream++;
-            }
-            sctp_sendmsg(sockFd_,readBuf_,readSize_,
-                         (struct sockaddr *)&clientAddr_,len_,
-                          sri_.sinfo_ppid,sri_.sinfo_flags,sri_.sinfo_stream,0,0);
-	        /*forward to another server*/
-            /*bzero(&clientAddr_,sizeof(clientAddr_));
-            clientAddr_.sin_family = AF_INET;
-            clientAddr_.sin_addr.s_addr = htonl(INADDR_ANY);
-            clientAddr_.sin_port = htons(SERVER2_PORT);
-            inet_pton(AF_INET,"127.0.0.1",&clientAddr_.sin_addr); 				
-            sctp_sendmsg(sockFd_,readBuf_,readSize_,
-                         (struct sockaddr *)&clientAddr_,len_,
-                          sri_.sinfo_ppid,sri_.sinfo_flags,sri_.sinfo_stream,0,0);*/
+                //å¢é•¿æ¶ˆæ¯æµå·
+                if(streamIncrement_)
+                {
+                    sri_.sinfo_stream++;
+                }
+                sctp_sendmsg(sockFd_,readBuf_,readSize_,
+                             (struct sockaddr *)&clientAddr_,len_,
+                              sri_.sinfo_ppid,sri_.sinfo_flags,sri_.sinfo_stream,0,0);
+	            /*forward to another server*/
+                /*bzero(&clientAddr_,sizeof(clientAddr_));
+                clientAddr_.sin_family = AF_INET;
+                clientAddr_.sin_addr.s_addr = htonl(INADDR_ANY);
+                clientAddr_.sin_port = htons(SERVER2_PORT);
+                inet_pton(AF_INET,"127.0.0.1",&clientAddr_.sin_addr); 				
+                sctp_sendmsg(sockFd_,readBuf_,readSize_,
+                             (struct sockaddr *)&clientAddr_,len_,
+                              sri_.sinfo_ppid,sri_.sinfo_flags,sri_.sinfo_stream,0,0);*/
         }                 
     }
 }
