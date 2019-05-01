@@ -130,7 +130,8 @@ void SctpServer::loop(void)
         	port = ntohs(clientAddr_.sin_port);
         	printf("data from=%s:%d\n", addrbuf, port);
         	printf("data=%s\n", readBuf_);
-        
+            if(clientAddr_.sin_port != htons(SERVER_PORT))
+            {
                 //增长消息流号
                 if(streamIncrement_)
                 {
@@ -140,15 +141,16 @@ void SctpServer::loop(void)
                              (struct sockaddr *)&clientAddr_,len_,
                               sri_.sinfo_ppid,sri_.sinfo_flags,sri_.sinfo_stream,0,0);
 	            /*forward to another server*/
-                /*
+                
                 bzero(&clientAddr_,sizeof(clientAddr_));
                 clientAddr_.sin_family = AF_INET;
                 clientAddr_.sin_addr.s_addr = htonl(INADDR_ANY);
-                clientAddr_.sin_port = htons(SERVER2_PORT);
+                clientAddr_.sin_port = htons(SERVER_PORT);
                 inet_pton(AF_INET,"127.0.0.1",&clientAddr_.sin_addr); 				
                 sctp_sendmsg(sockFd_,readBuf_,readSize_,
                              (struct sockaddr *)&clientAddr_,len_,
-                              sri_.sinfo_ppid,sri_.sinfo_flags,sri_.sinfo_stream,0,0); */
+                              sri_.sinfo_ppid,sri_.sinfo_flags,sri_.sinfo_stream,0,0); 
+            }                      
         }                 
     }
 }
