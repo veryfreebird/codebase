@@ -47,7 +47,8 @@ class SctpClient
             clientAddr_.sin_addr.s_addr = htonl(INADDR_ANY);
             clientAddr_.sin_port = htons(9999);
             inet_pton(AF_INET,"127.0.0.1",&clientAddr_.sin_addr);       
-            bind(sockFd_,(struct sockaddr *)&clientAddr_,sizeof(clientAddr_));        
+            if(bind(sockFd_,(struct sockaddr *)&clientAddr_,sizeof(clientAddr_)) == -1) 
+                perror("Bind fails!!");        
                 
             bzero(&serverAddr_,sizeof(serverAddr_));
             serverAddr_.sin_family = AF_INET;
