@@ -1,0 +1,12 @@
+Title: Here is a title
+eNB->"en-gNB": EB-DC Setup Request
+"en-gNB"->eNB: EN-DC Setup Response
+B-->C: Dashed line
+C->>D: Open arrow
+D-->>A: Dashed open arrow
+Note left of A: Note to the\n left of A
+Note right of A: Note to the\n right of A
+Note over A: Note over A
+Note over A,B: Note over both A and B
+
+Note right of A: By listing the participants\n you
