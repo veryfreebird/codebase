@@ -1,0 +1,31 @@
+0. User Management
+    user add/delete with access to family tree
+
+1. User Access
+    Family Tree
+        Read
+            Browse family tree
+        Admin
+            Family Management
+2. Family Management
+    Family node add
+        node info
+            name
+                name duplcation fix with sufix
+            date of birth
+            living location
+            date of death
+            relatives
+                none / first ancestor
+                child of Father and Mother
+                wife of Man
+                husband of WOMAN
+    Family node modification
+        node info
+            living location
+            date of death
+            relatives
+                none / first ancestor
+                child of Father and Mother
+                wife of Man
+                husband of WOMAN
