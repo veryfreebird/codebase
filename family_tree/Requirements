@@ -35,7 +35,9 @@
 Development tools:
 HTML5?
     - db access for data
-    - select and draw family tree
+    - select from global list and draw family tree
 MySQL?
      - user management
+     - family tree list - global list
+     - family tree table per family
     
