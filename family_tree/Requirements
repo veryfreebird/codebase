@@ -1,5 +1,6 @@
 0. User Management
     user add/delete with access to family tree
+    by default user has read access
 
 1. User Access
     Family Tree
@@ -7,6 +8,7 @@
             Browse family tree
         Admin
             Family Management
+
 2. Family Management
     Family node add
         node info
@@ -29,3 +31,11 @@
                 child of Father and Mother
                 wife of Man
                 husband of WOMAN
+
+Development tools:
+HTML5?
+    - db access for data
+    - draw family tree
+MySQL?
+     - user management
+    
