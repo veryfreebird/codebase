@@ -76,7 +76,7 @@ SctpServer::SctpServer()
 
 void SctpServer::listenSocket(void)
 {
-    //创建SCTP套接字
+    //创建SCTP套接字  
     sockFd_ = socket(AF_INET,SOCK_SEQPACKET,IPPROTO_SCTP);
     bzero(&serverAddr_,sizeof(serverAddr_));
     serverAddr_.sin_family = AF_INET;
