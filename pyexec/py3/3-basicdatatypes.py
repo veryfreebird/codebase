@@ -157,3 +157,59 @@ print(a ^ b)     # a 和 b 中不同时存在的元素
 #ord(x) 将一个字符转换为它的整数值
 #hex(x) 将一个整数转换为一个十六进制字符串
 #oct(x) 将一个整数转换为一个八进制字符串
+
+'''
+100
+1000.0
+james
+111 1.1 james2
++++++++++++++++++Number examples+++++++++++++++++
+<class 'int'> <class 'float'> <class 'str'>
+<class 'float'> <class 'int'>
+(1+2j) <class 'complex'> (1+4j) True
+3.233e+21 <class 'float'>
++++++++++++++++++String examples+++++++++++++++++
+Helloworld
+Helloworl
+H
+llo
+lloworld
+HelloworldHelloworld
+HelloworldTEST
+Ru
+oob
+Ru\noob
++++++++++++++++++Tuple examples+++++++++++++++++
+('abcd', 786, 2.23, 'runoob', 70.2)
+abcd
+(786, 2.23)
+(2.23, 'runoob', 70.2)
+(123, 'runoob', 123, 'runoob')
+('abcd', 786, 2.23, 'runoob', 70.2, 123, 'runoob')
+() (20,)
++++++++++++++++++List examples+++++++++++++++++
+['abcd', 786, 2.23, 'runoob', 70.2]
+abcd
+[786, 2.23]
+[2.23, 'runoob', 70.2]
+[123, 'runoob', 123, 'runoob']
+['abcd', 786, 2.23, 'runoob', 70.2, 123, 'runoob']
+[1, 2, 3, 4, 5, 6]
+[1, 2, 13, 14, 15, 6]
+I love Rose => Rose love I
++++++++++++++++++Dictionary examples+++++++++++++++++
+1 - 菜鸟教程
+2 - 菜鸟工具
+{'name': 'runoob', 'code': 1, 'site': 'www.runoob.com'}
+dict_keys(['name', 'code', 'site'])
+dict_values(['runoob', 1, 'www.runoob.com'])
+{('Google', 2), ('Taobao', 3), ('Runoob', 1)} {2: 4, 4: 16, 6: 36}
++++++++++++++++++Set examples+++++++++++++++++
+{'Mary', 'Jack', 'Tom', 'Jim', 'Rose'}
+Rose 在集合中
+{'b', 'r', 'a', 'd', 'c'} {'l', 'z', 'a', 'c', 'm'}
+{'d', 'b', 'r'}
+{'l', 'z', 'b', 'r', 'a', 'd', 'c', 'm'}
+{'a', 'c'}
+{'l', 'z', 'd', 'b', 'r', 'm'}
+'''
