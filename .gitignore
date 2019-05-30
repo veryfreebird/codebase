@@ -3,3 +3,15 @@
 .vscode/ipch/72141d0c3cf5fba6/mmap_address.bin
 .vscode/ipch/8b658fe8e015b841/mmap_address.bin
 .vscode/ipch/abb4cfb15e92a81/mmap_address.bin
+tags
+cscope.out
+lib_test/lib1.so.1
+lib_test/lib1.so.2
+lib_test/lib2.so.2
+sctp-tools/src/lib/.libs/libsctp.so.1
+sctp-tools/src/lib/.libs/libsctp.la
+sctp-tools/src/lib/.libs/libsctp.so
+sctp-tools/src/testlib/.libs/libsctputil.la
+sctp-tools/src/withsctp/.libs/libwithsctp.la
+sctp-tools/src/withsctp/.libs/libwithsctp.so
+sctp-tools/src/withsctp/.libs/libwithsctp.so.1

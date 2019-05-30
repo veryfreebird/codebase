@@ -33,3 +33,15 @@ print('------------------------------')
 print('hello\nJames')      # 使用反斜杠(\)+n转义特殊字符
 print(r'hello\nJames')     # 在字符串前面添加一个 r，表示原始字符串，不会发生转义, r-> raw string
 
+x="a"
+y="b"
+# 换行输出
+print( x )
+print( y )
+ 
+print('---------')
+# 不换行输出
+print( x, end="" )
+print( y, end="" )
+print()
+
