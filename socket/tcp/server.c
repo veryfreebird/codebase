@@ -6,6 +6,7 @@
 #include<sys/types.h>  
 #include<sys/socket.h>  
 #include<netinet/in.h>  
+#include<unistd.h>
 #define DEFAULT_PORT 8000  
 #define MAXLINE 4096  
 int main(int argc, char** argv)  
@@ -14,7 +15,7 @@ int main(int argc, char** argv)
     struct sockaddr_in     servaddr;  
     char    buff[4096];  
     int     n;  
-
+    pid_t   pid;
     //初始化Socket  
         if( (socket_fd = socket(AF_INET, SOCK_STREAM, 0)) == -1 ){  
             printf("create socket error: %s(errno: %d)\n",strerror(errno),errno);  
@@ -31,30 +32,42 @@ int main(int argc, char** argv)
         printf("bind socket error: %s(errno: %d)\n",strerror(errno),errno);  
         exit(0);  
     }  
-    //开始监听是否有客户端连接  
     if( listen(socket_fd, 10) == -1){  
         printf("listen socket error: %s(errno: %d)\n",strerror(errno),errno);  
         exit(0);  
     }  
     printf("======waiting for client's request======\n");  
-    while(1){  
+    while(1)
+    {  
         //阻塞直到有客户端连接，不然多浪费CPU资源。  
         if( (connect_fd = accept(socket_fd, (struct sockaddr*)NULL, NULL)) == -1){  
             printf("accept socket error: %s(errno: %d)",strerror(errno),errno);  
             continue;  
         }  
-        //接受客户端传过来的数据  
-        n = recv(connect_fd, buff, MAXLINE, 0);  
         //向客户端发送回应数据  
-        if(!fork()){ /*紫禁城*/  
+        if((pid = fork()) == 0)
+        {
             if(send(connect_fd, "Hello,you are connected!\n", 26,0) == -1)  
                 perror("send error");  
-            close(connect_fd);  
+            while(1)
+            {
+                 n = recv(connect_fd, buff, MAXLINE, 0); 
+                 buff[n]= '\0';
+                 send(connect_fd,buff, 26, 0); 
+                 if(strncmp(buff,"quit", 4)==0)
+                    break;                 
+            }
+            printf("process %d quit!\n", getpid()); 
+            close(connect_fd); 
+            sleep(1);
             exit(0);  
-        }  
-        buff[n] = '\0';  
-        printf("recv msg from client: %s\n", buff);  
-        close(connect_fd);  
+        }
+        else
+        {
+            printf("process %d forked!\n", pid);
+        }
+          
     }  
     close(socket_fd);  
+    exit(0);
 }  

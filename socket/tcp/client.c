@@ -5,6 +5,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<arpa/inet.h>
+#include<unistd.h>
 #define MAXLINE 4096  
 
 
@@ -41,20 +43,31 @@ int main(int argc, char** argv)
         exit(0);  
     }  
 
-
-    printf("send msg to server: \n");  
-    fgets(sendline, 4096, stdin);  
-    if( send(sockfd, sendline, strlen(sendline), 0) < 0)  
+    if((rec_len = recv(sockfd, buf, MAXLINE,0)) == -1) 
     {  
-        printf("send msg error: %s(errno: %d)\n", strerror(errno), errno);  
-        exit(0);  
-    }  
-    if((rec_len = recv(sockfd, buf, MAXLINE,0)) == -1) {  
         perror("recv error");  
         exit(1);  
     }  
     buf[rec_len]  = '\0';  
-    printf("Received : %s ",buf);  
+    printf("%s \n",buf); 
+    printf("send msg to server: \n");  
+    while(1)
+    {
+        fgets(sendline, 4096, stdin);  
+        if(send(sockfd, sendline, strlen(sendline), 0) < 0)  
+        {  
+            printf("send msg error: %s(errno: %d)\n", strerror(errno), errno);  
+            exit(0);  
+        }  
+        if((rec_len = recv(sockfd, buf, MAXLINE,0)) == -1) {  
+            perror("recv error");  
+            exit(1);  
+        }  
+        buf[rec_len]  = '\0';  
+        printf("Received : %s",buf);  
+        if(strncmp(buf,"quit", 4)==0)
+                    break; 
+    }
     close(sockfd);  
     exit(0);  
 }  

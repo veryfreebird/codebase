@@ -16,3 +16,6 @@ sctp-tools/src/withsctp/.libs/libwithsctp.la
 sctp-tools/src/withsctp/.libs/libwithsctp.so
 sctp-tools/src/withsctp/.libs/libwithsctp.so.1
 socket/tcp/.vscode/ipch/173218fcd7ff87b0/mmap_address.bin
+socket/tcp/server
+socket/tcp/client
+socket/tcp/.vscode/ipch/47037d17c13d47d4/mmap_address.bin
