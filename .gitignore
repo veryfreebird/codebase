@@ -15,3 +15,4 @@ sctp-tools/src/testlib/.libs/libsctputil.la
 sctp-tools/src/withsctp/.libs/libwithsctp.la
 sctp-tools/src/withsctp/.libs/libwithsctp.so
 sctp-tools/src/withsctp/.libs/libwithsctp.so.1
+socket/tcp/.vscode/ipch/173218fcd7ff87b0/mmap_address.bin
