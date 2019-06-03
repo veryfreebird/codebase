@@ -1,11 +1,9 @@
-
-/*https://www.jb51.net/article/101061.htm*/
+/*https://www.jb51.net/article/101051.htm*/
 /*
-poll的机制与select类似，与select在本质上没有多大差别，管理多个描述符也是进行轮询，根据描述符的状态进行处理，
-但是poll没有最大文件描述符数量的限制。poll和select同样存在一个缺点就是，包含大量文件描述符的数组被整体复制于
-用户态和内核的地址空间之间，而不论这些文件描述符是否就绪，它的开销随着文件描述符数量的增加而线性增大。
+epoll是在2.6内核中提出的，是之前的select和poll的增强版本。相对于select和poll来说，epoll更加灵活，没有描述符限制。
+epoll使用一个文件描述符管理多个描述符，将用户关系的文件描述符的事件存放到内核的一个事件表中，这样在用户空间和内核空间
+的copy只需一次。
 */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,34 +11,45 @@ poll的机制与select类似，与select在本质上没有多大差别，管理�
  
 #include <netinet/in.h>
 #include <sys/socket.h>
-#include <poll.h>
+#include <arpa/inet.h>
+#include <sys/epoll.h>
 #include <unistd.h>
 #include <sys/types.h>
-#include <arpa/inet.h> 
-
+ 
 #define IPADDRESS  "127.0.0.1"
 #define PORT    8787
-#define MAXLINE   1024
+#define MAXSIZE   1024
 #define LISTENQ   5
-#define OPEN_MAX  1000
-#define INFTIM   -1
+#define FDSIZE   1000
+#define EPOLLEVENTS 100
  
 //函数声明
 //创建套接字并进行绑定
 static int socket_bind(const char* ip,int port);
-//IO多路复用poll
-static void do_poll(int listenfd);
-//处理多个连接
-static void handle_connection(struct pollfd *connfds,int num);
+//IO多路复用epoll
+static void do_epoll(int listenfd);
+//事件处理函数
+static void
+handle_events(int epollfd,struct epoll_event *events,int num,int listenfd,char *buf);
+//处理接收到的连接
+static void handle_accpet(int epollfd,int listenfd);
+//读处理
+static void do_read(int epollfd,int fd,char *buf);
+//写处理
+static void do_write(int epollfd,int fd,char *buf);
+//添加事件
+static void add_event(int epollfd,int fd,int state);
+//修改事件
+static void modify_event(int epollfd,int fd,int state);
+//删除事件
+static void delete_event(int epollfd,int fd,int state);
  
 int main(int argc,char *argv[])
 {
-  int listenfd,connfd,sockfd;
-  struct sockaddr_in cliaddr;
-  socklen_t cliaddrlen;
+  int listenfd;
   listenfd = socket_bind(IPADDRESS,PORT);
   listen(listenfd,LISTENQ);
-  do_poll(listenfd);
+  do_epoll(listenfd);
   return 0;
 }
  
@@ -66,98 +75,119 @@ static int socket_bind(const char* ip,int port)
   return listenfd;
 }
  
-static void do_poll(int listenfd)
+static void do_epoll(int listenfd)
 {
-  int connfd,sockfd;
-  struct sockaddr_in cliaddr;
-  socklen_t cliaddrlen;
-  struct pollfd clientfds[OPEN_MAX];
-  int maxi;
-  int i;
-  int nready;
-  //添加监听描述符
-  clientfds[0].fd = listenfd;
-  clientfds[0].events = POLLIN;
-  //初始化客户连接描述符
-  for (i = 1;i < OPEN_MAX;i++)
-    clientfds[i].fd = -1;
-  maxi = 0;
-  //循环处理
+  int epollfd;
+  struct epoll_event events[EPOLLEVENTS];
+  int ret;
+  char buf[MAXSIZE];
+  memset(buf,0,MAXSIZE);
+  //创建一个描述符
+  epollfd = epoll_create(FDSIZE);
+  //添加监听描述符事件
+  add_event(epollfd,listenfd,EPOLLIN);
   for ( ; ; )
   {
-    //获取可用描述符的个数
-    nready = poll(clientfds,maxi+1,INFTIM);
-    if (nready == -1)
-    {
-      perror("poll error:");
-      exit(1);
-    }
-    //测试监听描述符是否准备好
-    if (clientfds[0].revents & POLLIN)
-    {
-      cliaddrlen = sizeof(cliaddr);
-      //接受新的连接
-      if ((connfd = accept(listenfd,(struct sockaddr*)&cliaddr,&cliaddrlen)) == -1)
-      {
-        if (errno == EINTR)
-          continue;
-        else
-        {
-          perror("accept error:");
-          exit(1);
-        }
-      }
-      fprintf(stdout,"accept a new client: %s:%d\n", inet_ntoa(cliaddr.sin_addr),cliaddr.sin_port);
-      //将新的连接描述符添加到数组中
-      for (i = 1;i < OPEN_MAX;i++)
-      {
-        if (clientfds[i].fd < 0)
-        {
-          clientfds[i].fd = connfd;
-          break;
-        }
-      }
-      if (i == OPEN_MAX)
-      {
-        fprintf(stderr,"too many clients.\n");
-        exit(1);
-      }
-      //将新的描述符添加到读描述符集合中
-      clientfds[i].events = POLLIN;
-      //记录客户连接套接字的个数
-      maxi = (i > maxi ? i : maxi);
-      if (--nready <= 0)
-        continue;
-    }
-    //处理客户连接
-    handle_connection(clientfds,maxi);
+    //获取已经准备好的描述符事件
+    ret = epoll_wait(epollfd,events,EPOLLEVENTS,-1);
+    handle_events(epollfd,events,ret,listenfd,buf);
+  }
+  close(epollfd);
+}
+ 
+static void
+handle_events(int epollfd,struct epoll_event *events,int num,int listenfd,char *buf)
+{
+  int i;
+  int fd;
+  //进行选好遍历
+  for (i = 0;i < num;i++)
+  {
+    fd = events[i].data.fd;
+    //根据描述符的类型和事件类型进行处理
+    if ((fd == listenfd) &&(events[i].events & EPOLLIN))
+      handle_accpet(epollfd,listenfd);
+    else if (events[i].events & EPOLLIN)
+      do_read(epollfd,fd,buf);
+    else if (events[i].events & EPOLLOUT)
+      do_write(epollfd,fd,buf);
+  }
+}
+static void handle_accpet(int epollfd,int listenfd)
+{
+  int clifd;
+  struct sockaddr_in cliaddr;
+  socklen_t cliaddrlen;
+  clifd = accept(listenfd,(struct sockaddr*)&cliaddr,&cliaddrlen);
+  if (clifd == -1)
+    perror("accpet error:");
+  else
+  {
+    printf("accept a new client: %s:%d\n",inet_ntoa(cliaddr.sin_addr),cliaddr.sin_port);
+    //添加一个客户描述符和事件
+    add_event(epollfd,clifd,EPOLLIN);
   }
 }
  
-static void handle_connection(struct pollfd *connfds,int num)
+static void do_read(int epollfd,int fd,char *buf)
 {
-  int i,n;
-  char buf[MAXLINE];
-  memset(buf,0,MAXLINE);
-  for (i = 1;i <= num;i++)
+  int nread;
+  nread = read(fd,buf,MAXSIZE);
+  if (nread == -1)
   {
-    if (connfds[i].fd < 0)
-      continue;
-    //测试客户描述符是否准备好
-    if (connfds[i].revents & POLLIN)
-    {
-      //接收客户端发送的信息
-      n = read(connfds[i].fd,buf,MAXLINE);
-      if (n == 0)
-      {
-        close(connfds[i].fd);
-        connfds[i].fd = -1;
-        continue;
-      }
-      // printf("read msg is: ");
-      write(STDOUT_FILENO,buf,n);
-      //向客户端发送buf
-      write(connfds[i].fd,buf,n);
-    }
+    perror("read error:");
+    close(fd);
+    delete_event(epollfd,fd,EPOLLIN);
   }
+  else if (nread == 0)
+  {
+    fprintf(stderr,"client close.\n");
+    close(fd);
+    delete_event(epollfd,fd,EPOLLIN);
+  }
+  else
+  {
+    printf("read message is : %s",buf);
+    //修改描述符对应的事件，由读改为写
+    modify_event(epollfd,fd,EPOLLOUT);
+  }
+}
+ 
+static void do_write(int epollfd,int fd,char *buf)
+{
+  int nwrite;
+  nwrite = write(fd,buf,strlen(buf));
+  if (nwrite == -1)
+  {
+    perror("write error:");
+    close(fd);
+    delete_event(epollfd,fd,EPOLLOUT);
+  }
+  else
+    modify_event(epollfd,fd,EPOLLIN);
+  memset(buf,0,MAXSIZE);
+}
+ 
+static void add_event(int epollfd,int fd,int state)
+{
+  struct epoll_event ev;
+  ev.events = state;
+  ev.data.fd = fd;
+  epoll_ctl(epollfd,EPOLL_CTL_ADD,fd,&ev);
+}
+ 
+static void delete_event(int epollfd,int fd,int state)
+{
+  struct epoll_event ev;
+  ev.events = state;
+  ev.data.fd = fd;
+  epoll_ctl(epollfd,EPOLL_CTL_DEL,fd,&ev);
+}
+ 
+static void modify_event(int epollfd,int fd,int state)
+{
+  struct epoll_event ev;
+  ev.events = state;
+  ev.data.fd = fd;
+  epoll_ctl(epollfd,EPOLL_CTL_MOD,fd,&ev);
 }
