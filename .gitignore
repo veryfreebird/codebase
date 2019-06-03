@@ -1,4 +1,4 @@
-.vscode/ipch/abb4cfb15e92a81/mmap_address.bin
+mmap_address.bin
 tags
 cscope.out
 lib_test/lib1.so.1
@@ -10,8 +10,6 @@ sctp-tools/src/lib/.libs/libsctp.so
 sctp-tools/src/testlib/.libs/libsctputil.la
 sctp-tools/src/withsctp/.libs/libwithsctp.la
 sctp-tools/src/withsctp/.libs/libwithsctp.so
-sctp-tools/src/withsctp/.libs/libwithsctp.so.1
-socket/tcp/.vscode/ipch/173218fcd7ff87b0/mmap_address.bin
-socket/tcp/server
-socket/tcp/client
-socket/tcp/.vscode/ipch/47037d17c13d47d4/mmap_address.bin
+server
+client
+*.ipch
