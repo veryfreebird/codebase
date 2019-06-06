@@ -39,3 +39,16 @@ NIC statistics:
      peer_ifindex: 16
 # ip link | grep '^16:'   # Look up interface
 16: ve_B@ve_A: <BROADCAST,MULTICAST,M-DOWN> mtu 1500 qdisc ...
+
+
+Linux-虚拟网络设备-veth pair
+https://blog.csdn.net/sld880311/article/details/77650937
+
+Linux虚拟网络设备之veth
+https://segmentfault.com/a/1190000009251098
+
+tun/tap
+https://segmentfault.com/a/1190000009249039
+
+Linux虚拟网络设备之bridge(桥)
+https://segmentfault.com/a/1190000009491002
