@@ -1,0 +1,41 @@
+bash$> brctl addbr mybridge
+bash$> brctl addif mybridge eth0
+bash$> brctl addif mybridge eth1
+bash$> brctl addif mybridge eth2
+bash$> ifconfig mybridge up
+
+brctl show stp mybridge
+brctl show mybridge
+
+
+
+
+-------------                       -------------
+|            |_veth00________veth01_|            |
+| mybridge0  |                      | mybridge1  |
+|            |_veth10________veth11_|            |
+-------------                       --------------
+
+
+man veth
+
+# ip link add <p1-name> type veth peer name <p2-name>
+
+
+veth device pairs are useful for combining the network facilities of
+the kernel together in interesting ways.  A particularly interesting
+use case is to place one end of a veth pair in one network namespace
+and the other end in another network namespace, thus allowing commu‐
+nication between network namespaces.  To do this, one first creates
+the veth device as above and then moves one side of the pair to the
+other namespace:
+
+# ip link set <p2-name> netns <p2-namespace>
+
+
+# ip link add ve_A type veth peer name ve_B   # Create veth pair
+# ethtool -S ve_A         # Discover interface index of peer
+NIC statistics:
+     peer_ifindex: 16
+# ip link | grep '^16:'   # Look up interface
+16: ve_B@ve_A: <BROADCAST,MULTICAST,M-DOWN> mtu 1500 qdisc ...
