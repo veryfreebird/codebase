@@ -1,6 +1,8 @@
 #/bin/bash
 
-modprobe bonding mode=802.3ad miimon=100
+##https://www.cnblogs.com/huangweimin/articles/6527058.html
+
+modprobe bonding mode=802.3ad miimon=100 fail_over_mac=1
 modprobe e100
 echo +bond0 > /sys/class/net/bonding_masters
 ifconfig bond0 up
