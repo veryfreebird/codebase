@@ -1,0 +1,11 @@
+#/bin/bash
+
+modprobe bonding mode=balance-alb miimon=100
+modprobe e100
+echo +bond0 > /sys/class/net/bonding_masters
+ifconfig bond0 up
+ifenslave bond0 enp0s9 enp0s10
+ip a add 111.111.111.112/24 dev bond0
+ip link
+ifenslave -a
+cat /proc/net/bonding/bond0
