@@ -7,8 +7,22 @@
 /*
 Source: https://www.cnblogs.com/sparkdev/p/9377072.html
 
+[root@myfedora linux_ns]# readlink /proc/$$/ns/uts
+uts:[4026531838]
+[root@myfedora linux_ns]# ./unshare_test -u ${SHELL}
+[root@myfedora linux_ns]# readlink /proc/$$/ns/uts
+uts:[4026532330]
+[root@myfedora linux_ns]# exit
+exit
+[root@myfedora linux_ns]# readlink /proc/$$/ns/uts
+uts:[4026531838]
 
 
+[root@myfedora linux_ns]# readlink /proc/$$/ns/net
+net:[4026531992]
+[root@myfedora linux_ns]# ./unshare_test -n ${SHELL}
+[root@myfedora linux_ns]# readlink /proc/$$/ns/net
+net:[4026532342]
 
 
  */

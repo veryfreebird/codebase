@@ -8,6 +8,9 @@
 #include <unistd.h>
 
 /*
+
+Source: https://www.cnblogs.com/sparkdev/p/9377072.html
+
 UTS: Unix Time sharing
 In short, the UTS namespace is about isolating hostnames.
 The UTS namespace is used to isolate two specific elements of the system that relate to the uname system call. 
