@@ -15,6 +15,26 @@ The UTS(UNIX Time Sharing) namespace is named after the data structure used to s
 the uname system call. Specifically, the UTS namespace isolates the hostname and the NIS domain name. NIS, 
 an abbreviation of Network Information Service, is an outdated directory service.
 
+
+[root@myfedora linux_ns]# ./uts_ns ttt
+uts.nodename in child:  ttt
+My PID is: 4826
+My parent PID is: 4825
+
+[root@ttt linux_ns]# ls
+uts_ns  uts_ns.c
+[root@ttt linux_ns]# ls -l
+total 28
+-rw-rw-rw-. 1 jamema jamema 22624 Jun 24  2019 uts_ns
+-rwxrwxrwx. 1 jamema jamema  2421 Jun 24  2019 uts_ns.c
+
+[root@ttt linux_ns]# hostname
+ttt
+
+[root@ttt linux_ns]# exit
+exit
+child has terminated
+
 */ 
 
 #define errExit(msg)    do { perror(msg); exit(EXIT_FAILURE); } while (0)
