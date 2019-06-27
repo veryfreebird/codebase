@@ -1,0 +1,8 @@
+[Unit]
+Description= Sync time with host
+
+[Service]
+ExecStart=/root/sh/clockupdate.sh
+
+[Install]
+WantedBy=multi-user.target 
