@@ -4,7 +4,7 @@ Description=Run clockupdate every 1min
 [Timer]
 OnUnitActiveSec=1min
 OnBootSec=10min
-Unit=updatetime
+Unit=clockupdate
 
 [Install]
 WantedBy=timers.target
