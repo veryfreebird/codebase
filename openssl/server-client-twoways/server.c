@@ -13,9 +13,9 @@
 
 #define MAXBUF 1024
 
-#define CA_FILE "/home/waf/keyless/test/cert/CA/cacert.pem"
-#define SERVER_KEY "/home/waf/keyless/test/cert/server-cert/key.pem"
-#define SERVER_CERT "/home/waf/keyless/test/cert/server-cert/cert.pem"
+#define CA_FILE "/mnt/local_src/codebase/openssl/server-client-twoways/myca/cacert.pem"
+#define SERVER_KEY "/mnt/local_src/codebase/openssl/server-client-twoways/myca/server/key.pem"
+#define SERVER_CERT "/mnt/local_src/codebase/openssl/server-client-twoways/myca/server/cert.pem"
 
 int main(int argc, char **argv)
 {

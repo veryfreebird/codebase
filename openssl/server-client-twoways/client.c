@@ -12,9 +12,10 @@
 
 #define MAXBUF 1024
 
-#define CA_FILE "/home/waf/keyless/test/cert/CA/cacert.pem"
-#define CLIENT_KEY "/home/waf/keyless/test/cert/client-cert/key.pem"
-#define CLIENT_CERT "/home/waf/keyless/test/cert/client-cert/cert.pem"
+#define CA_FILE "/mnt/local_src/codebase/openssl/server-client-twoways/myca/cacert.pem"
+#define CLIENT_KEY "/mnt/local_src/codebase/openssl/server-client-twoways/myca/client/key.pem"
+#define CLIENT_CERT "/mnt/local_src/codebase/openssl/server-client-twoways/myca/client/cert.pem"
+
 
 void ShowCerts(SSL *ssl)
 {
