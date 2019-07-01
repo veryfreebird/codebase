@@ -92,7 +92,7 @@ int main(int argc, char **argv)
     }
     /*加载客户端证书*/
     sprintf(CLIENT_CERT, "%s//%s//cert.pem", CLIENT_CERT_PREFIX,argv[3]);
-    printf("Load client private key from %s\n", CLIENT_CERT);
+    printf("Load client cert from %s\n", CLIENT_CERT);
     if (SSL_CTX_use_certificate_file(ctx, CLIENT_CERT, SSL_FILETYPE_PEM) != 1)
     {
         SSL_CTX_free(ctx);
