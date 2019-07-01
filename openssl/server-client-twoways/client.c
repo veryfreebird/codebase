@@ -13,9 +13,8 @@
 #define MAXBUF 1024
 
 #define CA_FILE "/mnt/local_src/codebase/openssl/server-client-twoways/myca/cacert.pem"
-#define CLIENT_KEY "/mnt/local_src/codebase/openssl/server-client-twoways/myca/client/key.pem"
-#define CLIENT_CERT "/mnt/local_src/codebase/openssl/server-client-twoways/myca/client/cert.pem"
-
+#define CLIENT_KEY_PREFIX "/mnt/local_src/codebase/openssl/server-client-twoways/myca/"
+#define CLIENT_CERT_PREFIX "/mnt/local_src/codebase/openssl/server-client-twoways/myca/"
 
 void ShowCerts(SSL *ssl)
 {
@@ -44,11 +43,13 @@ int main(int argc, char **argv)
     int sockfd, len;
     struct sockaddr_in dest;
     char buffer[MAXBUF + 1];
+    char CLIENT_CERT[1000], CLIENT_KEY[1000];
     SSL_CTX *ctx;
     SSL *ssl;
     const SSL_METHOD *method;
-
-    if (argc != 3)
+    bzero(CLIENT_CERT, 1000);
+    bzero(CLIENT_KEY, 1000);
+    if (argc != 4)
     {
         printf("参数格式错误！正确用法如下：\n\t\t%s IP地址 端口\n\t比如:\t%s 127.0.0.1 80\n此程序用来从某个"
                "IP 地址的服务器某个端口接收最多 MAXBUF 个字节的消息",
@@ -90,12 +91,16 @@ int main(int argc, char **argv)
         printf("Call to SSL_CTX_set_default_verify_paths failed");
     }
     /*加载客户端证书*/
+    sprintf(CLIENT_CERT, "%s//%s//cert.pem", CLIENT_CERT_PREFIX,argv[3]);
+    printf("Load client private key from %s\n", CLIENT_CERT);
     if (SSL_CTX_use_certificate_file(ctx, CLIENT_CERT, SSL_FILETYPE_PEM) != 1)
     {
         SSL_CTX_free(ctx);
         printf("Failed to load client certificate from %s", CLIENT_KEY);
     }
     /*加载客户端私钥*/
+    sprintf(CLIENT_KEY, "%s//%s//key.pem", CLIENT_KEY_PREFIX,argv[3]);
+    printf("Load client private key from %s\n", CLIENT_KEY);
     if (SSL_CTX_use_PrivateKey_file(ctx, CLIENT_KEY, SSL_FILETYPE_PEM) != 1)
     {
         SSL_CTX_free(ctx);
