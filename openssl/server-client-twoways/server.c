@@ -17,6 +17,28 @@
 #define SERVER_KEY "/mnt/local_src/codebase/openssl/server-client-twoways/myca/server/key.pem"
 #define SERVER_CERT "/mnt/local_src/codebase/openssl/server-client-twoways/myca/server/cert.pem"
 
+void ShowCerts(SSL *ssl)
+{
+    X509 *cert;
+    char *line;
+    cert = SSL_get_peer_certificate(ssl);
+    if (cert != NULL)
+    {
+        printf("========================================================================\n对端数字证书信息:\n");
+        line = X509_NAME_oneline(X509_get_subject_name(cert), 0, 0);
+        printf("证书: %s\n", line);
+        free(line);
+        line = X509_NAME_oneline(X509_get_issuer_name(cert), 0, 0);
+        printf("颁发者: %s\n========================================================================\n", line);
+        free(line);
+        X509_free(cert);
+    }
+    else
+    {
+        printf("无证书信息！\n");
+    }
+}
+
 int main(int argc, char **argv)
 {
     int sockfd, new_fd;
@@ -158,6 +180,7 @@ int main(int argc, char **argv)
             close(new_fd);
             break;
         }
+        ShowCerts(ssl);
         printf("Server with %s encryption\n", SSL_get_cipher(ssl));
 
         bzero(buf, MAXBUF + 1);

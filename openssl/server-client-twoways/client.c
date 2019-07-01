@@ -24,12 +24,12 @@ void ShowCerts(SSL *ssl)
     cert = SSL_get_peer_certificate(ssl);
     if (cert != NULL)
     {
-        printf("数字证书信息:\n");
+        printf("========================================================================\n对端数字证书信息:\n");
         line = X509_NAME_oneline(X509_get_subject_name(cert), 0, 0);
         printf("证书: %s\n", line);
         free(line);
         line = X509_NAME_oneline(X509_get_issuer_name(cert), 0, 0);
-        printf("颁发者: %s\n", line);
+        printf("颁发者: %s\n========================================================================\n", line);
         free(line);
         X509_free(cert);
     }
