@@ -28,7 +28,9 @@ void ShowCerts(SSL *ssl)
         printf("证书: %s\n", line);
         free(line);
         line = X509_NAME_oneline(X509_get_issuer_name(cert), 0, 0);
-        printf("颁发者: %s\n========================================================================\n", line);
+        printf("颁发者: %s\n", line);
+        printf("TLS version used: %s\n", SSL_get_version(ssl));
+        printf("========================================================================\n");
         free(line);
         X509_free(cert);
     }
@@ -60,7 +62,7 @@ int main(int argc, char **argv)
     SSL_library_init();
     SSL_load_error_strings();
     OpenSSL_add_all_algorithms();
-    method = TLSv1_2_client_method();
+    method = TLS_client_method();
     ctx = SSL_CTX_new(method);
 
     if (!ctx)
