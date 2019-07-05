@@ -70,3 +70,6 @@ IPSec建立的隧道在设计时就只支持IP单播，并且也不支持组播�
  setkey -D
  setkey -DP
  ping 172.168.10.11 -I 172.168.9.10
+
+  /*configure wireshark to decode ipsec packets*/
+ ESP->Protocol Preference->Open Encapsluating Security Payload preference
