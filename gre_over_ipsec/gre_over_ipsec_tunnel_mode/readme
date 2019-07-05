@@ -1,0 +1,72 @@
+-----------------                               ------------------
+|      gre10     |veth0____________________veth1|gre11            |
+|192.168.1.10    |10.10.xx.10        10.10.yy.11|192.168.1.11     |  
+| defaultns      |                              | othns           |
+|lo:172.168.9.10|                               |lo:172.168.10.11 |
+-----------------                               ------------------
+Route: 
+172.168.10.0/24 gw 192.168.1.11
+172.168.9.0/24 gw 192.168.1.10
+
+只有10.10.xx.10, 10.10.yy.11会作为outer IP，后跟GRE header, inner IP
+
+除了外层的 IP 头和内层的 IP 头之间多了一个 GRE 头之外，它最大的不同是， tunnel 不是建立在最终的 host 上，而是在中间的 router 上 ！
+换句话说，对于端点 host A 和 host B 来说，该 tunnel 是透明的（对比上面的 sit tunnel）。
+理解这一点非常关键，正是因为它这么设计的，所以它才能解决 ipip tunnel 解决不了的问题。
+
+ipip tunnel 是端对端的，通信也就只能是点对点的，而 GRE tunnel 却可以进行多播。
+IPSec建立的隧道在设计时就只支持IP单播，并且也不支持组播，所以IGP动态路由协议的流量不可能穿越IPSec隧道， 并且也不支持非IP协议的流量。
+
+/*veth pair and netns to simulate two different hosts connected with one wire*/
+ ip link add veth0 type veth peer name veth1
+ ip link
+ ip netns add othns
+ ip link set veth1 netns othns
+ ip link
+ ip a add 10.10.10.10/24 dev veth0
+ ip netns exec othns ip a a 10.10.10.11/24 dev veth1
+ ip link
+ ifconfig veth0 up
+ ip netns exec ifconfig veth1 up
+ ip netns exec othns ifconfig veth1 up
+ ping 10.10.10.11
+ 
+/*gre tunnel created*/
+ modprobe ip_gre
+ lsmod | grep gre
+ ip tunnel add gre10 mode gre remote 10.10.10.11 local 10.10.10.10 ttl 255
+ ip link
+ ip add add 192.168.1.10/24 dev gre10
+ ifconfig gre10 up
+ 
+ ip netns exec othns ifconfig
+ ip netns exec othns ip tunnel add gre11 mode gre remote 10.10.10.10 local 10.10.10.11 ttl 255
+ ip netns exec othns ip add add 192.168.1.11/24 dev gre11
+ ip netns exec othns ifconfig gre11 up
+ ip netns exec othns ifconfig
+ ping 192.168.1.11
+
+/*config ip address to lo interface*/ 
+ ifconfig
+ ip tunnel show
+ ip netns exec othns ifconfig lo up
+ ip a a 172.168.9.10/24 dev lo
+ ifconfig
+ ip link
+ ip a show
+ ip netns exec othns ip a a 172.168.10.11/24 dev lo
+ ping 172.168.10.11
+ 
+ /*config route to use gre tunnel*/
+ route add -net 172.168.10.0/24 gw 192.168.1.11
+ ip netns exec othns route add -net 172.168.9.0/24 gw 192.168.1.10
+ ping 172.168.10.11 -I 172.168.9.10
+ ifconfig
+ ip tunnel show
+
+ /*configure ipsec begin*/
+ setkey -f setkey1
+ ip netns exec othns setkey -f setkey2
+ setkey -D
+ setkey -DP
+ ping 172.168.10.11 -I 172.168.9.10
