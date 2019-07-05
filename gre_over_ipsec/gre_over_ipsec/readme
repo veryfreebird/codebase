@@ -63,3 +63,5 @@ IPSec建立的隧道在设计时就只支持IP单播，并且也不支持组播�
  ping 172.168.10.11 -I 172.168.9.10
  ifconfig
  ip tunnel show
+
+ /*configure ipsec begin*/

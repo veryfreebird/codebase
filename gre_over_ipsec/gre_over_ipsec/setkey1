@@ -1,0 +1,14 @@
+#!/usr/sbin/setkey -f
+# Configuration for 192.168.82.4
+# Flush the SAD and SPD
+flush;
+spdflush;
+
+# ESP SAs doing encryption using 192 bit long keys (168 + 24 parity)
+# and authentication using 128 bit long keys
+add 10.10.10.10 10.10.10.11 esp 0x201 -m tunnel -E 3des-cbc 0x7aeaca3f87d060a12f4a4487d5a5c3355920fae69a96c831 -A hmac-md5 0xc0291ff014dccdd03874d9e8e4cdf3e6;
+add 10.10.10.11 10.10.10.10 esp 0x301 -m tunnel -E 3des-cbc 0xf6ddb555acfd9d77b03ea3843f2653255afe8eb5573965df -A hmac-md5 0x96358c90783bbfa3d7b196ceabe0536b;
+
+# Security policies
+spdadd 172.168.9.0/24 172.168.10.0/24 any -P out ipsec esp/tunnel/10.10.10.10-10.10.10.11/require;
+spdadd 172.168.10.0/24 172.168.9.0/24 any -P in ipsec esp/tunnel/10.10.10.11-10.10.10.10/require;
