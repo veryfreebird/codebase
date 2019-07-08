@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
     else
         printf("Adding multicast group...OK.\n");
 
-    for (cnt = 0; cnt < 10; cnt++)
+    for (cnt = 0;; cnt++)
     {
         datalen = sizeof(databuf);
         if ((r = recvfrom(sd, databuf, datalen, 0, &serveraddr, &serveraddr_len)) < 0)

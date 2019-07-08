@@ -1,0 +1,11 @@
+GRE:
+GRE (Generic Routing Encapsulation)一种隧道协议，源于思科。创建一个虚拟点对点连接，能封装各种协议在里面进行
+通信。
+GRE 与 IPIP 和 EoIP 相同都属于无状态隧道连接，即远端隧道中断，所有路由指向该隧道的流量都变成黑洞路由。
+为了解决这个问题 RouterOS 为 GRE 隧道增加了
+keepalive 功能（GRE 隧道增加一个 24 字节的包头，4字节 gre 头+20 字节 IP 头）
+支持组播协议等。
+
+IPIP or IPIPv6:
+IPIP 隧道一个简单隧道协议，将 IP 数据包封装到 IPIP 隧道连接两端路由器。大多路由都支持该协议包括思科和 linux。
+IPIP 隧道没有 keepalive 值可以使用，因此在配置后不管远端是否能连接默认为运行状态，这点需要使用者特别注意。
