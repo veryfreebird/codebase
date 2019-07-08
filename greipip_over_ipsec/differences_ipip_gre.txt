@@ -9,3 +9,162 @@ keepalive 功能（GRE 隧道增加一个 24 字节的包头，4字节 gre 头+2
 IPIP or IPIPv6:
 IPIP 隧道一个简单隧道协议，将 IP 数据包封装到 IPIP 隧道连接两端路由器。大多路由都支持该协议包括思科和 linux。
 IPIP 隧道没有 keepalive 值可以使用，因此在配置后不管远端是否能连接默认为运行状态，这点需要使用者特别注意。
+
+
+
+See http://www.linuxfoundation.org/collaborate/workgroups/networking/tunneling#IPIP_tunnels and the paragraph below.
+
+Basically it's that IPIP can handle only IPv4 unicast, no multicast traffic and only one tunnel for unique tunnel endpoints pair. 
+GRE is more generic, with up to 64k tunnels between two unique endpoints plus multicast traffic which is important when 
+tunneling routing protocols.
+
+IPIP tunnels
+IPIP kind of tunnels is the simplest one. It has the lowest overhead, but can incapsulate only IPv4 unicast traffic, 
+so you will not be able to setup OSPF, RIP or any other multicast-based protocol. You can setup only one tunnel for 
+unique tunnel endpoints pair. It can work with FreeBSD and cisco IOS. Kernel module is 'ipip'. 
+
+GRE tunnels can incapsulate IPv4/IPv6 unicast/multicast traffic, so it is de-facto tunnel standard for dynamic routed 
+networks. You can setup up to 64K tunnels for an unique tunnel endpoints pair. It can work with FreeBSD and cisco IOS. 
+Kernel module is 'ip_gre'. 
+
+SIT stands for Simple Internet Transition. Its main purpose is to interconnect isolated IPv6 networks, located in global 
+IPv4 Internet. SIT works like IPIP. It can work with FreeBSD and cisco IOS. Kernel module is 'ipv6'. Once loaded, ipv6 
+module can't be unloaded. You can get your own IPv6 prefix and a SIT tunnel from a tunnel broker.
+
+
+https://www.x4b.net/kb/GREvsIPIP
+
+What is GRE?
+
+Generic Routing Encapsulation (GRE) is a simple protocol for encapsulating internet packets to route protocols over IP 
+networks as defined by RFC 2784. It has been developed as a tool for conveying a tunneling OSI Layer 3 protocol over an 
+IP network. In essence, the GRE creates a point-to-point private connection like a virtual private network (VPN).
+
+Generic Routing Encapsulation works by encapsulating a payload - that is, an internal packet to be delivered to a 
+destination network - within an outer IP packet. GRE tunnel endpoints send payloads into GRE tunnels for routing packets 
+to other IP networks. Other IP routers along the path do not analyze the payload (the inner packet); they analyze the 
+external IP packet as they send to the end of the GRE tunnel. After reaching the end point GRE tunnel encapsulation is 
+removed and the payload is transmitted along its final destination.
+
+In contrast to IP-in-IP, GRE tunnels have following advantages:
+GRE tunnels wrap multiple protocols on a single backbone protocol.
+GRE tunnels provide solutions for networks with limited hops.
+GRE tunnels connecting discontinuous subnets.
+GRE tunnels allow VPN wide area networks (WAN).
+Better support on devices and systems that miss-interoperate IP-in-IP packets or are unable to forward them.
+When using the optional tunnel identifier field can support up to 64K tunnels between two unique endpoints (IPv4 pairs)
+An optional checksum field can be utilized for integrity checking of the contained packet
+An optional sequence field for ensuring order of received packets is maintained over the tunnel, this may be useful for 
+    some UDP applications
+Security
+The additional key field that is available in the GRE protocol can be used to provide additional tunnel authentication 
+    which increases security by increasing key-space which the 32-bit source address represents.
+
+What is IP-in-IP?
+
+IP-in-IP is an even simpler encapsulating protocol, using this technique IP packets are encapsulated only in an additional 
+    IP header. So unlike GRE tunnels an IP-in-IP tunnel cannot carry multicast traffic, other protocols or IPv6 between 
+    networks.
+
+In contrast to GRE tunnels, IP-in-IP tunnels have the following advantages:
+
+Lower overhead due to less layers encapsulated
+Use of IP packets for encapsulation can allow for support (e.g. forwarding) on devices not supporting the GRE protocol
+Supports a single tunnel between two endpoints.
+
+Conclusion
+Unless you are encapsulating non-IP protocols, such as routing protocols or protocols used for research purposes IP-in-IP 
+    encapsulation is often a suitable protocol at a lower overhead to GRE, however GRE has slightly better security. 
+    Given that the overhead difference is minor we would recommend that if you can you use GRE instead of IP-in-IP 
+    encapsulation.
+
+
+
+
+https://gist.github.com/kalyco/22f528066285497141a40c20292e9d3a
+Routing Encapsulation
+Like a proxy, tunneling allows you to pass traffic from a filtered IP to another destination. Tunnels are much like a VPN, 
+except that not every tunnel involves encryption. A machine that is "tunneled" into another network has a virtual 
+interface configured with an IP that is not local, but exists on a remote network. This traffic is forwarded in the 
+form of packets at the kernel level, and therefore not susceptible to server interruptions.
+
+Below is a quick summary of both protocols, check here for more details, or move directly to Troubleshooting if you want 
+to get straight into it.
+
+What's important about tunnels is that they forward all packet details without packet modifications required for 
+techniques such as Reverse Proxying and Transparent Proxying, namely, the clients connecting IP address is preserved.
+
+GRE
+Generic Routing Encapsulation (GRE) is used as a tool for conveying a tunneling OSI Layer 3 protocol over an IP network. 
+This functions more like a VPN than IPIP.
+
+While you can use either/both GRE and IPIP, if you have to the biggest difference being that GRE has the following 
+advantages:
+• GRE tunnels allow multicast (one-to-many or many-to-many) packets
+• GRE tunnels allow VPN wide area networks (WAN)
+• Can interoperate with Cisco routers
+• Better support on devices and systems that miss-interoperate IP-in-IP packets or are unable to forward them
+• When using the optional tunnel identifier field can support up to 64K tunnels between two unique endpoints (IPv4 pairs)
+
+Security
+The additional key field available in GRE protocol can provide additional tunnel authentication which increases security 
+by increasing key-space which the 32-bit source address represents.
+
+IPIP
+IP-in-IP is a simpler encapsulation protocol. Through IPIP, packets are only encapsulated in an additional IP header. 
+So unlike GRE tunnels and IPIP cannot carry multicast traffic, other protocols, or IPv6 between networks.
+
+In contrast to GRE tunnels, IP-in-IP tunnels have the following advantages:
+• Lower overhead due to less layers encapsulated
+• Use of IP packets for encapsulation can allow for support (e.g. forwarding) on devices not supporting the GRE protocol
+• Supports a single tunnel between two endpoints
+
+Choosing a Protocol
+It us uncommon that you'll be doing any non-IP (like routing, or research-based) protocols, but in such a case you'll 
+need GRE. And while lower overhead is easier, the difference in setup is nearly negligible, and given the added security, 
+GRE is often the better option if a decision has to be made.
+
+Setting up
+More often than not, once you register an IP and get the green light from IT, one or both of these protocols will have 
+already been set up on your kernel. You can confirm this by sshing into your server and checking the configuration. 
+The following flow will confirm the existence (or lack) of your protocols, and manage how to configure it.
+
+modprobe ip_gre modprobe ipip
+modprobe is used for making additions/deletions/prioritizing existing modules within your kernel.
+
+These will load the kernel modules. If you get nothing back from either of these, you're all set, and the configuration 
+is good to either be configured, or has already been set up.
+
+If that is not the case you'll get back
+FATAL: Module ipip not found. And will need to continue from Troubleshooting
+
+Next check if they fully configured the tunnel protocol
+
+You can confirm which by checking ifconfig for something like
+tunnel <tunnel name> (IPIP Tunnel)
+
+If this is set you should be golden. Otherwise, follow this guideline for hooking up IPIP and/or GRE manually.
+
+Troubleshooting
+So from your last point of setup,
+uname -r
+List the current working/bootup kernel version. You'll need to know this.
+
+modprobe -c | grep ipip
+modprobe -c | grep ip_gre
+If these exist at all, you'll want to check where
+
+ls -l /lib/modules
+Check this directory for a list of kernels, and look for the current one.
+
+If the config was found, check which modules.dep files contain them,
+$ grep ip_gre /lib/modules/<working kernel>/modules.dep
+
+kernel/net/ipv4/ip_gre.ko: kernel/net/ipv4/ip_tunnel.ko kernel/net/ipv4/gre.ko
+Confirm whether it belongs to boot.
+
+If you don't have any configuration set for your bootup kernel
+$ wc -l /lib/modules/<working kernel>/modules.dep
+
+0 /lib/modules/<working kernel>/modules.dep
+You'll get something like this back.
