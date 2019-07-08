@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 
     memset((char *)&localSock, 0, sizeof(localSock));
     localSock.sin_family = AF_INET;
-    localSock.sin_port = htons(4321);
+    localSock.sin_port = htons(4321); /*端口需要与服务器端一致 */
     localSock.sin_addr.s_addr = htonl(INADDR_ANY);
     if (bind(sd, (struct sockaddr *)&localSock, sizeof(localSock)))
     {
