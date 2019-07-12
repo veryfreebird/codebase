@@ -133,6 +133,17 @@ $ cat ./id_rsa_old | grep -v -- '--' | base64 -d | hexdump -C
 000004a0  b3 67 25 7a 3e 60 53                              |.g%z>`S|
 000004a7
 
+只有N、e、d会被直接用于加密解密，而后面的prime1、prime2、exponent1、exponent2、coefficient只是用来校验。
+N =  p*q
+e*d mod ((p-1)*(q-1)) = 1..
+e = 65537
+
+(N, e) => public key
+(N, d) => private key
+
+Encrypt:  c = n^e mod N
+Decrypt:  n = c^d mod N
+
 $ openssl rsa -text -noout <./id_rsa_old
 RSA Private-Key: (2048 bit, 2 primes)
 modulus:  => N = p*q
