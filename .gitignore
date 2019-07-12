@@ -13,3 +13,5 @@ sctp-tools/src/withsctp/.libs/libwithsctp.so
 server
 client
 *.ipch
+rsa_keys/code/*.o
+rsa_keys/code/rsatest

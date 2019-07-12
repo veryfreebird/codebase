@@ -12,3 +12,6 @@ clean:
 	rm -f $(obj) rsatest
 
 print-% : ; @echo $* = $($*)
+
+
+#source: http://nuclear.mutantstargoat.com/articles/make/
