@@ -1,0 +1,228 @@
+$ awk '{print $2}' ./id_rsa.pub
+AAAAB3NzaC1yc2EAAAADAQABAAABAQCsKNoCz0TQTi9p5OA6TLy9L7Vm/JxKAyLgGeAGNsxHU6xhvWCJpaIbvoLQf4jcsnshJiJKTtGsentJtsx5i03UzBtlpPam5oS7dZG0axekRnG95qG5t6wnkunO4pM39ET8qSCbz2ar6iu6vvKeX0cyPUcGCpiPWmN791Xi71GYHW74S80JwXDM89Q1NI6DqvC3mDfH8LiYcWN54dMQkc4uogfwVjAsfcO5ITwkolJRVZfx51Z7llVBTiXQ/Xr750GlYGsbZQLi1aYXZeT8Z20GEUbg7Wzto0eP0W66em3eQebwiw2XG99fPXJ28WWYfw4xc8UEUY0uASQqR6rwoJtT
+
+$ awk '{print $2}' ~/.ssh/id_rsa.pub | base64 -d | hexdump -C
+00000000  00 00 00 07 73 73 68 2d  72 73 61 00 00 00 03 01  |....ssh-rsa.....|
+00000010  00 01 00 00 01 01 00 ac  28 da 02 cf 44 d0 4e 2f  |........(...D.N/|
+00000020  69 e4 e0 3a 4c bc bd 2f  b5 66 fc 9c 4a 03 22 e0  |i..:L../.f..J.".|
+00000030  19 e0 06 36 cc 47 53 ac  61 bd 60 89 a5 a2 1b be  |...6.GS.a.`.....|
+00000040  82 d0 7f 88 dc b2 7b 21  26 22 4a 4e d1 ac 7a 7b  |......{!&"JN..z{|
+00000050  49 b6 cc 79 8b 4d d4 cc  1b 65 a4 f6 a6 e6 84 bb  |I..y.M...e......|
+00000060  75 91 b4 6b 17 a4 46 71  bd e6 a1 b9 b7 ac 27 92  |u..k..Fq......'.|
+00000070  e9 ce e2 93 37 f4 44 fc  a9 20 9b cf 66 ab ea 2b  |....7.D.. ..f..+|
+00000080  ba be f2 9e 5f 47 32 3d  47 06 0a 98 8f 5a 63 7b  |...._G2=G....Zc{|
+00000090  f7 55 e2 ef 51 98 1d 6e  f8 4b cd 09 c1 70 cc f3  |.U..Q..n.K...p..|
+000000a0  d4 35 34 8e 83 aa f0 b7  98 37 c7 f0 b8 98 71 63  |.54......7....qc|
+000000b0  79 e1 d3 10 91 ce 2e a2  07 f0 56 30 2c 7d c3 b9  |y.........V0,}..|
+000000c0  21 3c 24 a2 52 51 55 97  f1 e7 56 7b 96 55 41 4e  |!<$.RQU...V{.UAN|
+000000d0  25 d0 fd 7a fb e7 41 a5  60 6b 1b 65 02 e2 d5 a6  |%..z..A.`k.e....|
+000000e0  17 65 e4 fc 67 6d 06 11  46 e0 ed 6c ed a3 47 8f  |.e..gm..F..l..G.|
+000000f0  d1 6e ba 7a 6d de 41 e6  f0 8b 0d 97 1b df 5f 3d  |.n.zm.A......._=|
+00000100  72 76 f1 65 98 7f 0e 31  73 c5 04 51 8d 2e 01 24  |rv.e...1s..Q...$|
+00000110  2a 47 aa f0 a0 9b 53                              |*G....S|
+00000117
+
+$ N=$(awk '{print $2}' ./id_rsa.pub | base64 -d | hexdump -ve '1/1 "%.2x"')
+$ echo ${N: -257*2} 
+00ac28da02cf44d04e2f69e4e03a4cbcbd2fb566fc9c4a0322e019e00636cc4753ac61bd6089a5a21bbe82d07f88dcb27b2126224a4ed1ac7a7b49b6cc798b4dd4cc1b65a4f6a6e684bb7591b46b17a44671bde6a1b9b7ac2792e9cee29337f444fca9209bcf66abea2bbabef29e5f47323d47060a988f5a637bf755e2ef51981d6ef84bcd09c170ccf3d435348e83aaf0b79837c7f0b898716379e1d31091ce2ea207f056302c7dc3b9213c24a252515597f1e7567b9655414e25d0fd7afbe741a5606b1b6502e2d5a61765e4fc676d061146e0ed6ceda3478fd16eba7a6dde41e6f08b0d971bdf5f3d7276f165987f0e3173c504518d2e01242a47aaf0a09b53
+
+$ cat id_rsa_old
+-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEArCjaAs9E0E4vaeTgOky8vS+1ZvycSgMi4BngBjbMR1OsYb1g
+iaWiG76C0H+I3LJ7ISYiSk7RrHp7SbbMeYtN1MwbZaT2puaEu3WRtGsXpEZxveah
+ubesJ5LpzuKTN/RE/Kkgm89mq+orur7ynl9HMj1HBgqYj1pje/dV4u9RmB1u+EvN
+CcFwzPPUNTSOg6rwt5g3x/C4mHFjeeHTEJHOLqIH8FYwLH3DuSE8JKJSUVWX8edW
+e5ZVQU4l0P16++dBpWBrG2UC4tWmF2Xk/GdtBhFG4O1s7aNHj9Fuunpt3kHm8IsN
+lxvfXz1ydvFlmH8OMXPFBFGNLgEkKkeq8KCbUwIDAQABAoIBAHLd4vBC+Qf/UrVV
+56Ied0PHZEKtw13Cj+90dDvRLiVdF8QzBglxQSM/zqpsnZWbZHoupmxsAIwTQNVj
+KTTjlG+qK5F7KrMbVW56OFhnp+OMuPFaw4dVnIDfDi9ij5Wi3rCx67bp//guizTT
+mK/ApJFJv2yxfy8OwRgCZATBZvCVgi9EF/W1Br27S9JYZY75C7SZakvSihFuBDIa
+LCcKRphUhGMd+LXvtInuablPEPOFnuH5XJjHQJOxM796p5Vr/Uqu5emN5/0sXir8
+UqX4ipWEQhTPxGKiQg3yl5MKmsO8tRowJEi4wKC2N1TXwP94ElU1jiga3l6xpUU+
+8JHyGnkCgYEA39RQClyaJrqcs1pmFmNp5g9OUBKHrlg7Fy/0V+lakl4KV3d9B5h6
+Uka9QuKPmbzs7DNaYPPh6VdKWjku8LNxGEYlB0xjDG7M+7sJEoPT1mgKZ1KmlGC0
+3XSQ51yl6lLNomsM+F1AxXlEJpkMyu7mv8s18/1XRXFFiusx0wfk4a8CgYEAxOdg
+PvH/J3GTTDcc/Y3LULPowAx/Py/9IAWsdZ0Tf/gsmDIQsIO2SijMtno1Fd+qSqrT
+SrNc2oYM6H4h5vEe5WEyr8SocDJ/FSOZq5DrHyZflUX8dpcvRER/xx5OxM8MK2x+
+Cgbx4oYQ8sRF7i566XRPfTdUctQ3E4M4BeicvZ0CgYBZUheS2vtlIykvZY7BtnBn
+L4p3570fdPQ3v5pJjsTnDgIgf310j4OY28PhMhpOJpeBdsjFUe3AOWZhdNpnkaQ7
+JJrYO8J3DqxcdHodWmAp+qDUNKZnJeRnT4IX4eAQD3UiMIgfgM89PrRUltUFEqsg
+tI5WTK4L9zTiSBM8/LR43wKBgCcVypwUC1L4D4YUdpO6Hr6hR7U/hc60JunBVo9u
+I53GVIvNfFSdgITN/nzGW11BLZtut0xfuDHEZDGOQAqImFpt5dLQFaNX0rQOggV1
+WcawJk8KOmgL8Jz7f+W1lWspsj+4ZHh3EnKlrB2UalEyNsG6jcDMR94XU+tyo59A
+okRdAoGBAMIPcVHwTUrPH/He/f83VIp0MLHXfmZg9V/QprIW2F+ybSGxhGQ59Og2
+2IWOZMdL2Syw7inRsHeN99hRanWRV/PF1xaM0497TAPuwSAaRa/ytSxcH52x78Wh
+S+dif2/chQRgFiD7/zGte+cqaxtzSeiqi1qpDSnEm/ezZyV6PmBT
+-----END RSA PRIVATE KEY-----
+
+$ cat ./id_rsa_old | grep -v -- '--' | base64 -d | hexdump -C
+00000000  30 82 04 a3 02 01 00 02  82 01 01 00 ac 28 da 02  |0............(..|
+00000010  cf 44 d0 4e 2f 69 e4 e0  3a 4c bc bd 2f b5 66 fc  |.D.N/i..:L../.f.|
+00000020  9c 4a 03 22 e0 19 e0 06  36 cc 47 53 ac 61 bd 60  |.J."....6.GS.a.`|
+00000030  89 a5 a2 1b be 82 d0 7f  88 dc b2 7b 21 26 22 4a  |...........{!&"J|
+00000040  4e d1 ac 7a 7b 49 b6 cc  79 8b 4d d4 cc 1b 65 a4  |N..z{I..y.M...e.|
+00000050  f6 a6 e6 84 bb 75 91 b4  6b 17 a4 46 71 bd e6 a1  |.....u..k..Fq...|
+00000060  b9 b7 ac 27 92 e9 ce e2  93 37 f4 44 fc a9 20 9b  |...'.....7.D.. .|
+00000070  cf 66 ab ea 2b ba be f2  9e 5f 47 32 3d 47 06 0a  |.f..+...._G2=G..|
+00000080  98 8f 5a 63 7b f7 55 e2  ef 51 98 1d 6e f8 4b cd  |..Zc{.U..Q..n.K.|
+00000090  09 c1 70 cc f3 d4 35 34  8e 83 aa f0 b7 98 37 c7  |..p...54......7.|
+000000a0  f0 b8 98 71 63 79 e1 d3  10 91 ce 2e a2 07 f0 56  |...qcy.........V|
+000000b0  30 2c 7d c3 b9 21 3c 24  a2 52 51 55 97 f1 e7 56  |0,}..!<$.RQU...V|
+000000c0  7b 96 55 41 4e 25 d0 fd  7a fb e7 41 a5 60 6b 1b  |{.UAN%..z..A.`k.|
+000000d0  65 02 e2 d5 a6 17 65 e4  fc 67 6d 06 11 46 e0 ed  |e.....e..gm..F..|
+000000e0  6c ed a3 47 8f d1 6e ba  7a 6d de 41 e6 f0 8b 0d  |l..G..n.zm.A....|
+000000f0  97 1b df 5f 3d 72 76 f1  65 98 7f 0e 31 73 c5 04  |..._=rv.e...1s..|
+00000100  51 8d 2e 01 24 2a 47 aa  f0 a0 9b 53 02 03 01 00  |Q...$*G....S....|
+00000110  01 02 82 01 00 72 dd e2  f0 42 f9 07 ff 52 b5 55  |.....r...B...R.U|
+00000120  e7 a2 1e 77 43 c7 64 42  ad c3 5d c2 8f ef 74 74  |...wC.dB..]...tt|
+00000130  3b d1 2e 25 5d 17 c4 33  06 09 71 41 23 3f ce aa  |;..%]..3..qA#?..|
+00000140  6c 9d 95 9b 64 7a 2e a6  6c 6c 00 8c 13 40 d5 63  |l...dz..ll...@.c|
+00000150  29 34 e3 94 6f aa 2b 91  7b 2a b3 1b 55 6e 7a 38  |)4..o.+.{*..Unz8|
+00000160  58 67 a7 e3 8c b8 f1 5a  c3 87 55 9c 80 df 0e 2f  |Xg.....Z..U..../|
+00000170  62 8f 95 a2 de b0 b1 eb  b6 e9 ff f8 2e 8b 34 d3  |b.............4.|
+00000180  98 af c0 a4 91 49 bf 6c  b1 7f 2f 0e c1 18 02 64  |.....I.l../....d|
+00000190  04 c1 66 f0 95 82 2f 44  17 f5 b5 06 bd bb 4b d2  |..f.../D......K.|
+000001a0  58 65 8e f9 0b b4 99 6a  4b d2 8a 11 6e 04 32 1a  |Xe.....jK...n.2.|
+000001b0  2c 27 0a 46 98 54 84 63  1d f8 b5 ef b4 89 ee 69  |,'.F.T.c.......i|
+000001c0  b9 4f 10 f3 85 9e e1 f9  5c 98 c7 40 93 b1 33 bf  |.O......\..@..3.|
+000001d0  7a a7 95 6b fd 4a ae e5  e9 8d e7 fd 2c 5e 2a fc  |z..k.J......,^*.|
+000001e0  52 a5 f8 8a 95 84 42 14  cf c4 62 a2 42 0d f2 97  |R.....B...b.B...|
+000001f0  93 0a 9a c3 bc b5 1a 30  24 48 b8 c0 a0 b6 37 54  |.......0$H....7T|
+00000200  d7 c0 ff 78 12 55 35 8e  28 1a de 5e b1 a5 45 3e  |...x.U5.(..^..E>|
+00000210  f0 91 f2 1a 79 02 81 81  00 df d4 50 0a 5c 9a 26  |....y......P.\.&|
+00000220  ba 9c b3 5a 66 16 63 69  e6 0f 4e 50 12 87 ae 58  |...Zf.ci..NP...X|
+00000230  3b 17 2f f4 57 e9 5a 92  5e 0a 57 77 7d 07 98 7a  |;./.W.Z.^.Ww}..z|
+00000240  52 46 bd 42 e2 8f 99 bc  ec ec 33 5a 60 f3 e1 e9  |RF.B......3Z`...|
+00000250  57 4a 5a 39 2e f0 b3 71  18 46 25 07 4c 63 0c 6e  |WJZ9...q.F%.Lc.n|
+00000260  cc fb bb 09 12 83 d3 d6  68 0a 67 52 a6 94 60 b4  |........h.gR..`.|
+00000270  dd 74 90 e7 5c a5 ea 52  cd a2 6b 0c f8 5d 40 c5  |.t..\..R..k..]@.|
+00000280  79 44 26 99 0c ca ee e6  bf cb 35 f3 fd 57 45 71  |yD&.......5..WEq|
+00000290  45 8a eb 31 d3 07 e4 e1  af 02 81 81 00 c4 e7 60  |E..1...........`|
+000002a0  3e f1 ff 27 71 93 4c 37  1c fd 8d cb 50 b3 e8 c0  |>..'q.L7....P...|
+000002b0  0c 7f 3f 2f fd 20 05 ac  75 9d 13 7f f8 2c 98 32  |..?/. ..u....,.2|
+000002c0  10 b0 83 b6 4a 28 cc b6  7a 35 15 df aa 4a aa d3  |....J(..z5...J..|
+000002d0  4a b3 5c da 86 0c e8 7e  21 e6 f1 1e e5 61 32 af  |J.\....~!....a2.|
+000002e0  c4 a8 70 32 7f 15 23 99  ab 90 eb 1f 26 5f 95 45  |..p2..#.....&_.E|
+000002f0  fc 76 97 2f 44 44 7f c7  1e 4e c4 cf 0c 2b 6c 7e  |.v./DD...N...+l~|
+00000300  0a 06 f1 e2 86 10 f2 c4  45 ee 2e 7a e9 74 4f 7d  |........E..z.tO}|
+00000310  37 54 72 d4 37 13 83 38  05 e8 9c bd 9d 02 81 80  |7Tr.7..8........|
+00000320  59 52 17 92 da fb 65 23  29 2f 65 8e c1 b6 70 67  |YR....e#)/e...pg|
+00000330  2f 8a 77 e7 bd 1f 74 f4  37 bf 9a 49 8e c4 e7 0e  |/.w...t.7..I....|
+00000340  02 20 7f 7d 74 8f 83 98  db c3 e1 32 1a 4e 26 97  |. .}t......2.N&.|
+00000350  81 76 c8 c5 51 ed c0 39  66 61 74 da 67 91 a4 3b  |.v..Q..9fat.g..;|
+00000360  24 9a d8 3b c2 77 0e ac  5c 74 7a 1d 5a 60 29 fa  |$..;.w..\tz.Z`).|
+00000370  a0 d4 34 a6 67 25 e4 67  4f 82 17 e1 e0 10 0f 75  |..4.g%.gO......u|
+00000380  22 30 88 1f 80 cf 3d 3e  b4 54 96 d5 05 12 ab 20  |"0....=>.T..... |
+00000390  b4 8e 56 4c ae 0b f7 34  e2 48 13 3c fc b4 78 df  |..VL...4.H.<..x.|
+000003a0  02 81 80 27 15 ca 9c 14  0b 52 f8 0f 86 14 76 93  |...'.....R....v.|
+000003b0  ba 1e be a1 47 b5 3f 85  ce b4 26 e9 c1 56 8f 6e  |....G.?...&..V.n|
+000003c0  23 9d c6 54 8b cd 7c 54  9d 80 84 cd fe 7c c6 5b  |#..T..|T.....|.[|
+000003d0  5d 41 2d 9b 6e b7 4c 5f  b8 31 c4 64 31 8e 40 0a  |]A-.n.L_.1.d1.@.|
+000003e0  88 98 5a 6d e5 d2 d0 15  a3 57 d2 b4 0e 82 05 75  |..Zm.....W.....u|
+000003f0  59 c6 b0 26 4f 0a 3a 68  0b f0 9c fb 7f e5 b5 95  |Y..&O.:h........|
+00000400  6b 29 b2 3f b8 64 78 77  12 72 a5 ac 1d 94 6a 51  |k).?.dxw.r....jQ|
+00000410  32 36 c1 ba 8d c0 cc 47  de 17 53 eb 72 a3 9f 40  |26.....G..S.r..@|
+00000420  a2 44 5d 02 81 81 00 c2  0f 71 51 f0 4d 4a cf 1f  |.D]......qQ.MJ..|
+00000430  f1 de fd ff 37 54 8a 74  30 b1 d7 7e 66 60 f5 5f  |....7T.t0..~f`._|
+00000440  d0 a6 b2 16 d8 5f b2 6d  21 b1 84 64 39 f4 e8 36  |....._.m!..d9..6|
+00000450  d8 85 8e 64 c7 4b d9 2c  b0 ee 29 d1 b0 77 8d f7  |...d.K.,..)..w..|
+00000460  d8 51 6a 75 91 57 f3 c5  d7 16 8c d3 8f 7b 4c 03  |.Qju.W.......{L.|
+00000470  ee c1 20 1a 45 af f2 b5  2c 5c 1f 9d b1 ef c5 a1  |.. .E...,\......|
+00000480  4b e7 62 7f 6f dc 85 04  60 16 20 fb ff 31 ad 7b  |K.b.o...`. ..1.{|
+00000490  e7 2a 6b 1b 73 49 e8 aa  8b 5a a9 0d 29 c4 9b f7  |.*k.sI...Z..)...|
+000004a0  b3 67 25 7a 3e 60 53                              |.g%z>`S|
+000004a7
+
+$ openssl rsa -text -noout <./id_rsa_old
+RSA Private-Key: (2048 bit, 2 primes)
+modulus:  => N = p*q
+    00:ac:28:da:02:cf:44:d0:4e:2f:69:e4:e0:3a:4c:
+    bc:bd:2f:b5:66:fc:9c:4a:03:22:e0:19:e0:06:36:
+    cc:47:53:ac:61:bd:60:89:a5:a2:1b:be:82:d0:7f:
+    88:dc:b2:7b:21:26:22:4a:4e:d1:ac:7a:7b:49:b6:
+    cc:79:8b:4d:d4:cc:1b:65:a4:f6:a6:e6:84:bb:75:
+    91:b4:6b:17:a4:46:71:bd:e6:a1:b9:b7:ac:27:92:
+    e9:ce:e2:93:37:f4:44:fc:a9:20:9b:cf:66:ab:ea:
+    2b:ba:be:f2:9e:5f:47:32:3d:47:06:0a:98:8f:5a:
+    63:7b:f7:55:e2:ef:51:98:1d:6e:f8:4b:cd:09:c1:
+    70:cc:f3:d4:35:34:8e:83:aa:f0:b7:98:37:c7:f0:
+    b8:98:71:63:79:e1:d3:10:91:ce:2e:a2:07:f0:56:
+    30:2c:7d:c3:b9:21:3c:24:a2:52:51:55:97:f1:e7:
+    56:7b:96:55:41:4e:25:d0:fd:7a:fb:e7:41:a5:60:
+    6b:1b:65:02:e2:d5:a6:17:65:e4:fc:67:6d:06:11:
+    46:e0:ed:6c:ed:a3:47:8f:d1:6e:ba:7a:6d:de:41:
+    e6:f0:8b:0d:97:1b:df:5f:3d:72:76:f1:65:98:7f:
+    0e:31:73:c5:04:51:8d:2e:01:24:2a:47:aa:f0:a0:
+    9b:53
+publicExponent: 65537 (0x10001) => e / public key
+privateExponent:    => d / private key
+    72:dd:e2:f0:42:f9:07:ff:52:b5:55:e7:a2:1e:77:
+    43:c7:64:42:ad:c3:5d:c2:8f:ef:74:74:3b:d1:2e:
+    25:5d:17:c4:33:06:09:71:41:23:3f:ce:aa:6c:9d:
+    95:9b:64:7a:2e:a6:6c:6c:00:8c:13:40:d5:63:29:
+    34:e3:94:6f:aa:2b:91:7b:2a:b3:1b:55:6e:7a:38:
+    58:67:a7:e3:8c:b8:f1:5a:c3:87:55:9c:80:df:0e:
+    2f:62:8f:95:a2:de:b0:b1:eb:b6:e9:ff:f8:2e:8b:
+    34:d3:98:af:c0:a4:91:49:bf:6c:b1:7f:2f:0e:c1:
+    18:02:64:04:c1:66:f0:95:82:2f:44:17:f5:b5:06:
+    bd:bb:4b:d2:58:65:8e:f9:0b:b4:99:6a:4b:d2:8a:
+    11:6e:04:32:1a:2c:27:0a:46:98:54:84:63:1d:f8:
+    b5:ef:b4:89:ee:69:b9:4f:10:f3:85:9e:e1:f9:5c:
+    98:c7:40:93:b1:33:bf:7a:a7:95:6b:fd:4a:ae:e5:
+    e9:8d:e7:fd:2c:5e:2a:fc:52:a5:f8:8a:95:84:42:
+    14:cf:c4:62:a2:42:0d:f2:97:93:0a:9a:c3:bc:b5:
+    1a:30:24:48:b8:c0:a0:b6:37:54:d7:c0:ff:78:12:
+    55:35:8e:28:1a:de:5e:b1:a5:45:3e:f0:91:f2:1a:
+    79
+prime1: => p
+    00:df:d4:50:0a:5c:9a:26:ba:9c:b3:5a:66:16:63:
+    69:e6:0f:4e:50:12:87:ae:58:3b:17:2f:f4:57:e9:
+    5a:92:5e:0a:57:77:7d:07:98:7a:52:46:bd:42:e2:
+    8f:99:bc:ec:ec:33:5a:60:f3:e1:e9:57:4a:5a:39:
+    2e:f0:b3:71:18:46:25:07:4c:63:0c:6e:cc:fb:bb:
+    09:12:83:d3:d6:68:0a:67:52:a6:94:60:b4:dd:74:
+    90:e7:5c:a5:ea:52:cd:a2:6b:0c:f8:5d:40:c5:79:
+    44:26:99:0c:ca:ee:e6:bf:cb:35:f3:fd:57:45:71:
+    45:8a:eb:31:d3:07:e4:e1:af
+prime2: => q
+    00:c4:e7:60:3e:f1:ff:27:71:93:4c:37:1c:fd:8d:
+    cb:50:b3:e8:c0:0c:7f:3f:2f:fd:20:05:ac:75:9d:
+    13:7f:f8:2c:98:32:10:b0:83:b6:4a:28:cc:b6:7a:
+    35:15:df:aa:4a:aa:d3:4a:b3:5c:da:86:0c:e8:7e:
+    21:e6:f1:1e:e5:61:32:af:c4:a8:70:32:7f:15:23:
+    99:ab:90:eb:1f:26:5f:95:45:fc:76:97:2f:44:44:
+    7f:c7:1e:4e:c4:cf:0c:2b:6c:7e:0a:06:f1:e2:86:
+    10:f2:c4:45:ee:2e:7a:e9:74:4f:7d:37:54:72:d4:
+    37:13:83:38:05:e8:9c:bd:9d
+exponent1:
+    59:52:17:92:da:fb:65:23:29:2f:65:8e:c1:b6:70:
+    67:2f:8a:77:e7:bd:1f:74:f4:37:bf:9a:49:8e:c4:
+    e7:0e:02:20:7f:7d:74:8f:83:98:db:c3:e1:32:1a:
+    4e:26:97:81:76:c8:c5:51:ed:c0:39:66:61:74:da:
+    67:91:a4:3b:24:9a:d8:3b:c2:77:0e:ac:5c:74:7a:
+    1d:5a:60:29:fa:a0:d4:34:a6:67:25:e4:67:4f:82:
+    17:e1:e0:10:0f:75:22:30:88:1f:80:cf:3d:3e:b4:
+    54:96:d5:05:12:ab:20:b4:8e:56:4c:ae:0b:f7:34:
+    e2:48:13:3c:fc:b4:78:df
+exponent2:
+    27:15:ca:9c:14:0b:52:f8:0f:86:14:76:93:ba:1e:
+    be:a1:47:b5:3f:85:ce:b4:26:e9:c1:56:8f:6e:23:
+    9d:c6:54:8b:cd:7c:54:9d:80:84:cd:fe:7c:c6:5b:
+    5d:41:2d:9b:6e:b7:4c:5f:b8:31:c4:64:31:8e:40:
+    0a:88:98:5a:6d:e5:d2:d0:15:a3:57:d2:b4:0e:82:
+    05:75:59:c6:b0:26:4f:0a:3a:68:0b:f0:9c:fb:7f:
+    e5:b5:95:6b:29:b2:3f:b8:64:78:77:12:72:a5:ac:
+    1d:94:6a:51:32:36:c1:ba:8d:c0:cc:47:de:17:53:
+    eb:72:a3:9f:40:a2:44:5d
+coefficient:
+    00:c2:0f:71:51:f0:4d:4a:cf:1f:f1:de:fd:ff:37:
+    54:8a:74:30:b1:d7:7e:66:60:f5:5f:d0:a6:b2:16:
+    d8:5f:b2:6d:21:b1:84:64:39:f4:e8:36:d8:85:8e:
+    64:c7:4b:d9:2c:b0:ee:29:d1:b0:77:8d:f7:d8:51:
+    6a:75:91:57:f3:c5:d7:16:8c:d3:8f:7b:4c:03:ee:
+    c1:20:1a:45:af:f2:b5:2c:5c:1f:9d:b1:ef:c5:a1:
+    4b:e7:62:7f:6f:dc:85:04:60:16:20:fb:ff:31:ad:
+    7b:e7:2a:6b:1b:73:49:e8:aa:8b:5a:a9:0d:29:c4:
+    9b:f7:b3:67:25:7a:3e:60:53
+[jamema@myfedora local_src]$
+
