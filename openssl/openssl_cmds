@@ -1,0 +1,23 @@
+vim plantext.txt
+openssl md5 plantext.txt
+
+
+openssl base64 -in plantext.txt > base64.txt
+cat base64.txt
+openssl base64 -d -in base64.txt
+
+openssl aes-128-cbc -k 123456 -in plantext.txt -base64
+openssl aes-128-cbc -k 123456 -in plantext.txt -base64 > aes_encry_base64.txt
+openssl aes-128-cbc -d -k 123456 -in aes_encry_base64.txt  -base64
+
+md5sum plantext.txt > plantext_md5.txt
+cat plantext_md5.txt
+
+
+openssl aes-128-cbc -d -k 123456 -in aes_encry_base64.txt  -base64 > decrypt_plain.txt
+[jamema@myfedora openssl]$ cat plantext_md5.txt
+59edfcd6d4c6a4fdb77e5128b930d761  plantext.txt
+
+md5sum decrypt_plain.txt > decrypt_plain_md5.txt
+[jamema@myfedora openssl]$ cat decrypt_plain_md5.txt
+59edfcd6d4c6a4fdb77e5128b930d761  decrypt_plain.txt
