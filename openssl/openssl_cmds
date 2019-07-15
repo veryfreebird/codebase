@@ -18,3 +18,197 @@ openssl aes-128-cbc -d -k 123456 -in aes_encry_base64.txt  -base64 > decrypt_pla
 md5sum decrypt_plain.txt > decrypt_plain_md5.txt
 [jamema@myfedora openssl]$ cat decrypt_plain_md5.txt
 59edfcd6d4c6a4fdb77e5128b930d761  decrypt_plain.txt
+
+
+这里以1.txt为需要被加密的文件。
+
+一、      用oppnssl md5  加密字符串和文件的方法。
+
+1. oppnssl md5  加密字符串的方法
+
+a.手动输入命令及过程如下：
+
+#openssl        //在终端中输入openssl后回车。
+
+OpenSSL> md5        //输入md5后回车
+
+123456      //接着输入123456，不要输入回车。然后按3次ctrl+d。
+
+123456e10adc3949ba59abbe56e057f20f883e    //123456后面的就是密文了
+
+解释：为何在输入123456后不回车呢？
+
+是因为openssl默认会把回车符当做要加密的字符串中的一个字符，所以得到的结果不同。如果你输入123456后回车，在按2次ctrl+d。得到的结果是：
+
+OpenSSL> md5
+
+123456
+
+f447b20a7fcbf53a5d5be013ea0b15af    //因为openssl不忽略回车符导致的
+
+b.或者直接用管道命令
+
+# echo -n  123456  | openssl md5   //必须要有-n参数，否则就不是这个结果了。
+
+e10adc3949ba59abbe56e057f20f883e
+
+解释：为何要加-n这个参数？
+
+-n就表示不输入回车符，这样才能得到正确的结果。如果你不加-n，那么结果和前面说的一样为：
+
+f447b20a7fcbf53a5d5be013ea0b15af    //因为openssl不忽略回车符导致的
+
+2.用openssl加密文件。
+
+#openssl   md 5   -in   1.txt
+
+ 
+
+
+
+
+Source: https://blog.csdn.net/taiyang1987912/article/details/42041329
+##################################################3
+
+Openssl其他相关加密的命令参数：引自：实用命令：利用openssl进行BASE64编码解码、md5/sha1摘要、AES/DES3加密解密 收藏
+一. 利用openssl命令进行BASE64编码解码（base64 encode/decode）
+1. BASE64编码命令
+对字符串‘abc’进行base64编码：
+# echo abc | openssl base64
+YWJjCg==  （编码结果）
+
+如果对一个文件进行base64编码（文件名t.txt）：
+# openssl base64 -in t.txt
+
+2. BASE64解码命令
+求base64后的字符串‘YWJjCg==’的原文：
+# echo YWJjCg== | openssl base64 -d
+abc   （解码结果）
+
+如果对一个文件进行base64解码（文件名t.base64）：
+# openssl base64 -d -in t.base64
+
+二. 利用openssl命令进行md5/sha1摘要（digest）
+1. 对字符串‘abc’进行md5摘要计算：echo abc | openssl md5
+若对某文件进行md5摘要计算：openssl md5 -in t.txt
+
+2. 对字符串‘abc’进行sha1摘要计算：echo abc | openssl sha1
+若对某文件进行sha1摘要计算：openssl sha1 -in t.txt
+
+三. 利用openssl命令进行AES/DES3加密解密（AES/DES3 encrypt/decrypt）
+
+对字符串‘abc’进行aes加密，使用密钥123，输出结果以base64编码格式给出：
+# echo abc | openssl aes-128-cbc -k 123 -base64
+U2FsdGVkX18ynIbzARm15nG/JA2dhN4mtiotwD7jt4g=   （结果）
+
+对以上结果进行解密处理：
+# echo U2FsdGVkX18ynIbzARm15nG/JA2dhN4mtiotwD7jt4g= | openssl aes-128-cbc -d -k 123 -base64
+abc  （结果）
+
+若要从文件里取原文（密文）进行加密（解密），只要指定 -in 参数指向文件名就可以了。
+
+进行des3加解密，只要把命令中的aes-128-cbc换成des3就可以了。
+
+注：只要利用openssl help就可以看到更多的安全算法了。
+
+###############################################
+
+二、      利用md5sum命令
+
+A.在linux或Unix上，md5sum是用来计算和校验文件报文摘要的工具程序。一般来说，安装了Linux后，就会有md5sum这个工具，直接在命令行终端直接运行。可以用下面的命令来获取md5sum命令帮助 man md5sum
+
+#md5sum –help
+
+有个提示：“With no FILE, or when FILE is -, read standard input.”翻译过来就是“如果没有输入文件选项或者文件选项为 -   ，则从标砖读取输入内容”，即可以直接从键盘读取字符串来加密。
+
+利用md5sum加密字符串的方法
+
+# md5sum         //然后回车
+
+123456           //输入123456.然后按两次ctrl+d.
+
+显示：
+
+123456e10adc3949ba59abbe56e057f20f883e     红色代表加密后的值
+
+还可以用管道命令：
+
+#echo   -n '123123' | md5sum
+
+ 
+
+或者写成md5加密脚本，名字叫md5.sh，
+
+将以下内容复制进脚本里：
+
+#!/bin/bash
+
+echo   -n   $1 | md5sum | awk '{print $1}'
+
+ 
+
+保存后，给脚本执行权限。
+
+#sh  md5.sh   123456
+
+显示：e10adc3949ba59abbe56e057f20f883e
+
+B.其实也可以将文本放入文本文件，然后用md5sum 加密改文本，也可以得到字符串加密的值。过程如下：
+
+#touch a.txt
+
+#echo  -n   123456 > a.txt    //将123456写进文本文件，不能丢了 –n参数，避免回车符干扰
+
+#md5sum    a.txt
+
+显示：e10adc3949ba59abbe56e057f20f883e     a.txt
+
+ 
+
+ctrl+d有两个含义：
+
+一是向程序发送文件输入结束符EOF。
+
+二是向程序发送exit退出指令。程序收到信号后具体动作是结束输入、然后等待，还是直接退出，那就要看该程序捕获信号后是如何操作的了。
+md5sum属于第一个含义。两次strl+d了，第一次读取EOF指令，再次捕获就会当成exit指令。而shell一类的程序，会直接把ctrl+d解析为退出指令。
+
+三、获取字符串的MD5值：
+
+字符串“hello”的MD5：
+
+$ echo -n 'hello'|md5sum|cut -d ' ' -f1
+
+得到的MD5值：
+5d41402abc4b2a76b9719d911017c592
+
+命令解释：
+md5sum: 显示或检查 MD5(128-bit) 校验和,若没有文件选项，或者文件处为"-"，则从标准输入读取。
+echo -n : 不打印换行符。
+cut:  cut用来从标准输入或文本文件中剪切列或域。剪切文本可以将之粘贴到一个文本文件。 
+        -d 指定与空格和tab键不同的域分隔符。-f1 表示第一个域。参考这里。
+
+获取文件的MD5值：
+
+$ md5sum linuxmint-12-gnome-dvd-32bit.iso|cut -d ' ' -f1
+得到的MD5值：
+ee3d6e2ca498bc7685b7f17cdb5f2eea
+
+使用MD5校验iso文件：
+
+$ md5sum linuxmint-12-gnome-dvd-32bit.iso >linuxmint-12-gnome-dvd-32bit.md5
+
+注意linuxmint-12-gnome-dvd-32bit.md5的内容是：
+ef3d6e2ca498bc7685b7f17cdb5f2eea linuxmint-12-gnome-dvd-32bit.iso
+
+把linuxmint-12-gnome-dvd-32bit和其验证文件
+    linuxmint-12-gnome-dvd-32bit.md5放到同一目录下用下面的命令：
+$ md5sum -c linuxmint-12-gnome-dvd-32bit.md5
+
+如果校验正确则输出: 
+linuxmint-12-gnome-dvd-32bit.iso: 确定
+
+如果校验错误则输出：
+linuxmint-12-gnome-dvd-32bit.iso: 失败
+md5sum: 警告：1/1 生成的校验和不匹配
+命令解释：
+md5 -c: 从文件中读取MD5 的校验值并予以检查
