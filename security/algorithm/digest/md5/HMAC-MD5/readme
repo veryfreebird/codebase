@@ -1,0 +1,23 @@
+HMAC - 
+Hash-based Message Authentication Code 
+keyed-hash message authentication code
+
+
+HMACMD5 是从 MD5 哈希函数构造的一种键控哈希算法，被用作基于哈希的消息验证代码 (HMAC)。此 HMAC 进程将密钥与消息数据
+混合，使用哈希函数对混合结果进行哈希计算，将所得哈希值与该密钥混合，然后再次应用哈希函数。输出的哈希值长度为 128 位。
+
+使用 MD5 哈希函数计算基于哈希值的消息验证代码 (HMAC)。
+在发送方和接收方共享机密密钥的前提下，HMAC 可用于确定通过不安全信道发送的消息是否已被篡改。发送方计算原始数据的哈希值，
+并将原始数据和哈希值放在一个消息中同时传送。接收方重新计算所接收消息的哈希值，并检查计算所得的 HMAC 是否与传送的 HMAC 
+匹配。因为更改消息和重新生成正确的哈希值需要密钥，所以对数据或哈希值的任何更改都会导致不匹配。因此，如果原始的哈希值与
+计算得出的哈希值相匹配，则消息通过身份验证。
+
+
+>>> import hmac
+>>> message = b'Hello, world!'
+>>> key = b'secret'
+>>> h = hmac.new(key, message, digestmod='MD5')
+>>> # 如果消息很长，可以多次调用h.update(msg)
+>>> h.hexdigest()
+'fa4ee7d173f2d97ee79022d1a7355bcf'
+
