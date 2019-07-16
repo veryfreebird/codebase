@@ -15,3 +15,24 @@ $6$OY4XvkftAKQZSVpy$UQTQEEiIOqUFmMhsXdhXUazyEKZJhrAfpmqGuHMypfdZ3.docrp/a6VkV5uB
 $ openssl passwd -6 -salt 0k6t.mYevkqcE4TT jamema
 $6$0k6t.mYevkqcE4TT$ulOnjqAhZmVu4AYZF4zpr/8ajbBFnGz1bcTuZJPS1CMnDcwk4qePwx4JVzw9k2SlOEgnqZd9Glw8dfgs5eQWS.
 
+
+source: https://www.shellhacks.com/linux-generate-password-hash/
+Hash Type	ID	Hash Length
+MD5	$1	22 characters
+SHA-256	$5	43 characters
+SHA-512	$6	86 characters
+
+
+python -c "import string,crypt
+randomsalt = '0k6t.mYevkqcE4TT'
+print crypt.crypt('jamema', '\$6\$%s\$' % randomsalt)"
+
+
+python -c "import string,crypt
+randomsalt = '0k6t.mYevkqcE4TT'
+print crypt.crypt('jamema', '\$5\$%s\$' % randomsalt)"
+
+python -c "import string,crypt
+randomsalt = '0k6t.mYevkqcE4TT'
+print crypt.crypt('jamema', '\$1\$%s\$' % randomsalt)"
+
