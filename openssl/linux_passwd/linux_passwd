@@ -1,0 +1,17 @@
+/etc/shadow
+root:$6$OY4XvkftAKQZSVpy$UQTQEEiIOqUFmMhsXdhXUazyEKZJhrAfpmqGuHMypfdZ3.docrp/a6VkV5uBF5uwLz5nnYzir5XTyOKjN3tDn/:18053:0:99999
+jamema:$6$0k6t.mYevkqcE4TT$ulOnjqAhZmVu4AYZF4zpr/8ajbBFnGz1bcTuZJPS1CMnDcwk4qePwx4JVzw9k2SlOEgnqZd9Glw8dfgs5eQWS.:18053:0:999
+
+$id$salt$encrypted
+
+id:
+1 - MD5
+5 - SHA256
+6 - SHA512
+
+$ openssl passwd -6 -salt OY4XvkftAKQZSVpy rootme
+$6$OY4XvkftAKQZSVpy$UQTQEEiIOqUFmMhsXdhXUazyEKZJhrAfpmqGuHMypfdZ3.docrp/a6VkV5uBF5uwLz5nnYzir5XTyOKjN3tDn/
+
+$ openssl passwd -6 -salt 0k6t.mYevkqcE4TT jamema
+$6$0k6t.mYevkqcE4TT$ulOnjqAhZmVu4AYZF4zpr/8ajbBFnGz1bcTuZJPS1CMnDcwk4qePwx4JVzw9k2SlOEgnqZd9Glw8dfgs5eQWS.
+
