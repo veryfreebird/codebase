@@ -39,3 +39,9 @@ openssl rsautl -decrypt -in input.file -inkey key.pem -out output.file
     -in 指定需要解密的文件
     -inkey 指定私钥文件
     -out 指定解密后的文件
+
+6. 私钥签名文件
+openssl dgst -sign key.pem -sha1 -out plain.sign plain.txt
+
+7. 公钥验证签名
+openssl dgst -verify pubkey.pem -sha1 -signature plain.sign plain.txt
