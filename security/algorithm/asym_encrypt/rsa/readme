@@ -1,3 +1,5 @@
+putty keygen tool can be used to convert key between openssh and rsa(old) version
+
 $ awk '{print $2}' ./id_rsa.pub
 AAAAB3NzaC1yc2EAAAADAQABAAABAQCsKNoCz0TQTi9p5OA6TLy9L7Vm/JxKAyLgGeAGNsxHU6xhvWCJpaIbvoLQf4jcsnshJiJKTtGsentJtsx5i03UzBtlpPam5oS7dZG0axekRnG95qG5t6wnkunO4pM39ET8qSCbz2ar6iu6vvKeX0cyPUcGCpiPWmN791Xi71GYHW74S80JwXDM89Q1NI6DqvC3mDfH8LiYcWN54dMQkc4uogfwVjAsfcO5ITwkolJRVZfx51Z7llVBTiXQ/Xr750GlYGsbZQLi1aYXZeT8Z20GEUbg7Wzto0eP0W66em3eQebwiw2XG99fPXJ28WWYfw4xc8UEUY0uASQqR6rwoJtT
 
