@@ -23,6 +23,8 @@ set hidden3d
 f(x,y) = x**3 + 3*x + 2 - y**2
 splot f(x,y),0                
 
+https://cdn.rawgit.com/andreacorbellini/ecc/920b29a/interactive/reals-add.html
+
 ECC椭圆曲线加密算法：介绍
 Source: 
 https://zhuanlan.zhihu.com/p/36326221
@@ -31,16 +33,11 @@ https://zhuanlan.zhihu.com/p/44743146
 用法
 https://zhuanlan.zhihu.com/p/66794410
 
-https://cdn.rawgit.com/andreacorbellini/ecc/920b29a/interactive/reals-add.html
 
-主要参数
-椭圆曲线算法将会运用在有限域上的椭圆曲线所形成的循环子群上，因此，我们的算法需要以下几个参数：
-    1. 素数 p，用于确定有限域的范围
-    2. 椭圆曲线方程中的 a，b 参数
-    3. 用于生成子群的的基点 G
-    4. 子群的阶 n
-    5. 子群的辅助因子 h
-所以，我们算法的主要参数可以定义为一个六元组 (p, a, b, G, n, h)
+讨论两种基于椭圆曲线密码学的两种公钥算法：用于加密的 ECDH（Elliptic curve Diffie-Hellman）和用于数字签名
+的 ECDSA（Elliptic curve Diffie-Hellman）
+https://zhuanlan.zhihu.com/p/66794410
+
 
 
 
