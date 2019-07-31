@@ -1,0 +1,32 @@
+gnuplot:
+
+#仅仅获取(0,0)相交二维图形
+reset
+set view 0,0
+set isosample 500,500
+set contour base
+set cntrparam levels discrete 0
+unset surface
+set grid
+unset key
+unset ztics
+set xlabel 'x'
+set ylabel 'y'
+f(x,y) = x**3 + 3*x + 2 - y**2
+splot [-10:10][-10:10] f(x,y)
+
+#三维图形和(0,0)平面相交图形
+reset   
+set isosamples 40   
+unset key
+set hidden3d
+f(x,y) = x**3 + 3*x + 2 - y**2
+splot f(x,y),0                
+
+ECC椭圆曲线加密算法：介绍
+Source: 
+https://zhuanlan.zhihu.com/p/36326221
+https://zhuanlan.zhihu.com/p/44743146
+https://zhuanlan.zhihu.com/p/66794410
+
+https://cdn.rawgit.com/andreacorbellini/ecc/920b29a/interactive/reals-add.html
