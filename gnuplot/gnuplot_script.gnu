@@ -79,3 +79,37 @@ set xlabel 'x'
 set ylabel 'y'
 f(x,y) = x**3 + 3*x + 2 - y**2
 splot f(x,y),0                
+
+
+
+gluplot_tutorial.pdf
+
+set xlabel "月份"
+set ylabel "降水量（毫米）"
+set title "北京市月平均降水量"
+unset key
+set xrange [0.5:12.5 ]
+set xtics 1,1,12
+plot "datafile.dat"
+plot "datafile.dat " with linespoints
+plot "datafile.dat" w lp l c 3 lw 2 pt 7 ps 2
+
+set xlabel "月份"
+set ylabel "降水量（毫米）"
+set title "各城市月平均降水量"
+set xrange [0.5:12.5]
+set xtics 1,1 ,12
+plot "precipitation.dat" using 1:2 w lp pt 5 title "Beijing",\
+"precipitation.dat" using 1:3 w lp pt 7 title "Shanghai"
+
+输出为文件
+set xlabel "Month"
+set ylabel "Precipitation(mm) "
+set xrange [0.5:12.5]
+set xtics 1,1,12
+set term jpeg
+set output "precipitation.jpg"
+plot "precipitation.dat " using 1:2 w lp pt 5 title "Beijing",\
+"precipitation.dat" using 1:3 w lp pt 7 title "Shanghai "
+set output
+set term wxt
