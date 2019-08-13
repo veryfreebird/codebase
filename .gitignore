@@ -17,3 +17,8 @@ rsa_keys/code/*.o
 rsa_keys/code/rsatest
 security/algorithm/digest/sha/sha512.o
 security/algorithm/digest/sha/sha512c
+gnuplot/fft_ifft/*.o
+fft_processor
+gnuplot_driver
+signal_source
+sound_source
