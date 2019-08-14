@@ -1,0 +1,73 @@
+先看QPSK的。
+用C语言计算出模拟的QPSK解调信号I路和Q路数据，然后以gnuplot作图。C代码演示了如何通过命令行参数输入噪声大小及解调参考相位。同时也给出了标准正态分布随机数的计算函数。
+
+C代码文件名为：QPSKconst.c
+
+编译：
+
+gcc QPSKconst.c
+1
+生成a.exe
+
+执行时输入噪声大小系数，如0.1，解调相位角（度数），如15：
+
+a.exe 0.1 15
+1
+则从屏幕输出1000行星座图信号坐标点。在gnuplot中作图即可。作图环境可用以下设置。
+
+set size square
+set grid
+unset key
+1
+2
+3
+然后，在gnuplot命令窗中输入作图命令
+
+gnuplot> plot [-2:2] [-2:2] "<a.exe 0.3 0"  w p pt 6 lc 3
+1
+"<a.exe 0.3 0"是执行带参数的exe文件并将结果重定向输入到plot命令中。
+得：
+
+又，减小噪声，得
+
+gnuplot> plot [-2:2] [-2:2] "<a.exe 0.05 0"  w p pt 6 lc 3
+1
+)
+
+又，相位偏移-10度，得
+
+plot [-2:2] [-2:2] "<a.exe 0.05 -10"  w p pt 6 lc 3
+
+
+噪声很大的情况，星座图点散开。
+
+plot [-2:2] [-2:2] "<a.exe 1 0"  w p pt 6 lc 3
+
+
+
+以此类似，可得16QAM、64QAM、BPSK、8PSK的星座图程序。
+
+
+编译作图64QAM：
+
+gnuplot> plot [-12:12] [-12:12] "<a.exe 0.1 0 64"  w p pt 6 lc 3
+1
+
+
+gnuplot> plot [-12:12][-12:12] "<a.exe 0.1 0 16"  w p pt 6 lc 3
+1
+
+
+M-PSK
+
+
+编译作图：
+
+plot [-12:12][-12:12] "<a.exe 0.1 0 2"  w p pt 6 lc 3
+1
+)
+
+8PSK
+
+plot [-12:12][-12:12] "<a.exe 0.1 0 8"  w p pt 6 lc 3
+1
