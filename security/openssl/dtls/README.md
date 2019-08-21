@@ -20,6 +20,12 @@ Options:
         -v      verbose
         -V      very verbose
 ```
+Server:
+dtls_udp_echo -V -L 127.0.0.1 -p 23232
+
+Client:
+dtls_udp_echo -l 100 -p 23232 -n 100 -V 127.0.0.1
+
 
 **DTLS Character Generator Server and Client**  
 This sample includes a multi-threaded character generator server and client sending as many messages as possible to each other over an SCTP/UDP connection encrypted with DTLS for a given time.
