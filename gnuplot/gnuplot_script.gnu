@@ -154,7 +154,7 @@ set xrange [-8:8]
 set yrange [-8:8]
 set zrange [-8:8]
 set ticslevel 0
-splot [-2*pi:2*pi][-pi:pi] cos(u)*(cos(v)+3), sin(u)*(cos(v)+3), sin(v)+u
+splot [-2*pi:2*pi][-2*pi:5*pi] cos(u)*(cos(v)+3), sin(u)*(cos(v)+3), sin(v)+u
 A side view...
 
 set nokey
