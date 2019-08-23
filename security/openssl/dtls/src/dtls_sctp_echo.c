@@ -821,7 +821,7 @@ int main(int argc, char **argv)
 	int messagenumber = 5;
 	char local_addr[INET6_ADDRSTRLEN+1];
 	char c;
-	int request_peer_certificate = 0;
+	int request_peer_certificate = 1;
 
 	memset(local_addr, 0, INET6_ADDRSTRLEN+1);
 
