@@ -1,0 +1,77 @@
+source: https://costiser.ro/2016/08/01/macsec-implementation-on-linux/#.XWYlE-gzZbU
+
+###On the first Virtual Machine
+# on vagrant box-1
+# ----------------
+
+# Clear IP configuration on the Host-Only adaptor between the VMs
+sudo ifconfig enp0s8 0.0.0.0
+
+# Load the MACsec kernel
+sudo modprobe macsec
+
+# Create the MACsec device on top of the physical one
+sudo ip link add link enp0s8 macsec0 type macsec
+
+# Configure the Transmit SA and keys
+sudo ip macsec add macsec0 tx sa 0 pn 100 on key 01 11111111111111111111111111111111
+
+# Configure the Receive Channel and SA:
+# MAC address of the peer
+# port number, packet number and key
+sudo ip macsec add macsec0 rx address 08:00:27:f2:1d:8c port 1
+sudo ip macsec add macsec0 rx address 08:00:27:f2:1d:8c port 1 sa 0 pn 100 on key 02 22222222222222222222222222222222
+
+
+# Bring up the interface
+sudo ip link set dev macsec0 up
+
+# Configure an IP address on it for connectivity between the hosts
+sudo ifconfig macsec0 1.1.1.1/24
+
+
+###On the second Virtual Machine
+Follow the same steps - again, make sure that you have the correct MAC addresses for the Layer 2 endpoints:
+
+# on vagrant box-1
+# ----------------
+sudo modprobe macsec
+
+sudo ip link add link enp0s8 macsec0 type macsec
+sudo ip macsec add macsec0 tx sa 0 pn 100 on key 02 22222222222222222222222222222222
+
+sudo ip macsec add macsec0 rx address 08:00:27:ae:4d:62 port 1
+sudo ip macsec add macsec0 rx address 08:00:27:ae:4d:62 port 1 sa 0 pn 100 on key 01 11111111111111111111111111111111
+
+sudo ip link set dev macsec0 up
+
+sudo ifconfig macsec0 1.1.1.2/24
+
+[root@myfedora macsec]# ip macsec show
+8: macsec0: protect on validate strict sc off sa off encrypt on send_sci on end_station off scb off replay off
+    cipher suite: GCM-AES-128, using ICV length 16
+    TXSC: 0800273045510001 on SA 0
+        0: PN 2780, state on, key 01000000000000000000000000000000
+    RXSC: 0800277934a20001, state on
+        0: PN 2798, state on, key 02000000000000000000000000000000
+
+[root@myfedora macsec]# ip -s macsec show
+8: macsec0: protect on validate strict sc off sa off encrypt on send_sci on end_station off scb off replay off
+    cipher suite: GCM-AES-128, using ICV length 16
+    TXSC: 0800273045510001 on SA 0
+    stats: OutPktsUntagged InPktsUntagged OutPktsTooLong InPktsNoTag InPktsBadTag InPktsUnknownSCI InPktsNoSCI InPktsOverrun
+                         0              0              0         425            0                0           0             0
+    stats: OutPktsProtected OutPktsEncrypted OutOctetsProtected OutOctetsEncrypted
+                        822             1858              90886             212652
+        0: PN 2780, state on, key 01000000000000000000000000000000
+    stats: OutPktsProtected OutPktsEncrypted
+                        822             1858
+    RXSC: 0800277934a20001, state on
+    stats: InOctetsValidated InOctetsDecrypted InPktsUnchecked InPktsDelayed InPktsOK InPktsInvalid InPktsLate InPktsNotValid InPktsNotUsingSA InPktsUnusedSA
+                       94632            209302               0             1     2696             0          0              0                0              0
+        0: PN 2820, state on, key 02000000000000000000000000000000
+    stats: InPktsOK InPktsInvalid InPktsNotValid InPktsNotUsingSA InPktsUnusedSA
+               2696             0              0                0              0
+
+
+
