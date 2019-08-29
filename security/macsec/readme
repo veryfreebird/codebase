@@ -85,3 +85,4 @@ sudo ifconfig macsec0 1.1.1.2/24
 
 
 
+ip link set macsec0 type macsec encrypt on
