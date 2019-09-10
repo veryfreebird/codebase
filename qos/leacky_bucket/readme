@@ -1,0 +1,20 @@
+source: https://blog.csdn.net/andylau00j/article/details/73958599
+source: https://www.cnblogs.com/f-zhao/p/7210158.html
+
+漏桶(Leaky bucket)与令牌桶(Token bucket)算法有什么区别。
+
+令牌桶，初始令牌个数是0，最大容量是100，当1万个请求到来时(初始令牌个数是0时)，也只能一秒处理一个请求个，因为令牌是每秒产生一个。
+
+漏桶，初始流量是0，最大流量是100，当1万个请求到来时，可以迅速的，最多的，能同时处理100个。
+
+=============================================
+
+令牌桶，初始令牌个数是100，最大容量是100，当1万个请求到来时(初始令牌个数是0时)，可以迅速的，最多的，同时处理100个请求，从第101个请求开始，也只能等新令牌的产生，而令牌是每秒产生一个。
+漏桶，初始流量是0，最大流量是100，当1万个请求到来时，可以迅速的，最多的，能同时处理100个。
+
+Google Guava RateLimiter类，是一个基于令牌桶的限流算法。
+
+
+How to run:
+javac -cp ./lib/guava-28.1-jre.jar TestRateLimiter.java
+java -cp ./lib/guava-28.1-jre.jar:${CLASSPATH} TestRateLimiter
