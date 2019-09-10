@@ -12,10 +12,10 @@ public class TestRateLimiter {
     public static void main(String[] args) {
  
         //新建一个每秒限制3个的令牌桶
-        RateLimiter rateLimiter = RateLimiter.create(100);
+        RateLimiter rateLimiter = RateLimiter.create(5);
  
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(100);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             executor.execute(new Runnable() {
                 @Override
                 public void run() {

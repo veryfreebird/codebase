@@ -16,5 +16,5 @@ Google Guava RateLimiter类，是一个基于令牌桶的限流算法。
 
 
 How to run:
-javac -cp ./lib/guava-28.1-jre.jar TestRateLimiter.java
+javac -cp ./lib/guava-28.1-jre.jar:${CLASSPATH} TestRateLimiter.java
 java -cp ./lib/guava-28.1-jre.jar:${CLASSPATH} TestRateLimiter
