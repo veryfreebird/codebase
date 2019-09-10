@@ -1,7 +1,7 @@
 source: https://blog.csdn.net/andylau00j/article/details/73958599
 source: https://www.cnblogs.com/f-zhao/p/7210158.html
 https://cloud.tencent.com/developer/article/1408819
-https://cloud.tencent.com/developer/article/1462630
+
 
 漏桶(Leaky bucket)与令牌桶(Token bucket)算法有什么区别。
 
