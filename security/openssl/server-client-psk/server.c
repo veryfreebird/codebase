@@ -121,13 +121,12 @@ int main(int argc, char **argv)
     }
 
     /* use psk suite for security */
-    SSL_CTX_set_quiet_shutdown(ctx, 1);
-	SSL_CTX_set_options(ctx, SSL_OP_NO_SSLv2);    
     SSL_CTX_set_psk_server_callback(ctx, psk_server_cb);
     SSL_CTX_use_psk_identity_hint(ctx, "ssl server");
-    if (SSL_CTX_set_cipher_list(ctx, "PSK-AES256-CBC-SHA") != EXIT_SUCCESS) 
+    int result;
+    if ((result = SSL_CTX_set_cipher_list(ctx, "PSK-AES256-CBC-SHA384")) != 1) 
     {
-        printf("Fatal error : server can't set cipher list\n");
+        printf("Fatal error : server can't set cipher list: %d\n", result);
         return 1;
     }
 

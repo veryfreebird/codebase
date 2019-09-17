@@ -60,7 +60,7 @@ int main(int argc, char **argv)
     }
 
     SSL_CTX_set_psk_client_callback(ctx, psk_client_cb);
-    SSL_CTX_set_cipher_list(ctx, "PSK-AES256-CBC-SHA");
+    SSL_CTX_set_cipher_list(ctx, "PSK-AES256-CBC-SHA384");
     if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
         perror("Socket");
