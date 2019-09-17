@@ -156,3 +156,9 @@ $ dtls_sctp_echo -V -L 127.0.0.1
 ```
 $ openssl s_client -sctp -dtls -connect 127.0.0.1:23232
 ```
+
+## How to get dtls_psk captureing:
+source: https://www.cnblogs.com/littleatp/p/6358261.html
+
+openssl s_server -dtls --accept 10000 -nocert -psk AAABBDDDFDDEDFFF
+openssl s_client -dtls -connect 127.0.0.1:10000 -psk AAABBDDDFDDEDFFF
