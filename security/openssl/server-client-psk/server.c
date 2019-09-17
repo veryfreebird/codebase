@@ -78,6 +78,28 @@ void tcp_accept(int sockfd, int *new_fd)
     }
 }
 
+/*
+ * Identify which psk key to use.
+ */
+static unsigned int psk_server_cb(SSL* ssl, const char* identity,
+                           unsigned char* key, unsigned int key_max_len)
+{
+    (void)ssl;
+    (void)key_max_len;
+
+    if (strncmp(identity, "Client_identity", 15) != 0) {
+        return 0;
+    }
+
+    key[0] = 26;
+    key[1] = 43;
+    key[2] = 60;
+    key[3] = 77;
+
+    return 4;
+}
+
+
 int main(int argc, char **argv)
 {
     int sockfd, client_fd;
@@ -97,21 +119,16 @@ int main(int argc, char **argv)
         ERR_print_errors_fp(stdout);
         exit(1);
     }
-    if (!SSL_CTX_use_certificate_file(ctx, argv[3], SSL_FILETYPE_PEM))
+
+    /* use psk suite for security */
+    SSL_CTX_set_psk_server_callback(ctx, psk_server_cb);
+    SSL_CTX_use_psk_identity_hint(ctx, "ssl server");
+    if (SSL_CTX_set_cipher_list(ctx, "PSK-AES128-CBC-SHA256") != EXIT_SUCCESS) 
     {
-        ERR_print_errors_fp(stdout);
-        exit(1);
+        printf("Fatal error : server can't set cipher list\n");
+        return 1;
     }
-    if (!SSL_CTX_use_PrivateKey_file(ctx, argv[4], SSL_FILETYPE_PEM))
-    {
-        ERR_print_errors_fp(stdout);
-        exit(1);
-    }
-    if (!SSL_CTX_check_private_key(ctx))
-    {
-        ERR_print_errors_fp(stdout);
-        exit(1);
-    }
+
     int chose = 0;
     signal(SIGPIPE, SIG_IGN);
     tcpserver_init(&sockfd);

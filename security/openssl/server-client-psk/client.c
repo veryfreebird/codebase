@@ -12,25 +12,26 @@
 
 #define MAXBUF 1024
 
-void ShowCerts(SSL *ssl)
+/*
+ * Identify which psk key to use.
+ */
+static unsigned int psk_client_cb(SSL* ssl, const char* hint, char* identity,
+                           unsigned int id_max_len, unsigned char* key, unsigned int key_max_len)
 {
-    X509 *cert;
-    char *line;
+    (void)ssl;
+    (void)hint;
+    (void)key_max_len;
 
-    cert = SSL_get_peer_certificate(ssl);
-    if (cert != NULL)
-    {
-        printf("数字证书信息:\n");
-        line = X509_NAME_oneline(X509_get_subject_name(cert), 0, 0);
-        printf("证书: %s\n", line);
-        free(line);
-        line = X509_NAME_oneline(X509_get_issuer_name(cert), 0, 0);
-        printf("颁发者: %s\n", line);
-        free(line);
-        X509_free(cert);
+    if (strncmp(identity, "Client_identity", 15) != 0) {
+        return 0;
     }
-    else
-        printf("无证书信息！\n");
+
+    key[0] = 26;
+    key[1] = 43;
+    key[2] = 60;
+    key[3] = 77;
+
+    return 4;
 }
 
 int main(int argc, char **argv)
@@ -50,12 +51,15 @@ int main(int argc, char **argv)
     SSL_library_init();
     OpenSSL_add_all_algorithms();
     SSL_load_error_strings();
+
     ctx = SSL_CTX_new(SSLv23_client_method());
     if (ctx == NULL)
     {
         ERR_print_errors_fp(stdout);
         exit(1);
     }
+
+    SSL_CTX_set_psk_client_callback(ctx, psk_client_cb);
 
     if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
@@ -85,12 +89,7 @@ int main(int argc, char **argv)
 
     if (SSL_connect(ssl) == -1)
         ERR_print_errors_fp(stderr);
-    else
-    {
-        printf("Connected with %s encryption\n", SSL_get_cipher(ssl));
-        ShowCerts(ssl);
-    }
-
+    
     bzero(buffer, MAXBUF + 1);
     len = SSL_read(ssl, buffer, MAXBUF);
     if (len > 0)
