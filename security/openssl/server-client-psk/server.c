@@ -130,15 +130,15 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    int chose = 0;
+    int chose = 1;
     signal(SIGPIPE, SIG_IGN);
     tcpserver_init(&sockfd);
     while (1)
     {
-        printf("Please Chose Channel No.:\n");
+       /* printf("Please Chose Channel No.:\n");
         printf("1.:SSL Protocol Channel\n");
         printf("2.:TCP Protocol Channel\n");
-        scanf("%d", &chose);
+        scanf("%d", &chose);*/
         if (chose == 1)
         {
             printf("SSL Protocol Channel selected, waiting...\n");
@@ -148,9 +148,10 @@ int main(int argc, char **argv)
             SSL_set_fd(ssl, client_fd);
             if (SSL_accept(ssl) == -1)
             {
+                ERR_print_errors_fp(stderr);
                 perror("accept");
                 close(client_fd);
-                break;
+                goto cleanup;
             }
             
             bzero(serverbuf, MAXSIZE);
@@ -186,6 +187,8 @@ int main(int argc, char **argv)
         }
         chose = 0;
     }
+
+cleanup:
     close(sockfd);
     SSL_CTX_free(ctx);
     return 0;

@@ -1,5 +1,5 @@
 运行程序用如下命令：
-./server 7838 1 cacert.pem privkey.pem
+./server
 ./client 127.0.0.1 7838
 
 用下面这两个命令产生上述cacert.pem和privkey.pem文件：
