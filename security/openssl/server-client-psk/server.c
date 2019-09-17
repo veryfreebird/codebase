@@ -124,7 +124,7 @@ int main(int argc, char **argv)
     SSL_CTX_set_psk_server_callback(ctx, psk_server_cb);
     SSL_CTX_use_psk_identity_hint(ctx, "ssl server");
     int result;
-    if ((result = SSL_CTX_set_cipher_list(ctx, "PSK-AES256-CBC-SHA384")) != 1) 
+    if ((result = SSL_CTX_set_cipher_list(ctx, "PSK-AES256-GCM-SHA384")) != 1) 
     {
         printf("Fatal error : server can't set cipher list: %d\n", result);
         return 1;
