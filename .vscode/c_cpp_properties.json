@@ -4,6 +4,23 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
+                "C:\\\\MinGW_W64\\\\include",
+                "C:\\\\MinGW_W64\\\\x86_64-w64-mingw32\\\\include"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "C:\\MinGW_W64\\bin\\g++.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
                 "/usr/include/**"            
             ],
             "defines": [
@@ -11,7 +28,7 @@
                 "UNICODE",
                 "_UNICODE"
             ],
-            "intelliSenseMode": "msvc-x64"
+            "intelliSenseMode": "mgcc-x64"
         }
     ],
     "version": 4
