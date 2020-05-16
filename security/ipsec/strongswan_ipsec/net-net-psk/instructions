@@ -1,0 +1,12 @@
+alias ipsec="strongswan"
+systemctl start strongswan-starter
+
+ipsec up net-net
+ipsec statusall
+ipsec route net-net
+ipsec statusall
+
+ip -s xfrm policy
+ip -s xfrm starter
+ip route list table 220
+
