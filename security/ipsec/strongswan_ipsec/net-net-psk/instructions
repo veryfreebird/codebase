@@ -1,12 +1,16 @@
 alias ipsec="strongswan"
 systemctl start strongswan-starter
 
+ipsec statusall
+
 ipsec up net-net
 ipsec statusall
 ipsec route net-net
 ipsec statusall
 
 ip -s xfrm policy
-ip -s xfrm starter
+ip -s xfrm state
+iptables -L
+
 ip route list table 220
 
