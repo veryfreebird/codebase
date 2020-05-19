@@ -1,0 +1,11 @@
+/*ethernet*/
+sudo ptp4l -i enp0s25 -m -S -2
+sudo ptp4l -i enp10s0 -m -S -s -2
+
+/*IPv4*/
+sudo ptp4l -i enp0s25 -m -S -4
+sudo ptp4l -i enp10s0 -m -S -s -4
+
+/*IPv6*/
+sudo ptp4l -i enp0s25 -m -S -2
+sudo ptp4l -i enp10s0 -m -S -s -6
