@@ -1,0 +1,141 @@
+fedora1 (OC/GM)
+enp0s8
+08:00:27:e0:f5:e3
+sudo ptp4l -m -S -i enp0s8 -2 -f /etc/ptp4l.conf
+/etc/ptp4l.conf：
+priority1               127
+priority2               127
+
+fedora2 (BC)
+enp0s8            enp0s9
+08:00:27:5a:7f:75 08:00:27:6c:48:51
+sudo ptp4l -m -S -2 -i enp0s8 -i enp0s9 -f /etc/ptp4l.conf
+/etc/ptp4l.conf：
+priority1               128
+priority2               128
+
+
+fedora3 (OC)
+                  enp0s9
+                  08:00:27:64:47:b3
+sudo ptp4l -m -S -2 -i enp0s9 -s -f /etc/ptp4l.conf
+/etc/ptp4l.conf：
+priority1               128
+priority2               128
+
+
+fedora3:
+[jamema@myfedora3 local_src]$ sudo pmc -u -b 0 'GET CURRENT_DATA_SET'
+sending: GET CURRENT_DATA_SET
+        080027.fffe.6447b3-0 seq 0 RESPONSE MANAGEMENT CURRENT_DATA_SET
+                stepsRemoved     2
+                offsetFromMaster 2133208852.0
+                meanPathDelay    151681.0
+
+[jamema@myfedora3 local_src]$ sudo pmc -u -b 1 'GET CURRENT_DATA_SET'
+sending: GET CURRENT_DATA_SET
+        080027.fffe.6447b3-0 seq 0 RESPONSE MANAGEMENT CURRENT_DATA_SET
+                stepsRemoved     2
+                offsetFromMaster -1169875155.0
+                meanPathDelay    -2619052.0
+        080027.fffe.5a7f75-2 seq 0 RESPONSE MANAGEMENT CURRENT_DATA_SET
+                stepsRemoved     1
+                offsetFromMaster 9077076838.0
+                meanPathDelay    15969943.0
+
+[jamema@myfedora3 local_src]$ sudo pmc -u -b 2 'GET CURRENT_DATA_SET'
+sending: GET CURRENT_DATA_SET
+        080027.fffe.6447b3-0 seq 0 RESPONSE MANAGEMENT CURRENT_DATA_SET
+                stepsRemoved     2
+                offsetFromMaster -78457089.0
+                meanPathDelay    -14874462.0
+        080027.fffe.5a7f75-2 seq 0 RESPONSE MANAGEMENT CURRENT_DATA_SET
+                stepsRemoved     1
+                offsetFromMaster 678919910.0
+                meanPathDelay    -7816125.0
+        080027.fffe.e0f5e3-1 seq 0 RESPONSE MANAGEMENT CURRENT_DATA_SET
+                stepsRemoved     0
+                offsetFromMaster 0.0
+                meanPathDelay    0.0
+
+[jamema@myfedora3 local_src]$ sudo pmc -u -b 0 'GET TIME_STATUS_NP'
+sending: GET TIME_STATUS_NP
+        080027.fffe.6447b3-0 seq 0 RESPONSE MANAGEMENT TIME_STATUS_NP
+                master_offset              -45548556
+                ingress_time               1591171837075467348
+                cumulativeScaledRateOffset +0.000000000
+                scaledLastGmPhaseChange    0
+                gmTimeBaseIndicator        0
+                lastGmPhaseChange          0x0000'0000000000000000.0000
+                gmPresent                  true
+                gmIdentity                 080027.fffe.e0f5e3
+
+[jamema@myfedora3 local_src]$ sudo pmc -u -b 1 'GET TIME_STATUS_NP'
+sending: GET TIME_STATUS_NP
+        080027.fffe.6447b3-0 seq 0 RESPONSE MANAGEMENT TIME_STATUS_NP
+                master_offset              -20355670
+                ingress_time               1591171858113950342
+                cumulativeScaledRateOffset +0.000000000
+                scaledLastGmPhaseChange    0
+                gmTimeBaseIndicator        0
+                lastGmPhaseChange          0x0000'0000000000000000.0000
+                gmPresent                  true
+                gmIdentity                 080027.fffe.e0f5e3
+        080027.fffe.5a7f75-2 seq 0 RESPONSE MANAGEMENT TIME_STATUS_NP
+                master_offset              326529033
+                ingress_time               1591171858041078599
+                cumulativeScaledRateOffset +0.000000000
+                scaledLastGmPhaseChange    0
+                gmTimeBaseIndicator        0
+                lastGmPhaseChange          0x0000'0000000000000000.0000
+                gmPresent                  true
+                gmIdentity                 080027.fffe.e0f5e3
+
+[jamema@myfedora3 local_src]$ sudo pmc -u -b 2 'GET TIME_STATUS_NP'
+sending: GET TIME_STATUS_NP
+        080027.fffe.6447b3-0 seq 0 RESPONSE MANAGEMENT TIME_STATUS_NP
+                master_offset              -21040899
+                ingress_time               1591171878122946011
+                cumulativeScaledRateOffset +0.000000000
+                scaledLastGmPhaseChange    0
+                gmTimeBaseIndicator        0
+                lastGmPhaseChange          0x0000'0000000000000000.0000
+                gmPresent                  true
+                gmIdentity                 080027.fffe.e0f5e3
+        080027.fffe.5a7f75-2 seq 0 RESPONSE MANAGEMENT TIME_STATUS_NP
+                master_offset              263244828
+                ingress_time               1591171877694352740
+                cumulativeScaledRateOffset +0.000000000
+                scaledLastGmPhaseChange    0
+                gmTimeBaseIndicator        0
+                lastGmPhaseChange          0x0000'0000000000000000.0000
+                gmPresent                  true
+                gmIdentity                 080027.fffe.e0f5e3
+        080027.fffe.e0f5e3-1 seq 0 RESPONSE MANAGEMENT TIME_STATUS_NP
+                master_offset              0
+                ingress_time               0
+                cumulativeScaledRateOffset +0.000000000
+                scaledLastGmPhaseChange    0
+                gmTimeBaseIndicator        0
+                lastGmPhaseChange          0x0000'0000000000000000.0000
+                gmPresent                  false
+                gmIdentity                 080027.fffe.e0f5e3
+
+
+
+Setting the -b option to zero limits the boundary to the locally running ptp4l instance. A larger boundary value will retrieve the information also from PTP nodes further from the local clock. The retrievable information includes:
+
+stepsRemoved is the number of communication paths to the grandmaster clock.
+
+offsetFromMaster and master_offset is the last measured offset of the clock from the master in nanoseconds.
+
+meanPathDelay is the estimated delay of the synchronization messages sent from the master in nanoseconds.
+
+if gmPresent is true, the PTP clock is synchronized to a master, the local clock is not the grandmaster clock.
+
+gmIdentity is the grandmaster’s identity.
+
+
+
+
+
