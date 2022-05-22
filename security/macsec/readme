@@ -21,6 +21,7 @@ sudo ifconfig enp0s8 0.0.0.0
 sudo modprobe macsec
 
 # Create the MACsec device on top of the physical one
+####替换enp0s8为VLAN接口enp0s8.100，照样能够工作
 sudo ip link add link enp0s8 macsec0 type macsec
 
 # Configure the Transmit SA and keys
@@ -47,6 +48,7 @@ Follow the same steps - again, make sure that you have the correct MAC addresses
 # ----------------
 sudo modprobe macsec
 
+####替换enp0s8为VLAN接口enp0s8.100，照样能够工作
 sudo ip link add link enp0s8 macsec0 type macsec
 sudo ip macsec add macsec0 tx sa 0 pn 100 on key 02 22222222222222222222222222222222
 
