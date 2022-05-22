@@ -219,3 +219,6 @@ linuxmint-12-gnome-dvd-32bit.iso: 失败
 md5sum: 警告：1/1 生成的校验和不匹配
 命令解释：
 md5 -c: 从文件中读取MD5 的校验值并予以检查
+
+
+test for PGP signing
