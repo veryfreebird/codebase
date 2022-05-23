@@ -30,8 +30,8 @@ sudo ip macsec add macsec0 tx sa 0 pn 100 on key 01 1111111111111111111111111111
 # Configure the Receive Channel and SA:
 # MAC address of the peer
 # port number, packet number and key
-sudo ip macsec add macsec0 rx address 08:00:27:f2:1d:8c port 1
-sudo ip macsec add macsec0 rx address 08:00:27:f2:1d:8c port 1 sa 0 pn 100 on key 02 22222222222222222222222222222222
+sudo ip macsec add macsec0 rx address 08:00:27:5a:7f:75 port 1
+sudo ip macsec add macsec0 rx address 08:00:27:5a:7f:75 port 1 sa 0 pn 100 on key 02 22222222222222222222222222222222
 
 
 # Bring up the interface
@@ -52,8 +52,8 @@ sudo modprobe macsec
 sudo ip link add link enp0s8 macsec0 type macsec
 sudo ip macsec add macsec0 tx sa 0 pn 100 on key 02 22222222222222222222222222222222
 
-sudo ip macsec add macsec0 rx address 08:00:27:ae:4d:62 port 1
-sudo ip macsec add macsec0 rx address 08:00:27:ae:4d:62 port 1 sa 0 pn 100 on key 01 11111111111111111111111111111111
+sudo ip macsec add macsec0 rx address 08:00:27:e0:f5:e3 port 1
+sudo ip macsec add macsec0 rx address 08:00:27:e0:f5:e3 port 1 sa 0 pn 100 on key 01 11111111111111111111111111111111
 
 sudo ip link set dev macsec0 up
 
@@ -88,3 +88,43 @@ sudo ifconfig macsec0 1.1.1.2/24
 
 
 ip link set macsec0 type macsec encrypt on
+
+
+
+
+
+
+
+
+
+
+
+
+ vconfig add enp0s10 100
+ vconfig add enp0s10 200
+ modprobe macsec
+ ip link add link enp0s10.100 macsec0 type macsec
+ ifconfig enp0s10.100 up
+ ifconfig enp0s10.200 up
+ ifconfig enp0s10.200 10.10.200.200/24
+ ip macsec add macsec0 tx sa 0 pn 100 on key 01 11111111111111111111111111111111
+ ip macsec add macsec0 rx address 08:00:27:83:8e:19 port 1
+ ip macsec add macsec0 rx address 08:00:27:83:8e:19 port 1 sa 0 pn 100 on key 02 22222222222222222222222222222222
+ ip link set dev macsec0 up
+ ifconfig macsec0 10.10.10.100/24
+ ip link set macsec0 type macsec encrypt on
+ 
+ vconfig add enp0s10 100
+ vconfig add enp0s10 200
+ modprobe macsec
+ ip link add link enp0s10.100 macsec0 type macsec
+ ifconfig enp0s10.100 up
+ ifconfig enp0s10.200 up
+ ifconfig enp0s10.200 10.10.200.201/24
+ ip macsec add macsec0 tx sa 0 pn 100 on key 02 22222222222222222222222222222222
+ ip macsec add macsec0 rx address 08:00:27:f9:cd:07 port 1
+ ip macsec add macsec0 rx address 08:00:27:f9:cd:07 port 1 sa 0 pn 100 on key 01 11111111111111111111111111111111
+ ip link set dev macsec0 up
+ ifconfig macsec0 10.10.10.101/24
+ ip link set macsec0 type macsec encrypt on
+
