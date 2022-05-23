@@ -22,3 +22,8 @@ fft_processor
 gnuplot_driver
 signal_source
 sound_source
+.vscode/c_cpp_properties.json
+.vscode/configurationCache.log
+.vscode/dryrun.log
+.vscode/targets.log
+.vscode/c_cpp_properties.json
