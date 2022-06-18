@@ -100,7 +100,7 @@ print(a[::-1],b[::-1]) ##=>[5,4,3,2,1] 54321
 print(a[3::-1],b[3::-1]) ##=>[4,3,2,1] 4321
 
 
-'''two dimension array initiation'''
+'''two dimension array initialization'''
 
 a = [[0 for n in range(4)] for m in range(3)]
 print(a)    ###[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
