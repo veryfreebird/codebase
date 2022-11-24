@@ -27,3 +27,13 @@ sound_source
 .vscode/dryrun.log
 .vscode/targets.log
 .vscode/c_cpp_properties.json
+code_base.IAB
+code_base.IAD
+code_base.IMB
+code_base.IMD
+code_base.PFI
+code_base.PO
+code_base.PR
+code_base.PRI
+code_base.PS
+code_base.WK3
