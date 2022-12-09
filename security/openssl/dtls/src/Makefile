@@ -1,6 +1,7 @@
 
 CFLAGS      = -std=c99 -pedantic -Wall -g -Wextra -Wno-unused-parameter -Wno-unused-function -Wno-overlength-strings
-INCLUDES    = -I/usr/local/include
+INCLUDES    = -I/usr/local/include:/usr/local/ssl/include
+#INCLUDES    = -I/usr/local/ssl/include
 LFLAGS      = -L/usr/local/lib
 LIBS        = -lssl -lcrypto -pthread -lm -ldl
 
