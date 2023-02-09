@@ -1,0 +1,53 @@
+1. key generation
+openssl genrsa -out rsa_private.key 2048
+
+
+
+
+2. certificate
+https://laurence.blog.csdn.net/article/details/123565671?spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-3-123565671-blog-76400805.t5_download_comparev1&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-3-123565671-blog-76400805.t5_download_comparev1&utm_relevant_index=6
+https://blog.csdn.net/fym0121/article/details/8001190
+
+2.1 check certificate
+2.1.1 check certificate in pem format
+openssl x509 -in test.pem -text -noout
+
+2.1.2 check certificate in der format
+openssl x509 -inform der -in test.der -text -noout
+
+2.2 convert between pem and der
+
+pem -> der
+openssl x509 -outform der -in test.pem -out test.der
+
+der -> pem
+openssl x509 -outform pem -in test.der -out test.pem
+
+2.3 Verify validity of intermediate CA certificate with Root CA certificate
+C:\james_home\local_src\codebase\security\nokia-certs>openssl verify -CAfile Nokia_Root_CA_Certificate.pem Factory_CA_Certificate.pem
+Factory_CA_Certificate.pem: OK
+
+2.4 Verify validity of EE certificate with ROOT/intermediate CA certificate
+2.4.1
+C:\james_home\local_src\codebase\security\nokia-certs>openssl verify -CAfile Nokia_Root_CA_Certificate.pem -untrusted Factory_CA_Certificate.pem 6Q180310393.nokiasolutionsandnetworks.com.pem
+6Q180310393.nokiasolutionsandnetworks.com.pem: OK
+
+2.4.2
+cat Nokia_Root_CA_Certificate.pem >> chain.pem
+cat Factory_CA_Certificate.pem >> chain.pem
+C:\james_home\local_src\codebase\security\nokia-certs>openssl verify -CAfile chain.pem 6Q180310393.nokiasolutionsandnetworks.com.pem
+6Q180310393.nokiasolutionsandnetworks.com.pem: OK
+
+2.4.3
+mkdir CApath
+nokia-certs>openssl x509 -hash -in Factory_CA_Certificate.pem -noout
+c2c49eea
+nokia-certs>copy Factory_CA_Certificate.pem CApath\c2c49eea.0
+已复制         1 个文件。
+nokia-certs>openssl x509 -hash -in Nokia_Root_CA_2067_Certificate.pem -noout
+cb4b4645
+nokia-certs>copy Nokia_Root_CA_Certificate.pem CApath\cb4b4645.0
+已复制         1 个文件。
+nokia-certs>openssl verify -CApath CApath 6Q180310393.nokiasolutionsandnetworks.com.pem
+6Q180310393.nokiasolutionsandnetworks.com.pem: OK
+
