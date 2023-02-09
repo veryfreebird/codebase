@@ -1,13 +1,4 @@
-1. key generation
-openssl genrsa -out rsa_private.key 2048
-
-
-
-
 2. certificate
-https://laurence.blog.csdn.net/article/details/123565671?spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-3-123565671-blog-76400805.t5_download_comparev1&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-3-123565671-blog-76400805.t5_download_comparev1&utm_relevant_index=6
-https://blog.csdn.net/fym0121/article/details/8001190
-
 2.1 check certificate
 2.1.1 check certificate in pem format
 openssl x509 -in test.pem -text -noout
@@ -28,17 +19,19 @@ C:\james_home\local_src\codebase\security\nokia-certs>openssl verify -CAfile Nok
 Factory_CA_Certificate.pem: OK
 
 2.4 Verify validity of EE certificate with ROOT/intermediate CA certificate
-2.4.1
+One issue, untrusted intermediate CA certificate(if it is self-signed one), may lead security issue (the verification ends in self-signed intermediate CA certificate)
+
+2.4.1 with separate Root CA and Factory CA(untrusted)
 C:\james_home\local_src\codebase\security\nokia-certs>openssl verify -CAfile Nokia_Root_CA_Certificate.pem -untrusted Factory_CA_Certificate.pem 6Q180310393.nokiasolutionsandnetworks.com.pem
 6Q180310393.nokiasolutionsandnetworks.com.pem: OK
 
-2.4.2
+2.4.2 with pem chain file
 cat Nokia_Root_CA_Certificate.pem >> chain.pem
 cat Factory_CA_Certificate.pem >> chain.pem
 C:\james_home\local_src\codebase\security\nokia-certs>openssl verify -CAfile chain.pem 6Q180310393.nokiasolutionsandnetworks.com.pem
 6Q180310393.nokiasolutionsandnetworks.com.pem: OK
 
-2.4.3
+2.4.3 with CA path holds Root and intermediate CA certificates
 mkdir CApath
 nokia-certs>openssl x509 -hash -in Factory_CA_Certificate.pem -noout
 c2c49eea
