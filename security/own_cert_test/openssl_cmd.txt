@@ -1,0 +1,15 @@
+3. Test with signing
+///create csr
+openssl req -new -key Any_priv.pem -out newEE_Cert1.csr -subj "/C=CN/ST=FJ/L=XM/O=sfox/OU=dev/CN=sfox.com/emailAddress=sfox@sfox.com"
+
+////sign the csr with private key
+openssl dgst -sha256 -sign EE_Cert1_priv.pem -out newEE_Cert1.csr.sign newEE_Cert1.csr 
+
+////prepare publick key from cert
+openssl x509 -in EE_Cert1.pem -pubkey -out EE_Cert1_pub.pem
+OR
+openssl rsa -in EE_Cert1_priv.pem -pubout -out EE_Cert1_pub.pem
+
+///verify the signature if the csr is from authenticated EE
+openssl dgst -sha256 -verify EE_Cert1_pub.pem -signature newEE_Cert1.csr.sign newEE_Cert1.csr 
+Verified OK
