@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>室内环境实时监测系统</title>
+    <script src="{{url_for('static', filename='jquery-1.12.4.min.js')}}"></script>
+    <style type="text/css">
+        .box{
+            width: 200px;
+            height: 300px;
+            margin-top: 180px;
+            margin-left: 180px;
+            position: fixed;
+        }
+        .btn{
+            width: 90px;
+            height: 50px;
+            font-size: 23px;
+            font-weight: bold;
+            border-radius: 25px;
+            background: aqua;
+        }
+         .btnc{
+            width: 185px;
+            height: 50px;
+            font-size: 23px;
+            font-weight: bold;
+            border-radius: 25px;
+            background: aqua;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function Download() {
+            $.ajax({
+                url: "http://{{ url }}/download",
+                type: "GET",
+                dataType: "JSON",
+                // data 发送给服务器的参数
+                // 请求成功执行的函数,data:服务器回传的数据
+                success: function (data) {
+                    alert("下载成功！文件保存至data/室内环境监测系统历史数据.txt");
+                },
+                //请求失败执行的函数
+                error: function () {
+                    alert("下载失败，请检查网络")
+                },
+                // 是否使用异步，默认不指定表示异步请求，异步：多个ajax同时发送请求
+                async: true
+            });
+        }
+        function turn_light() {
+            $.ajax({
+                url: "http://{{ url}}/turn_off_light",
+                type: "GET",
+                dataType: "JSON",
+                // data 发送给服务器的参数
+                // 请求成功执行的函数,data:服务器回传的数据
+                success: function (data) {
+                    alert("打开灯操作成功");
+                },
+                //请求失败执行的函数
+                error: function () {
+                    alert("打开灯操作失败")
+                },
+                // 是否使用异步，默认不指定表示异步请求，异步：多个ajax同时发送请求
+                async: true
+            });
+        }
+         function off_light() {
+            $.ajax({
+                url: "http://{{ url }}/turn_off_light",
+                type: "POST",
+                dataType: "JSON",
+                // data 发送给服务器的参数
+                // 请求成功执行的函数,data:服务器回传的数据
+                success: function (data) {
+                    alert("关灯操作成功");
+                },
+                //请求失败执行的函数
+                error: function () {
+                    alert("关灯操作失败")
+                },
+                // 是否使用异步，默认不指定表示异步请求，异步：多个ajax同时发送请求
+                async: true
+            });
+        }
+    </script>
+</head>
+<body background="{{ url_for('static', filename='background.jpg')}}"><meta http-equiv="refresh" content="60">
+
+<div class="box">
+    <p>
+        <button class="btn" type="button"  onclick=turn_light()>开灯</button>
+    </p>
+    <p>
+      <button class="btn" type="button" onclick=off_light()>关灯</button>
+    </p>
+    <p>
+      <button class="btnc" type="button"  onclick=Download()>下载历史数据</button>
+    </p>
+
+    <p>
+        <a href=http://www.robotedu.com/sk.asp?L-8134556701.Html style="color: blue">了解更多</a>
+    </p>
+
+</div>
+</body>
+
+<style>
+    #center{MARGIN-RIGHT:auto; MARGIN-LEFT:auto; background: #eff7ff; width:600px;
+     height: 500px; vertical-align:central; overflow-y: scroll; overflow-x: scroll}
+</style>
+
+<h1 align="center">室内环境实时监测系统</h1>
+<h2 align="center">当前室内温度:{{temp}}  亮度:{{light}}  湿度:{{hum}}</h2>
+<h2 align="center"><a href="/">刷新</a>历史数据列表：</h2>
+<div id="center" style="border: 2px solid #96c2f1">
+    温度 --- 亮度 --- 湿度 --- 记录时间<br>
+    {% for i in data[::-1]%}
+        {{ i[2] }} --- {{ i[3] }} --- {{ i[4] }} --- {{ i[5] }}<br>
+    {% endfor %}
+</div>
+
+
+
+</html>

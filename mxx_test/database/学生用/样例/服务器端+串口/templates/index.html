@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+	<head>
+		<meta charset="utf-8" />
+		<!-- 每 60 秒自动刷新网页一次 -->
+		<meta http-equiv="refresh" content="5" >
+		<title>自动刷新页面</title>
+	</head>
+    <h2>当前室内温度：{{data[0][3]}}</h2>
+    <table class="table is-striped is-hoverable is-fullwidth">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>用户</th>
+                <th>设备号</th>
+                <th>设备值</th>
+                <th>上传时间</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{ item[0] }}</td>
+                <td>{{ item[1] }}</td>
+                <td>{{ item[2] }}</td>
+                <td>{{ item[3] }}</td>
+                <td>{{ item[4] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

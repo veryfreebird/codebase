@@ -1,0 +1,50 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}室内环境实时监测系统{% endblock %}
+
+{% block head %}
+  {{ super() }}
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">室内环境实时监测系统</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/">首页</a></li>
+                <li><a href="/">查看数据</a></li>
+                <li><a href="/view">查看图表</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% block page_content %}{% endblock %}
+    </div>
+    {% block footer %}
+        <hr>
+        <footer class="footer content has-text-centered">
+			<p align="center">
+				<strong>室内环境实时监测系统</strong> by name
+				<span>&copy;2022学军中学高二信息系统搭建</span>
+			</p>
+		</footer>
+    {% endblock %}
+{% endblock %}
