@@ -28,6 +28,7 @@ def lo():
     un=request.args.get("username")
     pw=request.args.get('password')
     print(un,pw)
+'''
     if find(cur,un,pw):
         return redirect('/play')
     else:
@@ -35,10 +36,10 @@ def lo():
         cur.execute(sql)
         conn.commit()
         return redirect('/play')
-
-
     return render_template('logi.html',m=un)
-#/chat  POST
+'''
+    
+    #/chat  POST
 @app.route('/play',methods=["GET","POST"])
 
 
