@@ -1,0 +1,16 @@
+                   fedora1                      fedora2                             fedora3
+enp0s8              08:00:27:5e:6f:a6  (M-S)    08:00:27:e9:16:2f
+enp0s9                                          08:00:27:ec:77:65    (M-S)          08:00:27:39:cf:3d
+
+
+fedora1:
+ptp4l -i enp0s8  -2 -m -S   => grandmaster
+
+fedora2:
+ptp4l -i enp0s8 -i enp0s9 -2  -m -S   => BC
+ptp_mon_enp0s8.pcap
+ptp_mon_enp0s9.pcap
+
+fedora3:
+ptp4l -i enp0s9 -m -S -s -2    => OC
+

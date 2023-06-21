@@ -1,0 +1,16 @@
+                   fedora1                      fedora2                         fedora3
+enp0s8             192.168.56.114  (M-S)        192.168.56.112
+enp0s9                                          192.168.197.8    (M-S)          192.168.197.11
+
+
+fedora1:
+ptp4l -i enp0s8  -4 -m -S   => grandmaster
+
+fedora2:
+ptp4l -i enp0s8 -i enp0s9 -4  -m -S   => BC
+ptp_mon_enp0s8.pcap
+ptp_mon_enp0s9.pcap
+
+fedora3:
+ptp4l -i enp0s9 -m -S -s -4    => OC
+
