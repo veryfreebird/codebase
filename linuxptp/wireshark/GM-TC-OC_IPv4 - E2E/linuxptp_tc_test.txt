@@ -1,0 +1,16 @@
+                   fedora1                      fedora2                         fedora3
+enp0s8             192.168.56.112  (M)        192.168.56.114
+enp0s9                                        192.168.197.10                    (S) 192.168.197.11
+
+
+fedora1:
+ptp4l -i enp0s8 -4 -m -S    => grandmaster
+
+fedora2:
+ptp4l -i enp0s8 -i enp0s9 -f /usr/share/doc/linuxptp/configs/E2E-TC.cfg -m -S -4 => E2E TC
+
+
+fedora3:
+ptp4l -i enp0s9 -4 -m -S -s
+
+
