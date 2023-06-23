@@ -10,4 +10,11 @@ fedora2:
 ptp4l -i enp0s25 -4 -m -S -f ./UNICAST-SLAVE.cfg => OC
 
 UNICAST-SLAVE.cfg:
+[unicast_master_table]
+table_id		1
+logQueryInterval	2
+UDPv4			192.168.50.79
+
+[enp0s25]
+unicast_master_table	1
 
