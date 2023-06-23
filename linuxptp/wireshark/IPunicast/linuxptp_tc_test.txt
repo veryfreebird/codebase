@@ -1,0 +1,13 @@
+                   fedora1                      fedora2
+enp0s9             192.168.50.79  (M)        
+enp0s25                                      192.168.50.194
+
+
+fedora1:
+ptp4l -i enp0s9  -4 -m -S -f ./UNICAST-MASTER.cfg  => grandmaster
+
+fedora2:
+ptp4l -i enp0s25 -4 -m -S -f ./UNICAST-SLAVE.cfg => OC
+
+UNICAST-SLAVE.cfg:
+
