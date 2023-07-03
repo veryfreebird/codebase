@@ -1,0 +1,36 @@
+                   fedora1                      fedora2                fedora3
+enp0s8             192.168.56.112 (M)           192.168.56.114 (M)     192.168.56.115 (S)
+
+
+
+fedora1:
+ptp4l -i enp0s8 -f ./UNICAST-MASTER.cfg -4 -m -S
+
+
+fedora2:
+ptp4l -i enp0s8 -f ./UNICAST-MASTER.cfg -4 -m -S
+
+fedora3:
+ptp4l -i enp0s8 -f ./UNICAST-SLAVE.cfg -4 -m -S -s
+
+wireshark@fedora3:
+tcpdump -i enp0s8 -nn -w /mnt/local_src/codebase/linuxptp/wireshark/IPunicast-dual-source/ptp_ip_unicast-dual-source-swo.pcap
+start fedora3
+start fedora1
+start fedora2
+stop fedora1
+stop fedora2
+restart fedora1
+restart fedora2
+
+
+UNICAST-SLAVE.cfg:
+[unicast_master_table]
+table_id		1
+logQueryInterval	2
+UDPv4			192.168.56.112
+UDPv4			192.168.56.114
+
+[enp0s25]
+unicast_master_table	1
+
