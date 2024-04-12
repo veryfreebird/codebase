@@ -7,77 +7,95 @@
 #include <net/if.h>
 #include <netinet/ip.h>
 #include <netinet/udp.h>
+#include <netinet/ether.h>
 #include <arpa/inet.h>
+#include <unistd.h>
 
-#define INTERFACE_NAME "eth0"
-#define PTP_HEADER_SIZE 34
+#define PTP_EVENT_PORT 319
+#define PTP_GENERAL_PORT 320
 
 int main() {
-    int sockfd;
+    int sock;
     struct sockaddr_ll sa;
     struct ifreq ifr;
-    char buffer[ETH_FRAME_LEN];
-    
-    // Create a raw socket
-    sockfd = socket(AF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
-    if (sockfd == -1) {
+    char ifname[] = "eth0"; // Replace with your interface name
+
+    // Create a raw socket for PTP packets
+    sock = socket(AF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
+    if (sock == -1) {
         perror("socket");
-        exit(EXIT_FAILURE);
+        exit(1);
     }
-    
+
     // Set the network interface index
-    memset(&ifr, 0, sizeof(struct ifreq));
-    strncpy(ifr.ifr_name, INTERFACE_NAME, IFNAMSIZ - 1);
-    if (ioctl(sockfd, SIOCGIFINDEX, &ifr) == -1) {
+    memset(&ifr, 0, sizeof(ifr));
+    strncpy(ifr.ifr_name, ifname, IFNAMSIZ - 1);
+    if (ioctl(sock, SIOCGIFINDEX, &ifr) == -1) {
         perror("ioctl");
-        close(sockfd);
-        exit(EXIT_FAILURE);
+        close(sock);
+        exit(1);
     }
-    
-    // Set socket address structure
-    memset(&sa, 0, sizeof(struct sockaddr_ll));
+
+    // Bind the socket to the network interface
+    memset(&sa, 0, sizeof(sa));
     sa.sll_family = AF_PACKET;
     sa.sll_protocol = htons(ETH_P_ALL);
     sa.sll_ifindex = ifr.ifr_ifindex;
-    
-    // Bind the socket to the network interface
-    if (bind(sockfd, (struct sockaddr *)&sa, sizeof(struct sockaddr_ll)) == -1) {
+    if (bind(sock, (struct sockaddr *)&sa, sizeof(sa)) == -1) {
         perror("bind");
-        close(sockfd);
-        exit(EXIT_FAILURE);
+        close(sock);
+        exit(1);
     }
-    
+
+    // Enable hardware timestamping
+    int enable = 1;
+    if (setsockopt(sock, SOL_SOCKET, SO_TIMESTAMPING, &enable, sizeof(enable)) == -1) {
+        perror("setsockopt");
+        close(sock);
+        exit(1);
+    }
+
+    // Receive and process PTP packets
     while (1) {
-        ssize_t numBytes = recv(sockfd, buffer, ETH_FRAME_LEN, 0);
-        if (numBytes == -1) {
-            perror("recv");
-            close(sockfd);
-            exit(EXIT_FAILURE);
+        char buffer[ETH_FRAME_LEN];
+        struct msghdr msg;
+        struct iovec iov;
+        struct timespec ts[3];
+
+        memset(&msg, 0, sizeof(msg));
+        memset(&iov, 0, sizeof(iov));
+
+        iov.iov_base = buffer;
+        iov.iov_len = sizeof(buffer);
+
+        msg.msg_iov = &iov;
+        msg.msg_iovlen = 1;
+        msg.msg_control = ts;
+        msg.msg_controllen = sizeof(ts);
+
+        ssize_t len = recvmsg(sock, &msg, 0);
+        if (len == -1) {
+            perror("recvmsg");
+            close(sock);
+            exit(1);
         }
-        
-        // Extract PTP timestamp from the Ethernet frame
-        if (numBytes >= PTP_HEADER_SIZE) {
-            struct ether_header *ethHeader = (struct ether_header *)buffer;
-            struct iphdr *ipHeader = (struct iphdr *)(buffer + sizeof(struct ether_header));
-            struct udphdr *udpHeader = (struct udphdr *)(buffer + sizeof(struct ether_header) + sizeof(struct iphdr));
-            char *ptpHeader = buffer + sizeof(struct ether_header) + sizeof(struct iphdr) + sizeof(struct udphdr);
-            
-            // Check if the packet is a PTP packet
-            if (ethHeader->ether_type == htons(ETHERTYPE_IP) &&
-                ipHeader->protocol == IPPROTO_UDP &&
-                udpHeader->dest == htons(319)) {
-                
-                // Extract the PTP timestamp from the PTP header
-                // You can access the PTP timestamp fields here and use them as needed
-                
-                // Example: Print the PTP timestamp
-                printf("PTP Timestamp: %02x:%02x:%02x:%02x:%02x:%02x\n",
-                       ptpHeader[0], ptpHeader[1], ptpHeader[2],
-                       ptpHeader[3], ptpHeader[4], ptpHeader[5]);
+
+        // Extract the hardware timestamp
+        struct timespec *hwts = NULL;
+        for (struct cmsghdr *cmsg = CMSG_FIRSTHDR(&msg); cmsg != NULL; cmsg = CMSG_NXTHDR(&msg, cmsg)) {
+            if (cmsg->cmsg_level == SOL_SOCKET && cmsg->cmsg_type == SO_TIMESTAMPING) {
+                hwts = (struct timespec *)CMSG_DATA(cmsg);
+                break;
             }
         }
+
+        // Process the PTP packet and timestamp
+        if (hwts != NULL) {
+            // TODO: Process the PTP packet and use the hardware timestamp
+            printf("Received PTP packet with hardware timestamp: %ld.%09ld\n", hwts->tv_sec, hwts->tv_nsec);
+        }
     }
-    
-    close(sockfd);
+
+    close(sock);
     return 0;
 }
