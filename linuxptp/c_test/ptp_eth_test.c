@@ -99,3 +99,43 @@ int main() {
     close(sock);
     return 0;
 }
+
+
+
+/*Send packets and retrieve hardware timestamp*/
+/*Start of sending*/
+int ts_opt = SOF_TIMESTAMPING_TX_HARDWARE | SOF_TIMESTAMPING_RX_HARDWARE | SOF_TIMESTAMPING_RAW_HARDWARE;
+if (setsockopt(sock, SOL_SOCKET, SO_TIMESTAMPING, &ts_opt, sizeof(ts_opt)) < 0) {
+    perror("setsockopt");
+    exit(1);
+}
+struct msghdr msg = {0};
+struct iovec iov = { buffer, sizeof(buffer) };
+msg.msg_iov = &iov;
+msg.msg_iovlen = 1;
+if (sendmsg(sock, &msg, 0) == -1) {
+    perror("sendmsg");
+    exit(1);
+}
+char control[256];
+struct msghdr msg = {0};
+struct iovec iov = { buffer, sizeof(buffer) };
+msg.msg_iov = &iov;
+msg.msg_iovlen = 1;
+msg.msg_control = control;
+msg.msg_controllen = sizeof(control);
+if (recvmsg(sock, &msg, MSG_ERRQUEUE) == -1) {
+    perror("recvmsg");
+    exit(1);
+}
+struct timespec *hwts = NULL;
+for (struct cmsghdr *cmsg = CMSG_FIRSTHDR(&msg); cmsg != NULL; cmsg = CMSG_NXTHDR(&msg, cmsg)) {
+    if (cmsg->cmsg_level == SOL_SOCKET && cmsg->cmsg_type == SO_TIMESTAMPING) {
+        hwts = (struct timespec *)CMSG_DATA(cmsg);
+        break;
+    }
+}
+if (hwts != NULL) {
+    printf("Sent PTP packet with hardware timestamp: %ld.%09ld\n", hwts->tv_sec, hwts->tv_nsec);
+}
+/*End of sending*/
