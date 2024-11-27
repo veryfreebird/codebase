@@ -12,8 +12,8 @@ ideal_clock = t;
 TIE = clock_signal - ideal_clock;
 
 % 指定的tau值列表
-specific_taus = [0.02, 0.06, 0.10, 0.30, 0.5]; % 特定的时间间隔
-continuous_taus = 0.02:0.02:0.5; % 连续的tau值
+specific_taus = [0.02, 0.1, 0.5, 1, 5]; % 特定的时间间隔
+continuous_taus = 0.02:0.02:5; % 连续的tau值
 
 % 创建一个新的图形窗口来显示TIE图
 figure;
