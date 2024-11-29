@@ -1,4 +1,4 @@
-
+cd('/Users/freebird/src/codebase/simulation/sync-noise');
 
 fs = 1000; % 采样频率 (Hz)
 N = 1000; % 采样点数
@@ -153,3 +153,5 @@ for k = 1:length(sigmas)
     grid on;
     ylim([min_TDEV max_TDEV]); % 设置 y 轴限值
 end
+
+pause;
