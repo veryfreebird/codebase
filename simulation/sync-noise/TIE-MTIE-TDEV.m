@@ -1,4 +1,5 @@
-% 参数设置
+
+
 fs = 1000; % 采样频率 (Hz)
 N = 10000; % 采样点数
 t = (0:N-1)/fs; % 时间向量 (s)
@@ -29,6 +30,7 @@ function tdev = compute_tdev(tie, max_tau)
         end
     end
 end
+
 
 % 计算 MTIE 的函数
 function mtie = compute_mtie(tie, max_tau)
@@ -72,17 +74,17 @@ ylabel('TIE');
 title('TIE vs Time');
 grid on;
 
-% 绘制MTIE vs Time Interval 使用线性刻度
+% 绘制MTIE vs Time Interval 使用对数刻度
 subplot(3,1,2); % 创建第二个子图
-plot(1:max_tau, mtie_result, '-o');
+semilogx(1:max_tau, mtie_result, '-o');
 xlabel('Time Interval (\tau) [s]');
 ylabel('MTIE');
 title('MTIE vs Time Interval');
 grid on;
 
-% 绘制TDEV vs Time Interval 使用线性刻度
+% 绘制TDEV vs Time Interval 使用对数刻度
 subplot(3,1,3); % 创建第三个子图
-plot(1:max_tau, tdev_result, '-o');
+semilogx(1:max_tau, tdev_result, '-o');
 xlabel('Time Interval (\tau) [s]');
 ylabel('TDEV');
 title('TDEV vs Time Interval');
