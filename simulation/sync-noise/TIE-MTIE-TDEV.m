@@ -1,5 +1,3 @@
-cd('/Users/freebird/src/codebase/simulation/sync-noise');
-
 fs = 1000; % 采样频率 (Hz)
 N = 1000; % 采样点数
 t = (0:N-1)/fs; % 时间向量 (s)
@@ -64,20 +62,20 @@ max_tau = 999; % 最大时间间隔
 % 计算不同噪声标准差下的 TIE, MTIE 和 TDEV
 for k = 1:length(sigmas)
     sigma = sigmas(k);
-    
+
     % 创建模拟相位误差数据
     clock_signal = t + sigma * randn(1, N); % 模拟相位误差
-    
+
     % 计算TIE
     ideal_clock = t;
     TIE = clock_signal - ideal_clock;
     TIE_results{k} = TIE;
-    
+
     % 计算 TDEV
 
     tdev_result = compute_tdev(TIE, max_tau);
     tdev_results{k} = tdev_result;
-    
+
     % 计算 MTIE
     mtie_result = compute_mtie(TIE, max_tau);
     mtie_results{k} = mtie_result;
@@ -125,7 +123,7 @@ for k = 1:length(sigmas)
     text_position_x = mean([t(max_idx), t(min_idx)]); % 文本标注的 x 位置
     text_position_y = max_val + 0.1 * (max_TIE - min_TIE); % 文本标注的 y 位置
     text(text_position_x, text_position_y, ['Difference: ' num2str(diff_val)], 'Color', 'r', 'FontSize', 12);
-    
+
     % 添加最大值和最小值的 x 坐标标注
     text(t(max_idx), max_val, [' (x = ' num2str(t(max_idx)) ')'], 'Color', 'r', 'FontSize', 12, 'VerticalAlignment', 'bottom');
     text(t(min_idx), min_val, [' (x = ' num2str(t(min_idx)) ')'], 'Color', 'r', 'FontSize', 12, 'VerticalAlignment', 'top');
