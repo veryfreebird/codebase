@@ -1,7 +1,9 @@
 fs = 1000; % 采样频率 (Hz)
 N = 1000; % 采样点数
 t = (0:N-1)/fs; % 时间向量 (s)
-sigma = 0.01; % 噪声的标准差
+f = 5; % 正弦波频率 (Hz)，例如 5 Hz
+A = 1; % 振幅
+phi = 0; % 初始相位
 
 % 不同的噪声标准差
 sigmas = [0.01, 0.05, 0.1]; % 三个不同的标准差
@@ -10,6 +12,10 @@ sigmas = [0.01, 0.05, 0.1]; % 三个不同的标准差
 mtie_results = cell(length(sigmas), 1);
 tdev_results = cell(length(sigmas), 1);
 TIE_results = cell(length(sigmas), 1);
+noisy_signal = cell(length(sigmas), 1);
+
+% 生成理想的正弦波信号
+ideal_signal = A * sin(2*pi*f*t + phi);
 
 % 计算 TDEV 的函数
 function tdev = compute_tdev(tie, max_tau)
@@ -64,12 +70,11 @@ max_tau = 999; % 最大时间间隔
 for k = 1:length(sigmas)
     sigma = sigmas(k);
 
-    % 创建模拟相位误差数据
-    clock_signal = t + sigma * randn(1, N); % 模拟相位误差
+    % 创建模拟带噪声的正弦波信号
+    noisy_signal{k} = ideal_signal + sigma * randn(1, N); % 添加噪声
 
     % 计算TIE
-    ideal_clock = t;
-    TIE = clock_signal - ideal_clock;
+    TIE = noisy_signal{k} - ideal_signal;
     TIE_results{k} = TIE;
 
     % 计算 TDEV
@@ -97,9 +102,20 @@ max_MTIE = max(all_MTIE(:));
 min_TDEV = min(all_TDEV(:));
 max_TDEV = max(all_TDEV(:));
 
+% 绘制原始噪声信号
+for k = 1:length(sigmas)
+    subplot(4, length(sigmas), k); % 4行是因为我们增加了一行用于显示原始信号
+    plot(t, noisy_signal{k}, 'r', t, ideal_signal, 'b');
+    xlabel('Time (s)');
+    ylabel('Amplitude');
+    title(['Original Signal and Noisy Signal (sigma = ' num2str(sigmas(k)) ')']);
+    legend('Ideal Signal', 'Noisy Signal');
+    grid on;
+end
+
 % 绘制TIE vs Time
 for k = 1:length(sigmas)
-    subplot(3, length(sigmas), k);
+    subplot(4, length(sigmas), length(sigmas) + k);
     plot(t, TIE_results{k});
     xlabel('Time (s)');
     ylabel('TIE');
@@ -133,7 +149,7 @@ end
 
 % 绘制MTIE vs Time Interval 使用线性刻度
 for k = 1:length(sigmas)
-    subplot(3, length(sigmas), length(sigmas) + k);
+    subplot(4, length(sigmas), 2*length(sigmas) + k);
     semilogx((1:max_tau) / fs, mtie_results{k}, '-o'); % 使用对数刻度
     xlabel(['Time Interval (\tau) [s] - Last Value: ' num2str(mtie_results{k}(end))]);
     ylabel('MTIE');
@@ -144,7 +160,7 @@ end
 
 % 绘制TDEV vs Time Interval 使用线性刻度
 for k = 1:length(sigmas)
-    subplot(3, length(sigmas), 2*length(sigmas) + k);
+    subplot(4, length(sigmas), 3*length(sigmas) + k);
     semilogx((1:max_tau) / fs, tdev_results{k}, '-o'); % 使用对数刻度
     xlabel('Time Interval (\tau) [s]');
     ylabel('TDEV');
