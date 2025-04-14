@@ -30,11 +30,11 @@ contour(x2, y2, z4, [0, 0], 'b--', 'LineWidth', 2); % 蓝色虚线表示有误�
 
 % 绘制基站位置并使用不同颜色
 plot(bs1(1), bs1(2), 'mo', 'MarkerSize', 10, 'MarkerFaceColor', 'm'); % 洋红色圆点表示基站1
-text(bs1(1)+0.5, bs1(2), 'Base Station 1', 'FontSize', 12, 'Color', 'm'); % 标签基站1
+text(bs1(1)+0.5, bs1(2), 'Radio 1', 'FontSize', 12, 'Color', 'm'); % 标签基站1
 plot(bs2(1), bs2(2), 'co', 'MarkerSize', 10, 'MarkerFaceColor', 'c'); % 青色圆点表示基站2
-text(bs2(1)+0.5, bs2(2), 'Base Station 2', 'FontSize', 12, 'Color', 'c'); % 标签基站2
+text(bs2(1)+0.5, bs2(2), 'Radio 2', 'FontSize', 12, 'Color', 'c'); % 标签基站2
 plot(bs3(1), bs3(2), 'yo', 'MarkerSize', 10, 'MarkerFaceColor', 'g'); % 黄色圆点表示基站3
-text(bs3(1)+0.5, bs3(2), 'Base Station 3', 'FontSize', 12, 'Color', 'g'); % 标签基站3
+text(bs3(1)+0.5, bs3(2), 'Radio 3', 'FontSize', 12, 'Color', 'g'); % 标签基站3
 
 % 添加标签和标题
 xlabel('X');
