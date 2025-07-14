@@ -35,8 +35,19 @@ Optional (for automatic timezone detection):
 
 ```bash
 pip install timezonefinder
-```
 
+# 创建一个虚拟环境（例如叫 myenv）
+python3 -m venv myenv
+
+# 激活虚拟环境
+source myenv/bin/activate
+
+# 安装你需要的包
+pip install skyfield matplotlib numpy pytz
+
+# 使用完后可以退出虚拟环境
+deactivate
+```
 Place your TLE files in the `tle_data/` directory:
 
 ```

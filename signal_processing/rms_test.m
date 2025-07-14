@@ -38,7 +38,7 @@ ylabel('幅值');
 % 绘制瞬时RMS值
 subplot(5, 1, 3);
 plot(t, te1 + te2, 'r', 'LineWidth', 2);
-title('两路噪声的瞬时RMS值');
+title('两路噪声的瞬时SUM值');
 xlabel('时间 (s)');
 ylabel('瞬时RMS值');
 legend('瞬时RMS值');
@@ -46,7 +46,7 @@ legend('瞬时RMS值');
 % 绘制瞬时RMS值
 subplot(5, 1, 4);
 plot(t, instant_rms, 'r', 'LineWidth', 2);
-title('两路噪声的瞬时RMS值');
+title('两路噪声的瞬时SUM RMS值');
 xlabel('时间 (s)');
 ylabel('瞬时RMS值');
 legend('瞬时RMS值');
@@ -54,10 +54,12 @@ legend('瞬时RMS值');
 % 绘制瞬时RMS值
 subplot(5, 1, 5);
 plot(t, instant_rms1, 'r', 'LineWidth', 2);
-title('两路噪声的瞬时RMS值');
+title('两路噪声的瞬时cTE+RMS(dTE)值');
 xlabel('时间 (s)');
 ylabel('瞬时RMS值');
 legend('瞬时RMS值');
+
+pause;
 
 % 如果需要显示特定时间点的RMS值，可以取消下面这行的注释
 % disp(['某一时间点的瞬时RMS值: ', num2str(instant_rms(500))]); % 例如第500个样本点
