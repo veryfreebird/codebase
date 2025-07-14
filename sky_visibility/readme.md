@@ -20,7 +20,6 @@ This script calculates the visibility of GNSS satellites using TLE orbital data 
 | 📊 Polar Plot Visualization | Shows satellite positions using azimuth and elevation |
 | 🔵 Signal Strength Coloring | Color gradient indicates C/N0 value |
 | 📈 Multi-Constellation Overlay | View multiple systems simultaneously |
-| 🕒 Fixed Timezone Mode | Optional UTC+8:00 (Beijing Time) mode |
 
 ---
 
@@ -110,27 +109,4 @@ Each dot represents a visible satellite:
 - Some versions of Skyfield may raise warnings about leap seconds — these are safe to ignore.
 - For best results, ensure your system clock is accurate.
 
----
 
-## 🚀 Future Enhancements (Suggested)
-
-| Enhancement | Description |
-|------------|-------------|
-| 📷 Export Charts | Save plots as PNG/PDF |
-| 🌐 Auto Download TLE | Fetch latest TLEs from Celestrak |
-| 🧭 GUI Interface | Tkinter or PyQt-based UI |
-| 🌍 Multi-language Support | Chinese/English toggle |
-| 📅 Batch Mode | Process multiple dates or locations automatically |
-
----
-
-## 📜 License
-
-MIT License – see `LICENSE` for details.
-
----
-
-## 👥 Author
-
-Maintained by Qwen (Alibaba Cloud).  
-For questions or contributions, feel free to open an issue or pull request.
