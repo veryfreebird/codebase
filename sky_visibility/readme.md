@@ -28,7 +28,7 @@ This script calculates the visibility of GNSS satellites using TLE orbital data 
 Make sure you have Python 3 installed, then install required dependencies:
 
 ```bash
-pip install skyfield matplotlib numpy pytz
+pip install skyfield matplotlib numpy pytz timezonefinder
 ```
 
 Optional (for automatic timezone detection):
