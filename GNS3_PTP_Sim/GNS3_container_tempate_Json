@@ -1,0 +1,17 @@
+{
+  "gns3_template": {
+    "name": "PTP-Node",
+    "category": "guest",
+    "description": "通用 PTP 节点容器，通过 PTP_ROLE 环境变量控制角色",
+    "symbol": ":/symbols/classic/computer.svg",
+    "image": "my-ptp-node:latest",
+    "adapters": 2,
+    "adapter_type": "e1000",
+    "console_type": "telnet",
+    "builtin": false,
+    "command_line": "",
+    "environment": "PTP_ROLE=slave\nPTP_PRIORITY1=128",
+    "start_command": "",
+    "usage": "设置 PTP_ROLE 环境变量为 master, slave, bc, tc 之一来定义节点角色"
+  }
+}
