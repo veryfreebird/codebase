@@ -1,5 +1,5 @@
 # entrypoint.sh - 根据 PTP_ROLE 环境变量启动对应 PTP 服务
-#!/bin/bash
+#!/bin/bash 
 set -e
 
 # 读取环境变量
