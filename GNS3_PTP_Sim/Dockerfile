@@ -1,14 +1,17 @@
 FROM ubuntu:20.04
 
 # 安装依赖
-RUN apt update && apt install -y \
-    git build-essential libev-dev libcap-dev iproute2 net-tools
+#RUN apt update && apt install -y \
+#   git build-essential libev-dev libcap-dev iproute2 net-tools
 
 # 编译 linuxptp
-WORKDIR /opt
-RUN git clone https://git.code.sf.net/p/linuxptp/code linuxptp
-WORKDIR /opt/linuxptp
-RUN make && make install
+#WORKDIR /opt
+#RUN git clone https://git.code.sf.net/p/linuxptp/code linuxptp
+#WORKDIR /opt/linuxptp
+#RUN make && make install
+
+RUN apt update && apt install -y \
+   iproute2 net-tools linuxptp
 
 # 复制配置文件和脚本
 COPY configs/ /etc/ptp/
