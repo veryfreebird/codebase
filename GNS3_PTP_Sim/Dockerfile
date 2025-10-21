@@ -11,12 +11,15 @@ FROM ubuntu:20.04
 #RUN make && make install
 
 RUN apt update && apt install -y \
-   iproute2 net-tools linuxptp
+   iproute2 net-tools linuxptp python3 python3-pip
+
+RUN pip3 install requests
 
 # 复制配置文件和脚本
 COPY configs/ /etc/ptp/
 COPY entrypoint.sh /entrypoint.sh
 COPY scripts/ /scripts/
+COPY ptp_mon.py /scripts/ptp_mon.py
 
 # 设置权限
 RUN chmod +x /entrypoint.sh /scripts/*.sh

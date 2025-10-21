@@ -24,6 +24,8 @@ for cfg_file in /etc/ptp/*.cfg; do
     sed -i "s/{{OFFSET_SCALED_LOG_VARIANCE}}/$OFFSET_SCALED_LOG_VARIANCE/g" "$cfg_file"
 done
 
+#python3 /scripts/ptp_mon.py &
+
 # 根据角色启动对应脚本
 case "$ROLE" in
     "master")

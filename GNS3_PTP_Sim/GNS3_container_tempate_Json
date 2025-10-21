@@ -15,3 +15,8 @@
     "usage": "设置 PTP_ROLE 环境变量为 master, slave, bc, tc 之一来定义节点角色"
   }
 }
+
+为容器模板启用 "Advanced settings" → "Environment variables"
+GNS3_PROJECT_ID={project_id}
+GNS3_NODE_ID={node_id}
+GNS3_NODE_NAME={name}
