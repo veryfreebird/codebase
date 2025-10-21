@@ -25,22 +25,62 @@ GNS3_NODE_NAME = "GNS3_NODE_NAME"
 # ==================================================
 
 def get_local_ptp_role(interface: str) -> str:
-    """获取本容器当前 PTP 角色"""
+    """
+    使用 pmc 查询指定接口的 PTP 角色
+    假设 ptp4l 已由其他脚本启动，且 managementSocket 已启用
+    """
+    # 默认 socket 路径，ptp4l 通常创建在 /var/run 或 /tmp
+    socket_dir = "/var/run/linuxptp"
+    socket_path = f"{socket_dir}/ptp4l.{interface}.sock"
+
+    # 如果 socket 不在 /var/run，尝试 /tmp
+    if not os.path.exists(socket_path):
+        socket_dir = "/tmp"
+        socket_path = f"{socket_dir}/ptp4l.{interface}.sock"
+
+    # 构造 pmc 命令
+    cmd = [
+        "pmc",
+        "-u",
+        "-f", socket_path,
+        "GET PORT_DATA_SET"
+    ]
+
     try:
         result = subprocess.run(
-            ["ptp4l", "-i", interface, "-m", "-S", "-f", "/etc/linuxptp/ptp4l.conf"],
+            cmd,
             capture_output=True,
             text=True,
             timeout=10
         )
-        output = result.stdout + result.stderr
-        match = re.search(r"port\s+\d+:\s+state\s+(\w+)", output, re.IGNORECASE)
+
+        if result.returncode != 0:
+            print(f"⚠️ pmc command failed: {result.stderr}")
+            return "FAULTY"
+
+        output = result.stdout
+
+        # 解析角色（state）
+        # 示例输出：
+        #    number_ports                                    1
+        #    port_id                                       1
+        #    port_state                                    SLAVE
+        match = re.search(r"port_state\s+(\w+)", output)
         if match:
             state = match.group(1).upper()
             return state if state in ["MASTER", "SLAVE", "PASSIVE"] else "FAULTY"
+        else:
+            print("🔍 port_state not found in pmc output")
+            return "FAULTY"
+
+    except subprocess.TimeoutExpired:
+        print("⏰ pmc command timed out")
+        return "FAULTY"
+    except FileNotFoundError:
+        print("❌ 'pmc' command not found. Is linuxptp installed?")
         return "FAULTY"
     except Exception as e:
-        print(f"❌ PTP command error: {e}")
+        print(f"❌ Unexpected error: {e}")
         return "FAULTY"
 
 def get_color_for_role(role: str) -> str:
