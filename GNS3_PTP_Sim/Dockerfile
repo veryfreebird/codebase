@@ -11,7 +11,7 @@ FROM docker.xuanyuan.me/ubuntu:20.04
 #RUN make && make install
 
 RUN apt update && apt install -y \
-   iproute2 net-tools linuxptp python3 python3-pip
+   iproute2 net-tools linuxptp python3 python3-pip util-linux
 
 RUN pip3 install requests
 
