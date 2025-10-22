@@ -1,4 +1,4 @@
-# start-tc.sh - 启动 PTP Transparent Clock 服务
+# start-tc.sh - 启动 PTP Transparent Clock 服务 
 #!/bin/bash
 CONFIG=$1
 

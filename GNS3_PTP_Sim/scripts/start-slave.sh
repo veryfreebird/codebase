@@ -1,4 +1,4 @@
-# start-slave.sh - 启动 PTP Slave 服务
+# start-slave.sh - 启动 PTP Slave 服务 
 #!/bin/bash
 CONFIG=$1
 

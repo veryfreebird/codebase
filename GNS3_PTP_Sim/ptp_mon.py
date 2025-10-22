@@ -6,7 +6,7 @@ import os
 from typing import Dict, List
 
 # ==================== 配置参数 ====================
-GNS3_SERVER = "http://192.168.1.100:3080"           # GNS3 控制器地址
+GNS3_SERVER = "http://192.168.1.100:3080"           # GNS3 控制器地址 
 INTERFACES = ["eth1", "eth2"]                      # 要监控的接口列表
 SOCKET_INTERFACE = "eth1"                          # socket 基于第一个接口
 SOCKET_DIR = "/var/run/linuxptp"                   # socket 目录

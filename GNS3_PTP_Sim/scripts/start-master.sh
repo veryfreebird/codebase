@@ -1,4 +1,4 @@
-# start-master.sh - 启动 PTP Master 服务
+# start-master.sh - 启动 PTP Master 服务 
 #!/bin/bash
 CONFIG=$1
 

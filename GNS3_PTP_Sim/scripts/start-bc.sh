@@ -1,4 +1,4 @@
-# start-bc.sh - 启动 PTP Boundary Clock 服务
+# start-bc.sh - 启动 PTP Boundary Clock 服务 
 #!/bin/bash
 CONFIG=$1
 
