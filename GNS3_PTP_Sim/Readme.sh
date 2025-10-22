@@ -24,3 +24,8 @@ echo ""
 echo "5. 在容器内验证："
 echo "   ptp4l -i eth0 -f /etc/ptp/master.cfg -m"
 echo "   pmc -u -b 0 'GET TIME_STATUS_NP'"
+
+sudo docker run -it ubuntu:latest /bin/bash
+sudo docker exec -it <容器ID> /bin/bash
+echo $HOME
+printenv
