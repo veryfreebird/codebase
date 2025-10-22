@@ -10,10 +10,12 @@ FROM docker.xuanyuan.me/ubuntu:20.04
 #WORKDIR /opt/linuxptp
 #RUN make && make install
 
-RUN apt update && apt install -y \
-   iproute2 net-tools linuxptp python3 python3-pip util-linux
+COPY /etc/apt/sources.list /etc/apt/sources.list
 
-RUN pip3 install requests
+RUN apt update && apt install -y \
+   iproute2 net-tools linuxptp python3 python3-pip util-linux vim sudo
+
+#RUN pip3 install requests
 
 # 复制配置文件和脚本
 COPY configs/ /etc/ptp/
