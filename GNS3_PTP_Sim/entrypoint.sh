@@ -23,7 +23,7 @@ for cfg_file in /etc/ptp/*.cfg; do
     sed -i "s/{{CLOCK_ACCURACY}}/$CLOCK_ACCURACY/g" "$cfg_file"
     sed -i "s/{{OFFSET_SCALED_LOG_VARIANCE}}/$OFFSET_SCALED_LOG_VARIANCE/g" "$cfg_file"
 done
-
+sudo unshare -T --fork bash
 #python3 /scripts/ptp_mon.py &
 
 # 根据角色启动对应脚本
