@@ -8,7 +8,7 @@ echo "Starting PTP Master service with config: $CONFIG"
 sleep 3
 
 # 启动 ptp4l (Master 模式)
-ptp4l -i eth0 -f "$CONFIG" -m -l 6 -s &
+ptp4l -i eth0 -i eth1 -i eth2 -i eth3 -f "$CONFIG" -m -l 6 -s &
 
 # 同步系统时钟到 PHC
 #phc2sys -s eth0 -w -m -l 6 &
