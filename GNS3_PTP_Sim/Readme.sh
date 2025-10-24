@@ -31,3 +31,19 @@ echo $HOME
 printenv
 
 find /opt/gns3 -name "*.gns3template" -type f
+
+sudo nano /opt/gns3/templates/docker_my_ubuntu_netadmin_latest.gns3template
+在文件中添加：
+
+json
+编辑
+{
+  "category": "guest",
+  "compute_id": "vm",
+  "console_type": "telnet",
+  "default_name_format": "container{0}",
+  "image": "my-ubuntu-netadmin:latest",
+  "name": "Ubuntu NetAdmin",
+  "extra_container_options": "--cap-add=SYS_ADMIN --cap-add=SYS_TIME",
+  ...
+}
