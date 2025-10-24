@@ -29,3 +29,5 @@ sudo docker run -it ubuntu:latest /bin/bash
 sudo docker exec -it <容器ID> /bin/bash
 echo $HOME
 printenv
+
+find /opt/gns3 -name "*.gns3template" -type f
