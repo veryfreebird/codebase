@@ -1,5 +1,5 @@
-#FROM ubuntu:20.04
-FROM docker.xuanyuan.me/ubuntu:20.04
+FROM ubuntu:20.04
+#FROM docker.xuanyuan.me/ubuntu:20.04
 # 安装依赖
 #RUN apt update && apt install -y \
 #   git build-essential libev-dev libcap-dev iproute2 net-tools
@@ -10,12 +10,10 @@ FROM docker.xuanyuan.me/ubuntu:20.04
 #WORKDIR /opt/linuxptp
 #RUN make && make install
 
-#COPY sources.list /etc/apt/sources.list
+COPY sources.list /etc/apt/sources.list
 
-RUN apt update 
-
-RUN apt install -y \
-   iproute2 net-tools linuxptp python3 python3-pip vim sudo
+RUN apt update && apt install -y \
+   iproute2 net-tools linuxptp python3 python3-pip vim sudo util-linux
 
 #RUN pip3 install requests
 
