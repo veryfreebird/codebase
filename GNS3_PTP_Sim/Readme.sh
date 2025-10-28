@@ -47,3 +47,61 @@ json
   "extra_container_options": "--cap-add=SYS_ADMIN --cap-add=SYS_TIME",
   ...
 }
+
+#!/bin/bash
+CONTAINER_ID=$(docker ps -q --filter "name=gns3-您的容器")
+docker update --cap-add SYS_ADMIN --cap-add SYS_TIME $CONTAINER_ID
+
+修改 Docker 守护进程配置​​
+# 编辑 Docker 配置
+sudo nano /etc/docker/daemon.json
+{
+  "default-capabilities": ["SYS_ADMIN", "SYS_TIME"]
+}
+
+（2）修改 Docker 服务配置（不推荐）​​
+通过覆盖 Docker 服务参数 ​​全局生效​​（但影响所有容器）：
+# 编辑 systemd 配置
+sudo nano /etc/systemd/system/docker.service.d/override.conf
+添加：
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd --default-cap-add SYS_ADMIN --default-cap-add SYS_TIME
+
+修改 Docker 默认运行时​​
+# 编辑 /etc/docker/daemon.json
+{
+  "default-runtime": "gns3-custom",  # 强制所有容器使用自定义运行时
+  "runtimes": {
+    "gns3-custom": {
+      "path": "/usr/local/bin/gns3-docker-wrapper",
+      "runtimeArgs": []
+    }
+  }
+}
+
+sudo tee /usr/local/bin/gns3-docker-wrapper <<'EOF'
+#!/bin/bash
+# 拦截所有 GNS3 启动的容器，自动添加权限
+if echo "$@" | grep -q "com.docker.compose.project=gns3"; then
+  exec /usr/bin/runc --cap-add SYS_ADMIN --cap-add SYS_TIME "$@"
+else
+  exec /usr/bin/runc "$@"
+fi
+EOF
+
+sudo chmod +x /usr/local/bin/gns3-docker-wrapper
+
+/etc/docker/daemon.json​​
+{
+  "registry-mirrors": [
+    "https://<your-mirror-id>.mirror.aliyuncs.com"
+  ],
+  "default-runtime": "runc",
+  "runtimes": {
+    "runc": {
+      "path": "/usr/bin/runc",
+      "runtimeArgs": ["--cap-add=SYS_ADMIN", "--cap-add=SYS_TIME"]
+    }
+  }
+}
