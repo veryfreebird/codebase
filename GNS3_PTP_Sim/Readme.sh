@@ -105,3 +105,16 @@ sudo chmod +x /usr/local/bin/gns3-docker-wrapper
     }
   }
 }
+
+
+修改 containerd 配置（如果使用 containerd）
+# 编辑 containerd 配置
+sudo nano /etc/containerd/config.toml
+
+# 添加：
+[plugins."io.containerd.grpc.v1.cri".containerd]
+  default_runtime_name = "runc"
+  
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+  runtime_type = "io.containerd.runc.v2"
+  privileged = true
