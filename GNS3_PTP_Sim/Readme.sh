@@ -105,3 +105,16 @@ sudo chmod +x /usr/local/bin/gns3-docker-wrapper
     }
   }
 }
+
+{
+  "registry-mirrors": [
+    "https://docker.mirrors.ustc.edu.cn",
+    "https://hub-mirror.c.163.com",
+    "https://registry.docker-cn.com",
+    "https://mirror.ccs.tencentyun.com"
+  ],
+  "default-capabilities": [
+    "SYS_ADMIN",
+    "SYS_TIME"
+  ]
+}
