@@ -10,10 +10,12 @@ FROM ubuntu:20.04
 #WORKDIR /opt/linuxptp
 #RUN make && make install
 
+RUN apt update && apt install -y \
+   iproute2 net-tools linuxptp python3 python3-pip vim sudo
+
 COPY sources.list /etc/apt/sources.list
 
-RUN apt update && apt install -y \
-   iproute2 net-tools linuxptp python3 python3-pip vim sudo util-linux
+RUN apt update && apt install -y util-linux
 
 #RUN pip3 install requests
 
