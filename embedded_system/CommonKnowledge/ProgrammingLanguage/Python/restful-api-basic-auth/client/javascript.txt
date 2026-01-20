@@ -1,0 +1,16 @@
+// 浏览器中使用
+const username = 'admin';
+const password = 'admin123';
+
+// Base64编码
+const credentials = btoa(`${username}:${password}`);
+
+// 发起请求
+fetch('http://localhost:5000/protected', {
+    headers: {
+        'Authorization': `Basic ${credentials}`
+    }
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));

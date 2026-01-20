@@ -1,0 +1,20 @@
+# 1. 公共接口（无需认证）
+curl http://localhost:5000/public
+
+# 2. 受保护接口（带认证）
+curl -u admin:admin123 http://localhost:5000/protected
+
+# 3. 手动设置Authorization头
+curl -H "Authorization: Basic $(echo -n 'admin:admin123' | base64)" \
+  http://localhost:5000/protected
+
+# 4. 管理员接口
+curl -u admin:admin123 http://localhost:5000/admin
+
+# 5. 普通用户访问管理员接口（会失败）
+curl -u alice:alice456 http://localhost:5000/admin
+
+# 6. 创建新用户
+curl -u admin:admin123 -X POST http://localhost:5000/users \
+  -H "Content-Type: application/json" \
+  -d '{"username": "charlie", "password": "charlie123", "role": "user"}'
