@@ -1,0 +1,6 @@
+# requirements.txt
+flask==2.3.3
+flask-restx==1.2.0
+pyjwt==2.8.0
+python-dotenv==1.0.0
+cryptography==41.0.7
