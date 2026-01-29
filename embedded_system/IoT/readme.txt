@@ -5,7 +5,7 @@ IoT technologies:
 4. BSP/Driver
 5. HW design
 6. Firmware update
-7. Debugging, JTAG, Cross Compiling
+7. Debugging, JTAG, Cross Compiling, CMake
 8. Restful(and authentication), backend database
 9. Sensors and interfaces (GNSS, etc.)
 10. MQTT
