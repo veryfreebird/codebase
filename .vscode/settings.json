@@ -2,5 +2,6 @@
     "python.pythonPath": "C:\\DevTools\\Python373\\python.exe",
     "files.associations": {
         "stdio.h": "c"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
